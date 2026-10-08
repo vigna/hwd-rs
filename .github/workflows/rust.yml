@@ -78,7 +78,9 @@ jobs:
         run: RUST_BACKTRACE=full cargo test --features ${{ matrix.features }} --verbose
 
   # Coverage is measured on a single generator: the features are mutually
-  # exclusive, so `--all-features` would define several generators.
+  # exclusive, so `--all-features` would define several generators. The
+  # instrumented integration tests take more than tarpaulin's default timeout
+  # (60 seconds per test binary).
   coverage:
     needs: test
     name: coverage
@@ -93,7 +95,7 @@ jobs:
 
       - name: Generate code coverage
         run: |
-          cargo +nightly tarpaulin --verbose --engine llvm --features xoroshiro1024plus --workspace --out Lcov
+          cargo +nightly tarpaulin --verbose --engine llvm --timeout 600 --features xoroshiro1024plus --workspace --out Lcov
 
       - name: Coveralls
         uses: coverallsapp/github-action@v2
