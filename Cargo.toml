@@ -15,7 +15,7 @@ keywords = ["hamming-weight", "prng", "testing", "statistics"]
 exclude = ["c-check", "CLAUDE.md", ".github", ".pre-commit-config.yaml", ".gitignore"]
 
 [package.metadata.docs.rs]
-features = ["xoroshiro128plus"]
+features = ["incr"]
 
 [dependencies]
 rayon = "1"
@@ -39,6 +39,7 @@ codegen-units = 1
 
 [features]
 _prng = []
+incr = ["_prng"]
 xorshift128 = ["_prng"]
 xorshift128plus = ["_prng"]
 xorshift1024 = ["_prng"]

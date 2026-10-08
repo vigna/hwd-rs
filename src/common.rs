@@ -129,6 +129,11 @@ const MIN_ITERS_PER_THREAD: u64 = 1 << 16;
 /// parallel run allocates to make rounds longer.
 const EXTRA_SMALL_COUNTERS: usize = 1 << 26;
 
+/// The small-counter arrays are allocated contiguously, each padded to a
+/// multiple of this number of counters (128 bytes, the largest common
+/// cache-line size), so that threads never write to the same cache line.
+const ARRAY_ALIGN: usize = 32;
+
 /// The state of a test, except for the generator and the small counters.
 struct Hwd<'a, W: Write> {
     mode: Mode,
@@ -360,44 +365,72 @@ fn generation_desc(num_cpus: Option<usize>, skip_capable: bool) -> String {
 /// The report is identical to that of the original C implementation, and does
 /// not depend on `num_cpus`, except for the timing information.
 pub fn run_test(args: &Args, num_cpus: Option<usize>, out: &mut impl Write) -> io::Result<Outcome> {
+    let jump = Prng::new(args.seed).try_skip(0).is_ok();
+    run(args, num_cpus, jump, out)
+}
+
+/// Runs the test as [`run_test`], but in a parallel run the generators reach
+/// the start of their range with [`Prng::try_skip`] only if `jump` is true,
+/// and with [`prescan`] otherwise.
+fn run(
+    args: &Args,
+    num_cpus: Option<usize>,
+    jump: bool,
+    out: &mut impl Write,
+) -> io::Result<Outcome> {
     let mode = args.mode();
     let k = args.dim;
     let size = 3usize.pow(k as u32);
     let third = (size / 3) as u32;
     let trans = args.transitions;
-    let skip_capable = Prng::new(args.seed).try_skip(0).is_ok();
+    let bytes = args.bytes();
 
-    // The number of iterations of the main loop in a full batch.
+    // The number of words in a full batch.
     let mut batch = mode.batch_size(k);
     if let Some(max) = args.max_batch_size() {
         batch = batch.min(max);
     }
     // In a parallel run, a round contains enough batches to give each thread
-    // enough work, within the memory limit.
-    let (max_batches, num_arrays) = match num_cpus {
+    // enough work, within the memory limit, but not more batches than the
+    // whole test, and it is split among at most max_threads threads.
+    let (max_batches, max_threads) = match num_cpus {
         None => (1, 1),
         Some(n) => {
-            let wanted = (n as u64 * TARGET_ITERS_PER_THREAD).div_ceil(mode.iterations(batch));
-            let max_batches = wanted.min((EXTRA_SMALL_COUNTERS / size) as u64).max(1) as usize;
-            (max_batches, max_batches + n - 1)
+            let full = mode.iterations(batch);
+            let mut max_batches = (n as u64 * TARGET_ITERS_PER_THREAD)
+                .div_ceil(full)
+                .min((EXTRA_SMALL_COUNTERS / size) as u64);
+            // The iterations of a round are at most those of max_batches full
+            // batches, and at most those of the whole test.
+            let mut max_iters = u64::MAX;
+            if bytes >= 0 {
+                max_batches = max_batches.min((bytes as u64).div_ceil(batch * mode.word_bytes()));
+                max_iters = mode.iterations(bytes as u64 / mode.word_bytes());
+            }
+            let max_batches = max_batches.max(1);
+            let max_iters = max_iters.min(max_batches * full);
+            let max_threads = (max_iters / MIN_ITERS_PER_THREAD).clamp(1, n as u64);
+            (max_batches as usize, max_threads as usize)
         }
     };
+    // Each thread uses an array for each batch its range overlaps.
+    let num_arrays = max_batches + max_threads - 1;
+    let stride = size.next_multiple_of(ARRAY_ALIGN);
 
     eprintln!("Seed: {:#018x}", args.seed);
-    let gib = (size * (size_of::<CountSum>() + size_of::<f64>() + num_arrays * size_of::<u32>()))
-        as f64
+    let gib = (size * (size_of::<CountSum>() + size_of::<f64>())
+        + num_arrays * stride * size_of::<u32>()) as f64
         / 2.0f64.powi(30);
     eprintln!(
         "Running a test for Hamming-weight dependencies with k = {} and {} categories {} on {}, analyzing {} (batches of {} words, {:.3} GiB RAM)",
         k,
         args.numcats(),
-        generation_desc(num_cpus, skip_capable),
+        generation_desc(num_cpus, jump),
         mode.description(),
         if trans { "transitions" } else { "bits" },
         batch,
         gib
     );
-    let bytes = args.bytes();
     eprintln!(
         "Examining {}{}",
         if bytes >= 0 {
@@ -427,7 +460,9 @@ pub fn run_test(args: &Args, num_cpus: Option<usize>, out: &mut impl Write) -> i
         next_progress: PROGRESS_SIZES[0],
         out,
     };
-    let mut small: Vec<Buffer<u32>> = (0..num_arrays).map(|_| Buffer::new(size)).collect();
+    // The small-counter arrays, contiguous, each starting at a multiple of
+    // stride (a single mapping, rather than one per array).
+    let mut small = Buffer::<u32>::new(num_arrays * stride);
 
     // As in the C implementation, timing starts after allocation.
     hwd.tstart = Instant::now();
@@ -440,7 +475,7 @@ pub fn run_test(args: &Args, num_cpus: Option<usize>, out: &mut impl Write) -> i
             if batch == 0 {
                 break None;
             }
-            let cs = small[0].as_mut_slice();
+            let cs = &mut small.as_mut_slice()[..size];
             let tot_sums = scan_dispatch(
                 mode,
                 trans,
@@ -474,6 +509,7 @@ pub fn run_test(args: &Args, num_cpus: Option<usize>, out: &mut impl Write) -> i
                     .map(|i| i * base + i.min(rem))
                     .collect();
                 let segs = segments(&starts, &batch_lens);
+                assert!(segs.len() <= num_arrays);
 
                 // Threads but the first start warm_up iterations before their
                 // range; the offsets are in calls to the generator.
@@ -481,12 +517,15 @@ pub fn run_test(args: &Args, num_cpus: Option<usize>, out: &mut impl Write) -> i
                     .iter()
                     .map(|&s| (s - warm_up) * mode.calls_per_iter())
                     .collect();
-                let snapshots = (!skip_capable).then(|| prescan(prng, &offsets));
+                let snapshots = (!jump).then(|| prescan(prng, &offsets));
 
                 let mut per_thread: Vec<Vec<(&mut [u32], u64)>> =
                     (0..num_threads).map(|_| Vec::new()).collect();
-                for (seg, buf) in segs.iter().zip(small.iter_mut()) {
-                    per_thread[seg.thread].push((buf.as_mut_slice(), seg.len));
+                for (seg, buf) in segs
+                    .iter()
+                    .zip(small.as_mut_slice().chunks_exact_mut(stride))
+                {
+                    per_thread[seg.thread].push((&mut buf[..size], seg.len));
                 }
 
                 let (round_start, round_st) = (prng, st);
@@ -542,9 +581,10 @@ pub fn run_test(args: &Args, num_cpus: Option<usize>, out: &mut impl Write) -> i
                 let mut stop = None;
                 for (j, &batch) in batches.iter().enumerate() {
                     let end = first + segs[first..].iter().take_while(|s| s.batch == j).count();
-                    let mut arrays: Vec<&mut [u32]> = small[first..end]
-                        .iter_mut()
-                        .map(|b| b.as_mut_slice())
+                    let mut arrays: Vec<&mut [u32]> = small.as_mut_slice()
+                        [first * stride..end * stride]
+                        .chunks_exact_mut(stride)
+                        .map(|b| &mut b[..size])
                         .collect();
                     let tot_sums = sums[first..end].iter().sum();
                     if let Some(outcome) = hwd.end_batch(&mut arrays, batch, tot_sums)? {
@@ -580,6 +620,61 @@ pub fn run_test(args: &Args, num_cpus: Option<usize>, out: &mut impl Write) -> i
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Runs a test and returns its outcome and its report, without timing
+    /// information.
+    fn report(
+        args: &Args,
+        num_cpus: Option<usize>,
+        jump: bool,
+    ) -> anyhow::Result<(Outcome, String)> {
+        let mut out = Vec::new();
+        let outcome = run(args, num_cpus, jump, &mut out)?;
+        let report = String::from_utf8(out)?
+            .lines()
+            .map(|l| {
+                if l.starts_with("processed ") {
+                    l.split(" in ").next().unwrap_or(l)
+                } else {
+                    l
+                }
+            })
+            .collect::<Vec<_>>()
+            .join("\n");
+        Ok((outcome, report))
+    }
+
+    // Parallel runs in which generators reach the start of their range with a
+    // pre-scan (as generators without jumps do) give the same results as
+    // sequential runs.
+    #[test]
+    fn test_prescan() -> anyhow::Result<()> {
+        // Odd k with two words per iteration, and two calls per iteration.
+        for (word_bits, prng_bits, dim) in [(64, 64, 6), (32, 64, 5), (128, 64, 4)] {
+            let args = Args {
+                n: Some(1.2e8),
+                word_bits,
+                prng_bits,
+                dim,
+                categories: None,
+                transitions: true,
+                progress: true,
+                low_pv: None,
+                max_batch_size: None,
+                seed: 0x0123_4567_89AB_CDEF,
+                parallel: false,
+            };
+            let seq = report(&args, None, true)?;
+            for num_cpus in [2, 3] {
+                assert_eq!(
+                    report(&args, Some(num_cpus), false)?,
+                    seq,
+                    "{num_cpus} pre-scanning generators disagree with a sequential run for {args:?}"
+                );
+            }
+        }
+        Ok(())
+    }
 
     #[test]
     fn test_segments() {

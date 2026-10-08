@@ -33,4 +33,6 @@ for RUSTOPT in "" "-P"; do
 	# upper bits, so these runs must not use -t.
 	$C WELL512A well512a 64 64 8 --progress 1e9
 	$C WELL512A well512a 128 64 4 --progress 1e9
+	# Overflows of counters and of sums with transitions.
+	$C INCR incr 128 64 4 -t --progress 1e9
 done

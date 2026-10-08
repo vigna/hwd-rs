@@ -34,23 +34,7 @@ jobs:
       fail-fast: false
       matrix:
         features:
-          - mwc_128_64_0xff96d28c3f3329da
-          - mwc_128_64_0xffebb71d94fcdaf9
-          - mwc_192_64_0xffa04e67b3c95d86
-          - mwc_256_64_0xfff62cf2ccc0cdaf
-          - mwc_128_32_0xfffea2df
-          - splitmix
           - incr
-          - wyrand
-          - wyrand-reinerp
-          - romuduo
-          - romuduojr
-          - romutrio
-          - romutrio32
-          - lcg_32_32_0xec65035
-          - lcg_32_32_0x915f77f5
-          - lcg_64_64_0xa5b9ee81534fa94d
-          - "MSWS-CTR"
           - xorshift128
           - xorshift128plus
           - xorshift1024
@@ -77,23 +61,7 @@ jobs:
       fail-fast: false
       matrix:
         features:
-          - mwc_128_64_0xff96d28c3f3329da
-          - mwc_128_64_0xffebb71d94fcdaf9
-          - mwc_192_64_0xffa04e67b3c95d86
-          - mwc_256_64_0xfff62cf2ccc0cdaf
-          - mwc_128_32_0xfffea2df
-          - splitmix
           - incr
-          - wyrand
-          - wyrand-reinerp
-          - romuduo
-          - romuduojr
-          - romutrio
-          - romutrio32
-          - lcg_32_32_0xec65035
-          - lcg_32_32_0x915f77f5
-          - lcg_64_64_0xa5b9ee81534fa94d
-          - "MSWS-CTR"
           - xorshift128
           - xorshift128plus
           - xorshift1024
@@ -110,7 +78,7 @@ jobs:
         run: RUST_BACKTRACE=full cargo test --features ${{ matrix.features }} --verbose
 
   # Coverage is measured on a single generator: the features are mutually
-  # exclusive, so `--all-features` would hit the no-generator compile_error.
+  # exclusive, so `--all-features` would define several generators.
   coverage:
     needs: test
     name: coverage
@@ -125,7 +93,7 @@ jobs:
 
       - name: Generate code coverage
         run: |
-          cargo +nightly tarpaulin --verbose --engine llvm --features splitmix --workspace --out Lcov
+          cargo +nightly tarpaulin --verbose --engine llvm --features xoroshiro1024plus --workspace --out Lcov
 
       - name: Coveralls
         uses: coverallsapp/github-action@v2

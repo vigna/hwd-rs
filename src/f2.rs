@@ -18,6 +18,18 @@
 //! low-order coefficients (coefficient *k* is bit *k* % 64 of word ⌊*k* /
 //! 64⌋); the leading coefficient of characteristic polynomials is implicit.
 
+use std::collections::BTreeMap;
+use std::sync::{Mutex, PoisonError};
+
+/// The maximum number of polynomials cached by [`jump`].
+const JUMP_CACHE_SIZE: usize = 1024;
+
+/// A characteristic polynomial *p* and an exponent *n*.
+type JumpKey = (Vec<u64>, u64);
+
+/// The polynomials *x*ⁿ mod *p* computed by [`jump`].
+static JUMP_CACHE: Mutex<BTreeMap<JumpKey, Vec<u64>>> = Mutex::new(BTreeMap::new());
+
 /// A linear generator whose state is represented by `N` words.
 pub trait LinearGenerator<const N: usize>: Copy {
     /// Advances the state by one step.
@@ -86,7 +98,7 @@ pub fn jump<const N: usize>(g: &mut impl LinearGenerator<N>, n: u64, charpoly: &
         }
         return;
     }
-    let poly = x_pow_mod(n, charpoly);
+    let poly = cached_x_pow_mod(n, charpoly);
     let mut acc = [0; N];
     for w in poly {
         for b in 0..64 {
@@ -99,6 +111,27 @@ pub fn jump<const N: usize>(g: &mut impl LinearGenerator<N>, n: u64, charpoly: &
         }
     }
     g.set_vector(acc);
+}
+
+/// Returns *x*ⁿ mod `charpoly` as [`x_pow_mod`], but caching the results, as
+/// parallel runs jump by the same offsets again and again.
+fn cached_x_pow_mod<const N: usize>(n: u64, charpoly: &[u64; N]) -> [u64; N] {
+    let key = (charpoly.to_vec(), n);
+    let cached = JUMP_CACHE
+        .lock()
+        .unwrap_or_else(PoisonError::into_inner)
+        .get(&key)
+        .cloned();
+    if let Some(poly) = cached {
+        return poly.try_into().expect("cached polynomials have N words");
+    }
+    let poly = x_pow_mod(n, charpoly);
+    let mut cache = JUMP_CACHE.lock().unwrap_or_else(PoisonError::into_inner);
+    if cache.len() >= JUMP_CACHE_SIZE {
+        cache.clear();
+    }
+    cache.insert(key, poly.to_vec());
+    poly
 }
 
 /// Returns the minimal polynomial (the polynomial *m* of smallest degree such
@@ -191,7 +224,8 @@ mod tests {
         // Full degree: the leading coefficient is in the second word.
         assert_eq!(m[1], 1);
         let charpoly = [m[0]];
-        for n in [0u64, 1, 63, 64, 65, 1000, 123_456] {
+        // The last two offsets are repeated, and use the cache.
+        for n in [0u64, 1, 63, 64, 65, 1000, 123_456, 1000, 123_456] {
             let mut a = Xorshift64(0x0123_4567_89ab_cdef);
             let mut b = a;
             jump(&mut a, n, &charpoly);

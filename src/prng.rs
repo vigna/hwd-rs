@@ -49,6 +49,33 @@ mod placeholder {
 #[cfg(not(feature = "_prng"))]
 pub use placeholder::Prng;
 
+// ----- Trivial counters (sanity/baseline) ---------------------------------------------
+
+#[cfg(feature = "incr")]
+#[derive(Clone, Copy)]
+pub struct Prng {
+    x: u64,
+}
+
+#[cfg(feature = "incr")]
+impl Prng {
+    pub const NAME: &str = "incr (counter, x += 1)";
+    pub fn new(seed: u64) -> Self {
+        Self { x: seed }
+    }
+
+    #[inline(always)]
+    pub fn next_u64(&mut self) -> u64 {
+        self.x = self.x.wrapping_add(1);
+        self.x
+    }
+
+    pub fn try_skip(&mut self, n: u64) -> Result<(), ()> {
+        self.x = self.x.wrapping_add(n);
+        Ok(())
+    }
+}
+
 // ----- 𝐅₂-linear generators -----------------------------------------------------------
 //
 // The generators of "A New Test for Hamming-Weight Dependencies", by David

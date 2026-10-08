@@ -36,7 +36,7 @@ if [ -n "$NUMCATS" ]; then COPT="$COPT -DHWD_NUMCATS=$NUMCATS"; ROPT="$ROPT -c $
 if [ -n "$MAXB" ]; then COPT="$COPT -DMAX_BATCH_SIZE=$MAXB"; ROPT="$ROPT --max-batch-size $MAXB"; fi
 
 CBIN=$W/bin/hwd-$CDEF-$WB-$PB-$DIM$(echo $COPT | tr -c 'a-zA-Z0-9\n' '_')
-gcc -O3 -w $W/src/hwd.c -I$W/src -D$CDEF -DHWD_BITS=$WB -DHWD_PRNG_BITS=$PB -DHWD_DIM=$DIM $COPT -o $CBIN -lm
+gcc -O3 -ffp-contract=off -w $W/src/hwd.c -I$W/src -D$CDEF -DHWD_BITS=$WB -DHWD_PRNG_BITS=$PB -DHWD_DIM=$DIM $COPT -o $CBIN -lm
 (cd $ROOT && cargo build -q --release --features $FEAT && cp target/release/hwd $W/bin/hwd-$FEAT)
 
 TAG=$CDEF-$WB-$PB-$DIM-$(echo "$@ $COPT $RUSTOPT" | tr -c 'a-zA-Z0-9.\n' '_')

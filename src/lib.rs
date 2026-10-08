@@ -9,7 +9,6 @@
 #[doc(hidden)]
 pub mod cli;
 pub mod common;
-#[allow(dead_code)]
 pub mod f2;
 #[allow(dead_code, clippy::result_unit_err)]
 pub mod prng;

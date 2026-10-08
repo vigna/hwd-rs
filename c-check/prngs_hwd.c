@@ -5,8 +5,8 @@
  */
 
 /* Generators identical to those of the Rust crate, for compiling the C
-   implementation of the test (hwd.c) with check.sh. The state is filled with
-   SplitMix64 from SEED, as in the crate. */
+   implementation of the test (hwd.c) with check.sh. The state of the
+   𝐅₂-linear generators is filled with SplitMix64 from SEED, as in the crate. */
 #ifndef SEED
 #define SEED 0
 #endif
@@ -20,7 +20,11 @@ static uint64_t splitmix64(void) {
 	return z ^ (z >> 31);
 }
 
-#if defined(XORSHIFT128) || defined(XORSHIFT128PLUS)
+#if defined(INCR)
+static uint64_t x = SEED;
+static uint64_t inline next() { return ++x; }
+static void init(void) {}
+#elif defined(XORSHIFT128) || defined(XORSHIFT128PLUS)
 #define A 23
 #define B 18
 #define C 5

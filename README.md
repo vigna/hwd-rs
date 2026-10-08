@@ -12,10 +12,10 @@ This crate implements the test for Hamming-weight dependencies described in
 “[A New Test for Hamming-Weight Dependencies]”, by David Blackman and Sebastiano
 Vigna. The test finds bias induced by dependencies among the Hamming weights
 (the number of ones) of the outputs of a pseudorandom number generator (PRNG), in
-particular for generators based on 𝐅₂-linear transformations such as the dSFMT,
-`xoroshiro128+`, and WELL512.
+particular for generators based on 𝐅₂-linear transformations such as the [dSFMT],
+[`xoroshiro128+`], and [WELL512].
 
-The crate is a port of the original C implementation: for the same generator and
+The crate is a port of the [original C implementation]: for the same generator and
 parameters, the result of the test is the same. Moreover, the crate can use
 multiple cores to generate and examine the output of the generator in parallel,
 again without changing the result of the test.
@@ -82,6 +82,30 @@ counters, which are moved into 64-bit counters at the end of each batch. Batch
 sizes are chosen so that the probability that a packed counter overflows is
 below 10⁻¹⁰⁰: if this happens, the test reports a _p_-value of 10⁻¹⁰⁰.
 
+# Results
+
+The following table, from the [page of the test], reports for some
+𝐅₂-linear generators the amount of output, in bytes, after which the test
+yields a _p_-value below 10⁻²⁰, and the faulty signature. Ranges (→) appear
+when several variants were tested (e.g., several parameters of the Mersenne
+Twister): a missing right extreme means that some instances did not fail the
+test within a petabyte.
+
+| PRNG                            | _w_ | Period   | _p_ = 10⁻²⁰ @      | Faulty signature                             |
+| ------------------------------- | --: | -------- | ------------------ | -------------------------------------------- |
+| `xorshift128+`                  |  64 | 2¹²⁸ − 1 | 6 × 10⁹            | `00000012` (transitional)                    |
+| `xoroshiro128+`                 |  64 | 2¹²⁸ − 1 | 5 × 10¹²           | `00000012`                                   |
+| Tiny Mersenne Twister (64 bits) |  32 | 2¹²⁷ − 1 | 8 × 10¹³ →         | `10001021`                                   |
+| Tiny Mersenne Twister (32 bits) |  32 | 2¹²⁷ − 1 | 4 × 10¹³ →         | `10001021`                                   |
+| SFMT (607 bits)                 |  32 | 2⁶⁰⁷ − 1 | 4 × 10⁸            | `001000001000`                               |
+| dSFMT (521 bits)                |  32 | 2⁵²¹ − 1 | 6 × 10¹²           | `1001000100100010`                           |
+| Mersenne Twister (521 bits)     |  32 | 2⁵²¹ − 1 | 4 × 10¹⁰ →         | `1000000100000000`, `2000000100000000`       |
+| Mersenne Twister (607 bits)     |  32 | 2⁶⁰⁷ − 1 | 4 × 10⁸ → 4 × 10¹⁰ | `1000000001000000000`, `2000000001000000000` |
+| WELL512a (512 bits)             |  32 | 2⁵¹² − 1 | 3 × 10¹⁵           | `2001002200000000`                           |
+
+Since the generators of this crate are seeded differently (see below), the
+amount of output and the faulty signatures might be slightly different.
+
 # Parallel generation
 
 With option `-P`, the iterations of the test are split into contiguous ranges,
@@ -124,8 +148,12 @@ characteristic polynomial (see the [`f2`] module).
 
 # Usage
 
-The generator to test is selected at compilation time using Cargo features.
-For example,
+The generator to test is selected at compilation time using Cargo features:
+besides `incr`, a counter useful only to test the crate, the available
+generators are those of the paper, `xorshift128`, `xorshift128plus`,
+`xorshift1024`, `xorshift1024plus`, `xoroshiro128`, `xoroshiro128plus`,
+`xoroshiro1024`, `xoroshiro1024plus`, and the 32-bit generator `well512a`. For
+example,
 
 ```text
 cargo run -r -F xoroshiro128plus -- -P --progress --low-pv=1e-20 1e15
@@ -176,6 +204,15 @@ cargo run -r -F xorshift1024 -- -P -k 16 --progress --low-pv=1e-20 1e15
 cargo run -r -F well512a -- -P -w 32 --prng-bits 32 -k 16 --progress --low-pv=1e-20 1e15
 ```
 
+The repository configures Cargo to compile for the native CPU (`-C
+target-cpu=native`): on x86-64, for example, otherwise population counts do not
+use the `POPCNT` instruction. Since `cargo install` does not use this
+configuration, install the test with, for example,
+
+```text
+RUSTFLAGS="-C target-cpu=native" cargo install hwd -F xoroshiro128plus
+```
+
 # Adding your own generator
 
 To add a new generator, add a feature in `Cargo.toml` and a corresponding
@@ -189,10 +226,13 @@ characteristic polynomial of the transition map, as done, for example, for
 The [`prng`] module has the same interface as that of the [`coll-birth`] crate.
 
 [A New Test for Hamming-Weight Dependencies]: https://doi.org/10.1145/3527582
-[TestU01]: https://doi.org/10.1145/1268776.1268777
-[gjrand]: https://gjrand.sourceforge.net/
+[original C implementation]: https://prng.di.unimi.it/hwd.php
+[page of the test]: https://prng.di.unimi.it/hwd.php
 [SplitMix64]: https://prng.di.unimi.it/splitmix64.c
 [`coll-birth`]: https://crates.io/crates/coll-birth
 [`prng`]: https://docs.rs/hwd/latest/hwd/prng/index.html
 [`f2`]: https://docs.rs/hwd/latest/hwd/f2/index.html
 [`LinearGenerator`]: https://docs.rs/hwd/latest/hwd/f2/trait.LinearGenerator.html
+[dSFMT]: https://doi.org/10.1007/978-3-642-04107-5_38
+[`xoroshiro128+`]: https://doi.org/10.1145/3460772
+[WELL512]: https://doi.org/10.1145/1132973.1132974

@@ -63,9 +63,9 @@ pub struct Args {
     #[arg(short = 'S', long, default_value_t = 0, value_parser = parse_u64)]
     pub seed: u64,
 
-    /// Generate data in parallel: the orbit is split into contiguous segments, one generated per
-    /// thread; jump-capable generators jump to each segment start, others reach it with a
-    /// sequential pre-scan; the output is identical to that of a sequential run.​
+    /// Generate and examine the output in parallel: the output is split into contiguous ranges, one
+    /// per thread; generators reach the start of their range by jumping or, if they cannot jump,
+    /// with a sequential pre-scan; the report is identical to that of a sequential run.​
     #[arg(short = 'P', long)]
     pub parallel: bool,
 }
