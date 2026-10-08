@@ -15,8 +15,7 @@ Vigna. The test finds bias induced by dependencies among the Hamming weights
 particular for generators based on 𝐅₂-linear transformations such as the dSFMT,
 `xoroshiro128+`, and WELL512.
 
-The crate is a port of the original C implementation, which is in turn based on
-the test `z9` from David Blackman's [gjrand]: for the same generator and
+The crate is a port of the original C implementation: for the same generator and
 parameters, the result of the test is the same. Moreover, the crate can use
 multiple cores to generate and examine the output of the generator in parallel,
 again without changing the result of the test.

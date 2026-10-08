@@ -23,18 +23,81 @@
 //! that of a sequential run.
 
 use std::io::{self, Write};
+use std::marker::PhantomData;
 use std::mem::size_of;
 use std::time::Instant;
 
+use bytemuck::Pod;
+use mmap_rs::{MmapFlags, MmapMut, MmapOptions};
 use rayon::prelude::*;
 
 use crate::cli::Args;
-use crate::counters::{Buffer, CountSum, desat};
-use crate::mode::Mode;
 use crate::prng::Prng;
-use crate::scan::{SigState, scan_dispatch};
+use crate::scan::{CountSum, Mode, SigState, desat, scan_dispatch};
 use crate::stats::{compute_pvalue, format_p_value};
 use crate::util::Stopwatch;
+
+/// A zero-initialized buffer of `T` allocated with `mmap()`.
+pub struct Buffer<T> {
+    mmap: MmapMut,
+    len: usize,
+    _marker: PhantomData<T>,
+}
+
+impl<T: Pod> Buffer<T> {
+    /// Allocates a zero-initialized buffer of `len` elements, prefaulting it
+    /// as transparent huge pages.
+    ///
+    /// # Implementation Details
+    ///
+    /// [`MmapFlags::POPULATE`] would prefault the buffer as base (4 KiB)
+    /// pages, so we use [`MmapFlags::TRANSPARENT_HUGE_PAGES`] and prefault
+    /// the buffer by touching one byte every 2 MiB. If transparent huge pages
+    /// are disabled, the buffer is still prefaulted, as base pages.
+    ///
+    /// [`MmapFlags::POPULATE`]: mmap_rs::MmapFlags::POPULATE
+    /// [`MmapFlags::TRANSPARENT_HUGE_PAGES`]: mmap_rs::MmapFlags::TRANSPARENT_HUGE_PAGES
+    pub fn new(len: usize) -> Self {
+        // A failed allocation is not a bug, so we exit with an explanation
+        // rather than panicking.
+        fn alloc_error(n: usize, detail: &dyn std::fmt::Display) -> ! {
+            eprintln!(
+                "\ncannot allocate a buffer of {n} elements: {detail}; \
+                 reduce k or the number of threads"
+            );
+            std::process::exit(1);
+        }
+        let bytes_len = len
+            .checked_mul(size_of::<T>())
+            .unwrap_or_else(|| alloc_error(len, &"the size in bytes overflows usize"))
+            .max(1);
+        let mut mmap = MmapOptions::new(bytes_len)
+            .and_then(|options| {
+                options
+                    .with_flags(MmapFlags::TRANSPARENT_HUGE_PAGES)
+                    .map_mut()
+            })
+            .unwrap_or_else(|e| alloc_error(len, &e));
+        const HUGE_PAGE: usize = 2 * 1024 * 1024;
+        let bytes: &mut [u8] = &mut mmap;
+        bytes
+            .par_chunks_mut(HUGE_PAGE)
+            .for_each(|chunk| chunk[0] = 0);
+        Self {
+            mmap,
+            len,
+            _marker: PhantomData,
+        }
+    }
+
+    pub fn as_slice(&self) -> &[T] {
+        &bytemuck::cast_slice(&self.mmap[..])[..self.len]
+    }
+
+    pub fn as_mut_slice(&mut self) -> &mut [T] {
+        &mut bytemuck::cast_slice_mut(&mut self.mmap[..])[..self.len]
+    }
+}
 
 /// How a test ended.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]

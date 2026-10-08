@@ -8,7 +8,7 @@
 
 use clap::Parser;
 
-use crate::mode::Mode;
+use crate::scan::Mode;
 
 #[derive(Parser, Debug, Clone)]
 #[command(

@@ -9,7 +9,7 @@
   Dependencies", by David Blackman and Sebastiano Vigna, with identical
   results.
 
-- Faithful parallel generation (`-P`): the output is identical to that of a
+- Parallel generation (`-P`): the output is identical to that of a
   sequential run.
 
 - Arbitrary jumps (`try_skip`) for the 𝐅₂-linear generators of the paper.

@@ -17,7 +17,7 @@ use std::io::{self, Write};
 
 use rayon::prelude::*;
 
-use crate::counters::CountSum;
+use crate::scan::CountSum;
 
 unsafe extern "C" {
     /// The complementary error function of the C math library (the Rust
@@ -49,7 +49,7 @@ const CORRECT6: f64 = 0.40824829046386301636;
 const PAR_THRESHOLD: usize = 1 << 16;
 
 /// Returns the probability that the smallest of `n` independent uniform
-/// values in [0 . . 1) is at most `x`, that is, 1 − (1 − `x`)ⁿ.
+/// values in [0 . . 1) is at most `x`, that is, 1 − (1 − `x`)ⁿ.
 pub fn pco_scale(x: f64, n: f64) -> f64 {
     if x >= 1.0 || x <= 0.0 {
         return x;
