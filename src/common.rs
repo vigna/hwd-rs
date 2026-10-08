@@ -35,7 +35,6 @@ use crate::cli::Args;
 use crate::prng::Prng;
 use crate::scan::{CountSum, Mode, SigState, desat, scan_dispatch};
 use crate::stats::{compute_pvalue, format_p_value};
-use crate::util::Stopwatch;
 
 /// A zero-initialized buffer of `T` allocated with `mmap()`.
 pub struct Buffer<T> {
@@ -431,7 +430,6 @@ pub fn run_test(args: &Args, num_cpus: Option<usize>, out: &mut impl Write) -> i
     let mut small: Vec<Buffer<u32>> = (0..num_arrays).map(|_| Buffer::new(size)).collect();
 
     // As in the C implementation, timing starts after allocation.
-    let mut sw = Stopwatch::new();
     hwd.tstart = Instant::now();
     let mut prng = Prng::new(args.seed);
     let mut st = SigState::initial(size as u32);
@@ -572,7 +570,10 @@ pub fn run_test(args: &Args, num_cpus: Option<usize>, out: &mut impl Write) -> i
             }
         }
     };
-    eprintln!("Test completed in {:.2} seconds", sw.lap());
+    eprintln!(
+        "Test completed in {:.2} seconds",
+        hwd.tstart.elapsed().as_secs_f64()
+    );
     Ok(outcome)
 }
 

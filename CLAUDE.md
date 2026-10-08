@@ -36,7 +36,6 @@ The crate is both a library (`src/lib.rs`, crate name `hwd`) and a thin binary (
 - **`f2.rs`**: arbitrary jumps for 𝐅₂-linear generators, a port of `f2x.c` from prng.di.unimi.it: `x_pow_mod` by square-and-multiply with bit-serial `mul_mod`, and `jump`, the accumulate-and-step loop over the `LinearGenerator` trait (`step`, `to_vector`, `set_vector`, with canonical rotation for generators with a rotating index). Characteristic polynomials are hardcoded in `prng.rs` (`CHARPOLY`); `minimal_polynomial` (Berlekamp–Massey) is test-only and checks them in `prng::charpoly_tests`.
 - **`prng.rs`**: the generators of the paper, with the same interface as in coll-birth (one `pub struct Prng` per feature with `NAME`, `new(seed)`, `next_u64`, `try_skip`; 32-bit outputs in the upper bits). Their state is filled with SplitMix64 from the seed; the linear engines return their first state word, as in the C replication code, and the `+` variants the sum of two words.
 - **`cli.rs`**: `Args` (clap) and validation. It accepts the C program's invocation (`-t --progress --low-pv=1e-20 1E15`).
-- **`util.rs`**: copied from coll-birth.
 
 Integration tests (`tests/test_parallel.rs`) compare the full reports of parallel runs with 1, 2, 3, and 7 threads against a sequential run, for all word modes, with and without transitions; they run with whatever generator feature is enabled. Since all generators jump, `prescan` is not exercised.
 

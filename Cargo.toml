@@ -12,7 +12,7 @@ license = "Apache-2.0 OR MIT"
 readme = "README.md"
 categories = ["algorithms", "mathematics", "command-line-utilities"]
 keywords = ["hamming-weight", "prng", "testing", "statistics"]
-exclude = ["c-check"]
+exclude = ["c-check", "CLAUDE.md", ".github", ".pre-commit-config.yaml", ".gitignore"]
 
 [package.metadata.docs.rs]
 features = ["xoroshiro128plus"]
@@ -22,7 +22,6 @@ rayon = "1"
 clap = { version = "4.1.6", features = ["derive", "wrap_help"] }
 mmap-rs = "0.7.0"
 bytemuck = { version = "1.13.1", features = ["derive"] }
-num = { version = "0.4.0", features = ["num-bigint"] }
 
 [dev-dependencies]
 anyhow = "1.0.79"

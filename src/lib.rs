@@ -15,4 +15,3 @@ pub mod f2;
 pub mod prng;
 pub mod scan;
 pub mod stats;
-pub mod util;

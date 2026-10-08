@@ -162,7 +162,7 @@ impl Args {
     /// when `--parallel` is set.
     pub fn parallel_cpus(&self) -> Option<usize> {
         if self.parallel {
-            Some(crate::util::parallelism())
+            Some(rayon::current_num_threads())
         } else {
             None
         }
