@@ -5,8 +5,6 @@
  */
 
 //! Tests checking that parallel runs give the same results as sequential runs.
-//!
-//! Depending on the generator, the tests exercise jump-ahead or pre-scan.
 
 use hwd::cli::Args;
 use hwd::common::{Outcome, run_test};
@@ -109,8 +107,8 @@ fn test_small_batches() -> anyhow::Result<()> {
     check(&args)
 }
 
-// A run stopping at the first report (or before, if the generator is so bad
-// that counters overflow).
+// A run stopping at the first report (or before, if counters overflow, as it
+// happens with 32-bit generators).
 #[test]
 fn test_low_pv() -> anyhow::Result<()> {
     let mut args = make_args(1.3e8, 64, 64, 8);

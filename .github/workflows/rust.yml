@@ -1,0 +1,134 @@
+name: Rust
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+# The coverage job uploads to Coveralls using GITHUB_TOKEN, which needs only
+# read access here.
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  # Formatting is feature-independent, so it runs once.
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - name: Check formatting
+        run: cargo fmt -- --check
+
+  # Exactly one generator feature must be enabled, so clippy is run once per
+  # generator: a bare `cargo clippy` would hit the no-generator compile_error.
+  clippy:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        features:
+          - mwc_128_64_0xff96d28c3f3329da
+          - mwc_128_64_0xffebb71d94fcdaf9
+          - mwc_192_64_0xffa04e67b3c95d86
+          - mwc_256_64_0xfff62cf2ccc0cdaf
+          - mwc_128_32_0xfffea2df
+          - splitmix
+          - incr
+          - wyrand
+          - wyrand-reinerp
+          - romuduo
+          - romuduojr
+          - romutrio
+          - romutrio32
+          - lcg_32_32_0xec65035
+          - lcg_32_32_0x915f77f5
+          - lcg_64_64_0xa5b9ee81534fa94d
+          - "MSWS-CTR"
+          - xorshift128
+          - xorshift128plus
+          - xorshift1024
+          - xorshift1024plus
+          - xoroshiro128
+          - xoroshiro128plus
+          - xoroshiro1024
+          - xoroshiro1024plus
+          - well512a
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - name: Clippy (${{ matrix.features }})
+        run: cargo clippy --all-targets --features ${{ matrix.features }} -- -D warnings
+
+  # Tests, on stable, across every generator. Each generator gates its own
+  # `Prng`, so a single feature would leave the others uncompiled.
+  test:
+    runs-on: ubuntu-latest
+    needs: [fmt, clippy]
+    strategy:
+      fail-fast: false
+      matrix:
+        features:
+          - mwc_128_64_0xff96d28c3f3329da
+          - mwc_128_64_0xffebb71d94fcdaf9
+          - mwc_192_64_0xffa04e67b3c95d86
+          - mwc_256_64_0xfff62cf2ccc0cdaf
+          - mwc_128_32_0xfffea2df
+          - splitmix
+          - incr
+          - wyrand
+          - wyrand-reinerp
+          - romuduo
+          - romuduojr
+          - romutrio
+          - romutrio32
+          - lcg_32_32_0xec65035
+          - lcg_32_32_0x915f77f5
+          - lcg_64_64_0xa5b9ee81534fa94d
+          - "MSWS-CTR"
+          - xorshift128
+          - xorshift128plus
+          - xorshift1024
+          - xorshift1024plus
+          - xoroshiro128
+          - xoroshiro128plus
+          - xoroshiro1024
+          - xoroshiro1024plus
+          - well512a
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Test (${{ matrix.features }})
+        run: RUST_BACKTRACE=full cargo test --features ${{ matrix.features }} --verbose
+
+  # Coverage is measured on a single generator: the features are mutually
+  # exclusive, so `--all-features` would hit the no-generator compile_error.
+  coverage:
+    needs: test
+    name: coverage
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    container:
+      image: xd009642/tarpaulin:develop-nightly
+      options: --security-opt seccomp=unconfined
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Generate code coverage
+        run: |
+          cargo +nightly tarpaulin --verbose --engine llvm --features splitmix --workspace --out Lcov
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: "lcov.info"

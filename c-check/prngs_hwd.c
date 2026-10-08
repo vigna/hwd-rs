@@ -5,8 +5,8 @@
  */
 
 /* Generators identical to those of the Rust crate, for compiling the C
-   implementation of the test (hwd.c) with check.sh. Generators with more than
-   64 bits of state are seeded with SplitMix64 from SEED, as in the crate. */
+   implementation of the test (hwd.c) with check.sh. The state is filled with
+   SplitMix64 from SEED, as in the crate. */
 #ifndef SEED
 #define SEED 0
 #endif
@@ -20,25 +20,7 @@ static uint64_t splitmix64(void) {
 	return z ^ (z >> 31);
 }
 
-#if defined(SPLITMIX)
-static uint64_t x = SEED;
-static uint64_t inline next() {
-	uint64_t z = x;
-	z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9;
-	z = (z ^ (z >> 27)) * 0x94d049bb133111eb;
-	x += 0x9e3779b97f4a7c15;
-	return z ^ (z >> 31);
-}
-static void init(void) {}
-#elif defined(INCR)
-static uint64_t x = SEED;
-static uint64_t inline next() { return ++x; }
-static void init(void) {}
-#elif defined(LCG32)
-static uint32_t x = (uint32_t)SEED;
-static uint32_t inline next() { x = x * 0xec65035 + 1; return x; }
-static void init(void) {}
-#elif defined(XORSHIFT128) || defined(XORSHIFT128PLUS)
+#if defined(XORSHIFT128) || defined(XORSHIFT128PLUS)
 #define A 23
 #define B 18
 #define C 5
@@ -121,7 +103,7 @@ static void init(void) { for(int i = 0; i < 16; i++) s[i] = splitmix64(); }
 static unsigned int state_i = 0;
 static uint32_t STATE[R];
 static uint32_t z0, z1, z2;
-uint32_t next(void){
+static uint32_t well512a(void){
   z0    = VRm1;
   z1    = MAT0NEG (-16,V0)    ^ MAT0NEG (-15, VM1);
   z2    = MAT0POS (11, VM2)  ;
@@ -130,17 +112,14 @@ uint32_t next(void){
   state_i = (state_i + 15) & 0x0000000fU;
   return STATE[state_i];
 }
+/* hwd.c declares next() with the type of the output of the generator: with 64
+   bits, the output is in the lower bits (in the crate, in the upper bits). */
+#if HWD_PRNG_BITS == 64
+static inline uint64_t next(void) { return well512a(); }
+#else
+static inline uint32_t next(void) { return well512a(); }
+#endif
 static void init(void) { for(int i = 0; i < 16; i++) STATE[i] = splitmix64() >> 32; }
-#elif defined(ROMUTRIO)
-static uint64_t x = SEED, y = 1, z = 1;
-static uint64_t inline next() {
-	uint64_t xp = x, yp = y, zp = z;
-	x = 15241094284759029579u * zp;
-	y = yp - xp; y = (y << 12) | (y >> 52);
-	z = zp - yp; z = (z << 44) | (z >> 20);
-	return xp;
-}
-static void init(void) {}
 #else
 #error "No generator"
 #endif

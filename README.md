@@ -11,8 +11,7 @@
 This crate implements the test for Hamming-weight dependencies described in
 “[A New Test for Hamming-Weight Dependencies]”, by David Blackman and Sebastiano
 Vigna. The test finds bias induced by dependencies among the Hamming weights
-(the number of ones) of the outputs of a pseudorandom number generator (PRNG),
-even for PRNGs that pass the tests of the same kind of [TestU01], and in
+(the number of ones) of the outputs of a pseudorandom number generator (PRNG), in
 particular for generators based on 𝐅₂-linear transformations such as the dSFMT,
 `xoroshiro128+`, and WELL512.
 
@@ -93,8 +92,8 @@ words of its range in its own copy of the packed counters, starting a few words
 before its range so to have the same signature as a sequential run; at the end
 of each batch, the copies are added together, and since packed counters are
 updated by addition modulo 2³², the result is exactly the one of a sequential
-run, even in case of overflow. Thus, **the output of a parallel run is identical
-to that of a sequential run**, except for timing information.
+run, even in case of overflow. Thus, the output of a parallel run is identical
+to that of a sequential run.
 
 Each thread needs its own copy of the packed counters, so a parallel run with
 _t_ threads uses at least 4 · (_t_ − 1) · 3*ᵏ* additional bytes of memory
@@ -188,7 +187,7 @@ just need to implement the [`LinearGenerator`] trait and provide the
 characteristic polynomial of the transition map, as done, for example, for
 `xoroshiro128`.
 
-The [`prng`] module is shared with the [`coll-birth`] crate.
+The [`prng`] module has the same interface as that of the [`coll-birth`] crate.
 
 [A New Test for Hamming-Weight Dependencies]: https://doi.org/10.1145/3527582
 [TestU01]: https://doi.org/10.1145/1268776.1268777
