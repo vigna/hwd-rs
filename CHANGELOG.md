@@ -1,6 +1,6 @@
 # Change Log
 
-## [0.1.1] - 2024-10-09
+## [0.1.1] - 2026-10-09
 
 ### Changed
 
@@ -19,7 +19,8 @@
 
 - The README provides options to replicate the results of the paper for all
   generators (in particular, `xoroshiro128+` was tested with the transitional
-  variant).
+  variant, and the faulty signature of `xoroshiro1024+` with the transitional
+  variant is `1200000000000001`).
 
 ## [0.1.0] - 2026-10-08
 

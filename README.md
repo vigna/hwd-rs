@@ -207,7 +207,7 @@ cargo run -r -F FEATURE -- -P OPTIONS --progress --low-pv=1e-20 1e15
 with the following features and options (the `+` generators were tested with
 the transitional variant, and the batch size of the `xorshift1024` generators
 was reduced to obtain more frequent reports); the amount of data and the faulty
-signature are those reported in the paper:
+signature are those of the tests of the paper:
 
 | Feature             | Options                         | _p_ = 10⁻²⁰ @ | Faulty signature   |
 | ------------------- | ------------------------------- | ------------- | ------------------ |
@@ -218,7 +218,7 @@ signature are those reported in the paper:
 | `xoroshiro128`      |                                 | 1 × 10¹⁰      | `00000012`         |
 | `xoroshiro128plus`  | `-t`                            | 5 × 10¹²      | `00000012`         |
 | `xoroshiro1024`     | `-k 16`                         | 5 × 10¹²      | `1100000000000001` |
-| `xoroshiro1024plus` | `-t -k 16`                      | 4 × 10¹³      | `1100000000000001` |
+| `xoroshiro1024plus` | `-t -k 16`                      | 4 × 10¹³      | `1200000000000001` |
 | `well512a`          | `-w 32 -k 16`                   | 3 × 10¹⁵      | `2001002200000000` |
 
 WELL512a needs more than a petabyte, so for it you must raise the limit, or omit
