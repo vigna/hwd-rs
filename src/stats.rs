@@ -63,6 +63,9 @@ pub fn pco_scale(x: f64, n: f64) -> f64 {
 ///
 /// The transform multiplies `v` by the *k*-th Kronecker power of a 3 × 3
 /// orthonormal matrix, recursively as in the fast Walsh–Hadamard transform.
+/// As in the C implementation, the matrix is that of the paper with the third
+/// column negated: since only absolute values of the result are used, the
+/// sign is irrelevant.
 pub fn mix3(v: &mut [f64], sig: usize) {
     debug_assert_eq!(v.len(), 3 * sig);
     let (v0, rest) = v.split_at_mut(sig);

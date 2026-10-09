@@ -71,10 +71,10 @@ given number of bytes, or runs indefinitely if no number is specified. With
 `--progress` (or when running indefinitely), _p_-values are reported after
 about 10⁸, 1.25 · 10⁸, 1.5 · 10⁸, 1.75 · 10⁸, 2 · 10⁸, 2.5 · 10⁸, 3 · 10⁸, 4 ·
 10⁸, 5 · 10⁸, 6 · 10⁸, 7 · 10⁸, 8.5 · 10⁸ bytes, and so on, multiplying by ten
-each time; the test stops as soon as a _p_-value is below the threshold set with
-`--low-pv`. In the paper, tests were performed with _w_ = 32 or _w_ = 64 and _k_
-between 8 and 19, stopping after a petabyte of data or at a _p_-value below
-10⁻²⁰.
+each time; the test stops as soon as the final _p_-value of a report (the line
+`p = …`) is below the threshold set with `--low-pv`. In the paper, tests were
+performed with _w_ = 32 or _w_ = 64 and _k_ between 8 and 19, stopping after a
+petabyte of data or at a _p_-value below 10⁻²⁰.
 
 The test needs 28 · 3*ᵏ* bytes of memory, which become about 1.2 GB for _k_ = 16
 and 33 GB for _k_ = 19. To improve locality, words are counted in packed 32-bit
@@ -94,10 +94,10 @@ test within a petabyte.
 | PRNG                            | _w_ | Period   | _p_ = 10⁻²⁰ @      | Faulty signature                             |
 | ------------------------------- | --: | -------- | ------------------ | -------------------------------------------- |
 | `xorshift128+`                  |  64 | 2¹²⁸ − 1 | 6 × 10⁹            | `00000012` (transitional)                    |
-| `xoroshiro128+`                 |  64 | 2¹²⁸ − 1 | 5 × 10¹²           | `00000012`                                   |
-| Tiny Mersenne Twister (64 bits) |  32 | 2¹²⁷ − 1 | 8 × 10¹³ →         | `10001021`                                   |
+| `xoroshiro128+`                 |  64 | 2¹²⁸ − 1 | 5 × 10¹²           | `00000012` (transitional)                    |
+| Tiny Mersenne Twister (64 bits) |  32 | 2¹²⁷ − 1 | 8 × 10¹³ →         | `00000202`                                   |
 | Tiny Mersenne Twister (32 bits) |  32 | 2¹²⁷ − 1 | 4 × 10¹³ →         | `10001021`                                   |
-| SFMT (607 bits)                 |  32 | 2⁶⁰⁷ − 1 | 4 × 10⁸            | `001000001000`                               |
+| SFMT (607 bits)                 |  64 | 2⁶⁰⁷ − 1 | 4 × 10⁸            | `001000001000`                               |
 | dSFMT (521 bits)                |  32 | 2⁵²¹ − 1 | 6 × 10¹²           | `1001000100100010`                           |
 | Mersenne Twister (521 bits)     |  32 | 2⁵²¹ − 1 | 4 × 10¹⁰ →         | `1000000100000000`, `2000000100000000`       |
 | Mersenne Twister (607 bits)     |  32 | 2⁶⁰⁷ − 1 | 4 × 10⁸ → 4 × 10¹⁰ | `1000000001000000000`, `2000000001000000000` |
@@ -112,8 +112,8 @@ With option `-P`, the iterations of the test are split into contiguous ranges,
 one for each thread: jump-capable generators jump to the start of their range,
 whereas the others reach it with a sequential pre-scan. Each thread counts the
 words of its range in its own copy of the packed counters, starting a few words
-before its range so to have the same signature as a sequential run; at the end
-of each batch, the copies are added together, and since packed counters are
+before its range so as to have the same signature as a sequential run; at the
+end of each batch, the copies are added together, and since packed counters are
 updated by addition modulo 2³², the result is exactly the one of a sequential
 run, even in case of overflow. Thus, the output of a parallel run is identical
 to that of a sequential run.
@@ -135,8 +135,9 @@ characteristic polynomial (see the [`f2`] module).
   selected at compile time using Cargo features.
 
 - Generators return 64-bit values: 32-bit generators return their output in the
-  upper 32 bits, and must be tested with `--prng-bits 32`. With 64-bit outputs,
-  `-w 32` splits each output into two words, upper half first.
+  upper 32 bits, and `--prng-bits` defaults to the number of bits of output of
+  the generator. With 64-bit outputs, `-w 32` splits each output into two words,
+  upper half first.
 
 - Generators are initialized from a 64-bit seed (option `-S`), and generators
   with more than 64 bits of state fill it using [SplitMix64]: the faulty
@@ -156,57 +157,76 @@ generators are those of the paper, `xorshift128`, `xorshift128plus`,
 example,
 
 ```text
-cargo run -r -F xoroshiro128plus -- -P --progress --low-pv=1e-20 1e15
+cargo run -r -F xoroshiro128plus -- -P -t --progress --low-pv=1e-20 1e15
 Generator: xoroshiro128+ (24, 16, 37)
 Seed: 0x0000000000000000
-Running a test for Hamming-weight dependencies with k = 8 and 5 categories using 10 parallel generators (jump-ahead) on 64-bit words, the full outputs, analyzing bits (batches of 2311072 words, 0.002 GiB RAM)
+Running a test for Hamming-weight dependencies with k = 8 and 5 categories using 10 parallel generators (jump-ahead) on 64-bit words, the full outputs, analyzing transitions (batches of 2311072 words, 0.002 GiB RAM)
 Examining 1000000000000000 bytes, stopping if p < 1e-20
-mix3 extreme = 2.57485 (sig = 00020000) weight 1 (16), p-value = 0.14893176321045537
-mix3 extreme = 2.95929 (sig = 00001020) weight 2 (112), p-value = 0.2924060708331487
-mix3 extreme = 2.97046 (sig = 01002200) weight 3 (448), p-value = 0.736610976840799
-mix3 extreme = 2.96745 (sig = 21200100) weight 4 (1120), p-value = 0.9655482751525518
-mix3 extreme = 4.32354 (sig = 22120101) weight >=5 (4864), p-value = 0.0719628674515154
-bits per word = 64 (analyzing bits); min category p-value = 0.0719628674515154
+mix3 extreme = 2.04196 (sig = 00200000) weight 1 (16), p-value = 0.4895265563711558
+mix3 extreme = 2.81178 (sig = 10000200) weight 2 (112), p-value = 0.4248712876027823
+mix3 extreme = 2.90032 (sig = 10020100) weight 3 (448), p-value = 0.8123541528946184
+mix3 extreme = 4.32909 (sig = 02020202) weight 4 (1120), p-value = 0.016630046075989773
+mix3 extreme = 4.32152 (sig = 12021102) weight >=5 (4864), p-value = 0.07260107083813899
+bits per word = 64 (analyzing transitions); min category p-value = 0.016630046075989773
 
-processed 110931456 bytes in 0.057 seconds (1.9524 GB/s, 7.0286 TB/h)
+processed 110931456 bytes in 0.052 seconds (2.1269 GB/s, 7.6568 TB/h)
 
-p = 0.3116223400948752
+p = 0.08043025669891243
 ------
 
 [...]
 
-mix3 extreme = 2.21810 (sig = 00002000) weight 1 (16), p-value = 0.3498212859734305
-mix3 extreme = 11.28875 (sig = 00000012) weight 2 (112), p-value = 1.6703369397814162e-27
-mix3 extreme = 3.43838 (sig = 20000210) weight 3 (448), p-value = 0.23067832880149697
-mix3 extreme = 3.21723 (sig = 20221000) weight 4 (1120), p-value = 0.7655706409615056
-mix3 extreme = 3.37608 (sig = 21101022) weight >=5 (4864), p-value = 0.9720588981323016
-bits per word = 64 (analyzing bits); min category p-value = 1.6703369397814162e-27
+mix3 extreme = 1.72707 (sig = 01000000) weight 1 (16), p-value = 0.7550051714620413
+mix3 extreme = 10.43265 (sig = 00000012) weight 2 (112), p-value = 1.9702516536983596e-23
+mix3 extreme = 3.10710 (sig = 10000110) weight 3 (448), p-value = 0.5713964898923892
+mix3 extreme = 3.83667 (sig = 11021000) weight 4 (1120), p-value = 0.1303729781298133
+mix3 extreme = 3.63088 (sig = 10100222) weight >=5 (4864), p-value = 0.7469225372955031
+bits per word = 64 (analyzing transitions); min category p-value = 1.9702516536983596e-23
 
-processed 10000008544000 bytes in 435.037 seconds (22.9866 GB/s, 82.7517 TB/h)
+processed 5000013516288 bytes in 199.500 seconds (25.0627 GB/s, 90.2258 TB/h)
 
-p = 8.351684698907081e-27
-Test completed in 435.04 seconds
+p = 9.851258268491799e-23
+Test completed in 199.50 seconds
 ```
 
-will test `xoroshiro128+` with _w_ = 64 and _k_ = 8 on an Apple M1 Max with 10
-cores, finding bias after 10¹³ bytes in about seven minutes, with the same
-faulty signature reported in the paper (`00000012`). The test processes about
-23 GB/s; the C implementation, which is sequential, processes about 3.3 GB/s on
-the same hardware, and would need about 50 minutes.
+will run the transitional variant of the test on `xoroshiro128+` with _w_ = 64
+and _k_ = 8, as in the paper, on an Apple M1 Max with 10 cores, finding bias
+after 5 · 10¹² bytes in less than three and a half minutes, with the same amount
+of data and the same faulty signature reported in the paper (`00000012`). The
+test processes about 25 GB/s; the C implementation, which is sequential,
+processes about 3.3 GB/s on the same hardware, and would need about 25 minutes.
 
 The default parameters (_w_ = 64, _k_ = 8) are those used for 64-bit generators
-with 128 bits of state; generators with a larger state need a larger _k_. For
-example, to replicate the tests of the paper on `xorshift1024` and on the
-32-bit generator WELL512a, use
+with 128 bits of state; generators with a larger state need a larger _k_. To
+replicate the tests of the paper, use
 
 ```text
-cargo run -r -F xorshift1024 -- -P -k 16 --progress --low-pv=1e-20 1e15
-cargo run -r -F well512a -- -P -w 32 --prng-bits 32 -k 16 --progress --low-pv=1e-20 1e15
+cargo run -r -F FEATURE -- -P OPTIONS --progress --low-pv=1e-20 1e15
 ```
 
+with the following features and options (the `+` generators were tested with
+the transitional variant, and the batch size of the `xorshift1024` generators
+was reduced to obtain more frequent reports); the amount of data and the faulty
+signature are those reported in the paper:
+
+| Feature             | Options                         | _p_ = 10⁻²⁰ @ | Faulty signature   |
+| ------------------- | ------------------------------- | ------------- | ------------------ |
+| `xorshift128`       |                                 | 8 × 10⁸       | `00000021`         |
+| `xorshift128plus`   | `-t`                            | 6 × 10⁹       | `00000012`         |
+| `xorshift1024`      | `-k 16 --max-batch-size 1e7`    | 6 × 10⁸       | `2000000000000001` |
+| `xorshift1024plus`  | `-t -k 16 --max-batch-size 1e8` | 9 × 10⁹       | `2000000000000001` |
+| `xoroshiro128`      |                                 | 1 × 10¹⁰      | `00000012`         |
+| `xoroshiro128plus`  | `-t`                            | 5 × 10¹²      | `00000012`         |
+| `xoroshiro1024`     | `-k 16`                         | 5 × 10¹²      | `1100000000000001` |
+| `xoroshiro1024plus` | `-t -k 16`                      | 4 × 10¹³      | `1100000000000001` |
+| `well512a`          | `-w 32 -k 16`                   | 3 × 10¹⁵      | `2001002200000000` |
+
+WELL512a needs more than a petabyte, so for it you must raise the limit, or omit
+it to run indefinitely.
+
 The repository configures Cargo to compile for the native CPU (`-C
-target-cpu=native`): on x86-64, for example, otherwise population counts do not
-use the `POPCNT` instruction. Since `cargo install` does not use this
+target-cpu=native`), as otherwise, for example, population counts on x86-64
+would not use the `POPCNT` instruction. Since `cargo install` does not use this
 configuration, install the test with, for example,
 
 ```text
@@ -215,15 +235,30 @@ RUSTFLAGS="-C target-cpu=native" cargo install hwd -F xoroshiro128plus
 
 # Adding your own generator
 
-To add a new generator, add a feature in `Cargo.toml` and a corresponding
-implementation in the [`prng`] module. If skipping is possible, you can
-implement the `try_skip` method, which must succeed for every offset or for
-none (see the [`prng`] module documentation): for 𝐅₂-linear generators, you
-just need to implement the [`LinearGenerator`] trait and provide the
-characteristic polynomial of the transition map, as done, for example, for
-`xoroshiro128`.
+To add a new generator:
 
-The [`prng`] module has the same interface as that of the [`coll-birth`] crate.
+1. Add to `Cargo.toml` a feature enabling the internal `_prng` marker (e.g.,
+   `mygen = ["_prng"]`): otherwise, the build stops with a “no PRNG selected”
+   error.
+
+2. Add to the [`prng`] module, conditionally on the feature, a `Prng` type with
+   the constants `NAME` and `BITS` and the methods `new`, `next_u64`, and
+   `try_skip` (see the [`prng`] module documentation). The `try_skip` method is
+   mandatory, but it can fail for every offset: in this case, parallel runs
+   reach the start of their range with a sequential pre-scan.
+
+3. For 𝐅₂-linear generators, implement the [`LinearGenerator`] trait, define
+   the characteristic polynomial `CHARPOLY` of the transition map, and
+   implement `try_skip` with the `f2_try_skip!` macro, as done, for example, for
+   `xoroshiro128`; the feature must be added to the `cfg` lists of the macro and
+   of the `charpoly_tests` module. To obtain the characteristic polynomial,
+   define `CHARPOLY` as zero and run `cargo test -F mygen test_charpoly`: the
+   test will fail, printing the characteristic polynomial, computed as the
+   minimal polynomial of the sequence of the lowest bit of the state (the test
+   checks that it has full degree).
+
+The [`prng`] module has the same interface as that of the [`coll-birth`] crate,
+except for the `BITS` constant.
 
 [A New Test for Hamming-Weight Dependencies]: https://doi.org/10.1145/3527582
 [original C implementation]: https://prng.di.unimi.it/hwd.php

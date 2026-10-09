@@ -19,8 +19,8 @@
 //! copies are merged into the large counters (see [`desat`]) and progress is
 //! reported exactly as in a sequential run. A thread starts by examining (but
 //! not counting) the words preceding its range, so that its signature is the
-//! same of a sequential run. The output of a parallel run is thus identical to
-//! that of a sequential run.
+//! same as that of a sequential run. The output of a parallel run is thus
+//! identical to that of a sequential run.
 
 use std::io::{self, Write};
 use std::marker::PhantomData;
@@ -52,7 +52,9 @@ impl<T: Pod> Buffer<T> {
     /// [`MmapFlags::POPULATE`] would prefault the buffer as base (4 KiB)
     /// pages, so we use [`MmapFlags::TRANSPARENT_HUGE_PAGES`] and prefault
     /// the buffer by touching one byte every 2 MiB. If transparent huge pages
-    /// are disabled, the buffer is still prefaulted, as base pages.
+    /// are not available (e.g., on macOS, or on Linux if they are disabled),
+    /// this faults in a single base page every 2 MiB, and the rest of the
+    /// buffer is faulted in on first access.
     ///
     /// [`MmapFlags::POPULATE`]: mmap_rs::MmapFlags::POPULATE
     /// [`MmapFlags::TRANSPARENT_HUGE_PAGES`]: mmap_rs::MmapFlags::TRANSPARENT_HUGE_PAGES
@@ -101,9 +103,12 @@ impl<T: Pod> Buffer<T> {
 /// How a test ended.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Outcome {
-    /// All the requested data was examined.
+    /// All the requested data was examined, and the final *p*-value of the
+    /// last report was not below the threshold given with `--low-pv`.
     Completed,
-    /// A reported *p*-value was below the threshold given with `--low-pv`.
+    /// The final *p*-value of a report (the line `p = …`, not the *p*-values
+    /// of the categories) was below the threshold given with `--low-pv`; this
+    /// includes the report at the end of the test.
     LowPValue,
     /// A small counter overflowed, and a *p*-value of 10⁻¹⁰⁰ was reported.
     Overflow,
@@ -360,10 +365,12 @@ fn generation_desc(num_cpus: Option<usize>, skip_capable: bool) -> String {
 }
 
 /// Runs the test, writing the report to `out`, sequentially if `num_cpus` is
-/// `None`, and otherwise using `num_cpus` parallel generators.
+/// `None`, and otherwise using `num_cpus` parallel generators (`Some(0)` is
+/// treated as `Some(1)`).
 ///
-/// The report is identical to that of the original C implementation, and does
-/// not depend on `num_cpus`, except for the timing information.
+/// The results are the same as those of the original C implementation (only
+/// the formatting differs), and the report does not depend on `num_cpus`,
+/// except for the timing information.
 pub fn run_test(args: &Args, num_cpus: Option<usize>, out: &mut impl Write) -> io::Result<Outcome> {
     let jump = Prng::new(args.seed).try_skip(0).is_ok();
     run(args, num_cpus, jump, out)
@@ -378,10 +385,13 @@ fn run(
     jump: bool,
     out: &mut impl Write,
 ) -> io::Result<Outcome> {
+    let num_cpus = num_cpus.map(|n| n.max(1));
     let mode = args.mode();
     let k = args.dim;
     let size = 3usize.pow(k as u32);
     let third = (size / 3) as u32;
+    // The number of counters of a small-counter array, padded.
+    let stride = size.next_multiple_of(ARRAY_ALIGN);
     let trans = args.transitions;
     let bytes = args.bytes();
 
@@ -399,7 +409,7 @@ fn run(
             let full = mode.iterations(batch);
             let mut max_batches = (n as u64 * TARGET_ITERS_PER_THREAD)
                 .div_ceil(full)
-                .min((EXTRA_SMALL_COUNTERS / size) as u64);
+                .min((EXTRA_SMALL_COUNTERS / stride) as u64);
             // The iterations of a round are at most those of max_batches full
             // batches, and at most those of the whole test.
             let mut max_iters = u64::MAX;
@@ -415,7 +425,6 @@ fn run(
     };
     // Each thread uses an array for each batch its range overlaps.
     let num_arrays = max_batches + max_threads - 1;
-    let stride = size.next_multiple_of(ARRAY_ALIGN);
 
     eprintln!("Seed: {:#018x}", args.seed);
     let gib = (size * (size_of::<CountSum>() + size_of::<f64>())

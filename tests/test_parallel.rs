@@ -126,3 +126,11 @@ fn test_short() -> anyhow::Result<()> {
     args.progress = false;
     check(&args)
 }
+
+// Zero parallel generators are treated as one.
+#[test]
+fn test_zero_threads() -> anyhow::Result<()> {
+    let args = make_args(1e7, 64, 64, 4);
+    assert_eq!(run(&args, Some(0))?, run(&args, None)?);
+    Ok(())
+}

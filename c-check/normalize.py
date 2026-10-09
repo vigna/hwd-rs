@@ -2,12 +2,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0 OR MIT
 
-"""Normalizes HWD output for comparison: drops timing, and rounds the
-full-precision numbers of the Rust output to the precision of the C output."""
+"""Normalizes HWD output for comparison: drops timing, rounds the exact byte
+counts of the Rust output to the precision of the C output, and writes all
+p-values as the shortest representation of the double they denote, so that
+they compare equal only if they are the same double (check.sh patches the C
+code to print p-values with 17 significant digits)."""
 import re, sys
-
-def g3(x):
-    return '%.3g' % x
 
 def norm(lines, rust):
     out = []
@@ -16,10 +16,9 @@ def norm(lines, rust):
         m = re.match(r'processed (\S+) bytes', line)
         if m:
             b = m.group(1)
-            out.append('processed %s bytes' % (g3(float(b)) if rust else b))
+            out.append('processed %s bytes' % ('%.3g' % float(b) if rust else b))
             continue
-        if rust:
-            line = re.sub(r'(p-value = |p = )(\S+)$', lambda m: m.group(1) + g3(float(m.group(2))), line)
+        line = re.sub(r'(p-value = |p = )(\S+)$', lambda m: m.group(1) + repr(float(m.group(2))), line)
         out.append(line)
     return out
 

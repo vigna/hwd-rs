@@ -205,6 +205,12 @@ pub const SUM_BITS: u32 = 19;
 pub struct SigState {
     /// The signature of the last *k* words, as a base-3 numeral whose most
     /// significant digit is the trit of the most recent word.
+    ///
+    /// The paper uses the opposite order, but since the transform *T*ₖ is a
+    /// Kronecker power, reversing the trits of its indices permutes its inputs
+    /// and outputs in the same way, so the results do not change. Printed
+    /// signatures have the trit of the oldest word on the left, as in the
+    /// paper.
     pub sig: u32,
     /// The last bit of the previous word (always zero if not testing
     /// transitions).

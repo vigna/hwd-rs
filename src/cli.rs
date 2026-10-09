@@ -8,6 +8,7 @@
 
 use clap::Parser;
 
+use crate::prng::Prng;
 use crate::scan::Mode;
 
 #[derive(Parser, Debug, Clone)]
@@ -28,9 +29,10 @@ pub struct Args {
     #[arg(short = 'w', long, default_value_t = 64)]
     pub word_bits: usize,
 
-    /// Number of output bits of the generator: 32 (in the upper bits of the 64-bit output) or 64;
-    /// with 64-bit outputs and w = 32 each output provides two words, upper bits first.​
-    #[arg(long, default_value_t = 64)]
+    /// Number of output bits of the generator: 32 (in the upper bits of the 64-bit output) or 64
+    /// (default: the output size of the generator); with 64-bit outputs and w = 32 each output
+    /// provides two words, upper bits first.​
+    #[arg(long, default_value_t = Prng::BITS)]
     pub prng_bits: usize,
 
     /// Length k of signatures, between 1 and 19; memory usage is proportional to 3ᵏ.​
@@ -49,8 +51,8 @@ pub struct Args {
     #[arg(long)]
     pub progress: bool,
 
-    /// Stop as soon as a reported p-value is below this threshold (default: the smallest positive
-    /// normal double).​
+    /// Stop as soon as the final p-value of a report (the line "p = …") is below this threshold
+    /// (default: the smallest positive normal double).​
     #[arg(long, value_parser = parse_f64)]
     pub low_pv: Option<f64>,
 
@@ -126,6 +128,17 @@ impl Args {
                 "{}-bit words are not supported with {}-bit outputs",
                 self.word_bits, self.prng_bits
             ));
+        }
+        if self.prng_bits > Prng::BITS {
+            // Not an error, as the C check uses this setting to cause
+            // overflows on purpose.
+            eprintln!(
+                "warning: {} has {} bits of output, so the lower {} bits of each {}-bit output are zero",
+                Prng::NAME,
+                Prng::BITS,
+                self.prng_bits - Prng::BITS,
+                self.prng_bits
+            );
         }
         if !(1..=19).contains(&self.dim) {
             Self::die(&format!("k ({}) must be between 1 and 19", self.dim));

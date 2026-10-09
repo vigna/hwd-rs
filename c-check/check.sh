@@ -19,8 +19,10 @@
 # HWD_C_DIR must point to the directory containing hwd.c and the
 # *-next.c files of the C implementation (by default, ../hwd/c).
 #
-# Outputs are normalized by normalize.py, which removes timing information and
-# rounds p-values to the three significant digits printed by C.
+# The copy of hwd.c is patched to print p-values with 17 significant digits,
+# rather than 3, so that they identify a double. Outputs are normalized by
+# normalize.py, which removes timing information and writes p-values in a
+# canonical form, so they compare equal only if they are the same double.
 
 set -e
 D=$(cd "$(dirname "$0")" && pwd)
@@ -28,7 +30,13 @@ ROOT=$(cd "$D/.." && pwd)
 HWD_C_DIR=${HWD_C_DIR:-$ROOT/../hwd/c}
 W=$ROOT/target/c-check
 mkdir -p $W/src $W/bin $W/out
-cp $HWD_C_DIR/hwd.c $HWD_C_DIR/*-next.c $D/prngs_hwd.c $W/src/
+cp $HWD_C_DIR/*-next.c $D/prngs_hwd.c $W/src/
+sed -e 's/p-value = %\.3g/p-value = %.17g/' -e 's/"p = %\.3g/"p = %.17g/' $HWD_C_DIR/hwd.c > $W/src/hwd.c
+# The p-values of the categories, their minimum, and three final p-values.
+if [ $(grep -c '%\.17g' $W/src/hwd.c) -ne 5 ]; then
+	echo "Cannot patch the p-value formats of $HWD_C_DIR/hwd.c" >&2
+	exit 1
+fi
 
 CDEF=$1; FEAT=$2; WB=$3; PB=$4; DIM=$5; shift 5
 COPT=""; ROPT="-w $WB --prng-bits $PB -k $DIM $RUSTOPT"

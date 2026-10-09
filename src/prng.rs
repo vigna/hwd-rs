@@ -7,9 +7,11 @@
 //! Pseudorandom number generators selected at build time via Cargo features.
 //!
 //! Exactly one feature must be enabled when building the crate; each variant
-//! exposes a single [`Prng`] type with a `new(seed: u64) -> Self` constructor,
-//! a `next_u64(&mut self) -> u64` step function, and a `try_skip(&mut self, n:
-//! u64) -> Result<(), ()>` method to skip ahead by `n` steps.
+//! exposes a single [`Prng`] type with a `NAME` constant (a description), a
+//! `BITS` constant (the number of bits of output, 32 or 64), a `new(seed: u64)
+//! -> Self` constructor, a `next_u64(&mut self) -> u64` step function, and a
+//! `try_skip(&mut self, n: u64) -> Result<(), ()>` method to skip ahead by `n`
+//! steps.
 //!
 //! `try_skip(n)` must have the same effect as `n` calls to `next_u64`. It must
 //! succeed for every `n`, or fail for every `n` (including 0) without changing
@@ -17,6 +19,7 @@
 //!
 //! Generators outputting less than 64 bits must shift their outputs to the top
 //! (e.g., 32-bit generators must return their output shifted to the left by 32).
+//! `BITS` is the default of `--prng-bits`.
 
 // When no PRNG feature is selected, the _prng marker (enabled by every PRNG
 // feature in Cargo.toml) is off. Emit one clear error AND expose a placeholder Prng
@@ -33,6 +36,7 @@ mod placeholder {
     pub struct Prng;
     impl Prng {
         pub const NAME: &str = "(no generator selected)";
+        pub const BITS: usize = 64;
         pub fn new(_seed: u64) -> Self {
             Self
         }
@@ -60,6 +64,7 @@ pub struct Prng {
 #[cfg(feature = "incr")]
 impl Prng {
     pub const NAME: &str = "incr (counter, x += 1)";
+    pub const BITS: usize = 64;
     pub fn new(seed: u64) -> Self {
         Self { x: seed }
     }
@@ -79,15 +84,18 @@ impl Prng {
 // ----- 𝐅₂-linear generators -----------------------------------------------------------
 //
 // The generators of "A New Test for Hamming-Weight Dependencies", by David
-// Blackman and Sebastiano Vigna, with the parameters used in the paper. The
-// linear engines output their first state word, as in the paper; the `+`
-// variants add two words of state. Since the state transition is 𝐅₂-linear,
-// try_skip uses its characteristic polynomial (see the f2 module).
+// Blackman and Sebastiano Vigna, with the parameters used in the paper. As in
+// the replication code of the paper, the linear engines return the word s0 of
+// the reference implementation of the corresponding `+` variant, which returns
+// s0 + s1. Since the state transition is 𝐅₂-linear, try_skip uses its
+// characteristic polynomial (see the f2 module).
 
 /// Returns the next output of SplitMix64 (incrementing first), used to fill the
 /// state of generators with more than 64 bits of state. Since the output
 /// function of SplitMix64 is a bijection, two consecutive outputs cannot be
-/// both zero, so the state of such generators is never zero.
+/// both zero, so the state of the 64-bit generators is never zero; WELL512a
+/// keeps only the upper 32 bits of each output, so its state is zero only with
+/// negligible probability.
 fn splitmix64(x: &mut u64) -> u64 {
     *x = x.wrapping_add(0x9e3779b97f4a7c15);
     let mut z = *x;
@@ -139,6 +147,7 @@ macro_rules! xorshift128 {
             } else {
                 "xorshift128 (23, 18, 5)"
             };
+            pub const BITS: usize = 64;
 
             pub fn new(seed: u64) -> Self {
                 let mut x = seed;
@@ -220,6 +229,7 @@ macro_rules! xorshift1024 {
             } else {
                 "xorshift1024 (31, 11, 30)"
             };
+            pub const BITS: usize = 64;
 
             pub fn new(seed: u64) -> Self {
                 let mut x = seed;
@@ -286,6 +296,7 @@ macro_rules! xoroshiro128 {
             } else {
                 "xoroshiro128 (24, 16, 37)"
             };
+            pub const BITS: usize = 64;
 
             pub fn new(seed: u64) -> Self {
                 let mut x = seed;
@@ -367,6 +378,7 @@ macro_rules! xoroshiro1024 {
             } else {
                 "xoroshiro1024 (25, 27, 36)"
             };
+            pub const BITS: usize = 64;
 
             pub fn new(seed: u64) -> Self {
                 let mut x = seed;
@@ -438,6 +450,7 @@ pub struct Prng {
 #[cfg(feature = "well512a")]
 impl Prng {
     pub const NAME: &str = "WELL512a";
+    pub const BITS: usize = 32;
 
     pub fn new(seed: u64) -> Self {
         let mut x = seed;
