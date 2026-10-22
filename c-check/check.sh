@@ -16,8 +16,8 @@
 # NUMCATS and MAXB set the number of categories and the maximum batch size,
 # and RUSTOPT contains additional options for the crate (e.g., -P).
 #
-# HWD_C_DIR must point to the directory containing hwd.c and the
-# *-next.c files of the C implementation (by default, ../hwd/c).
+# HWD_C_DIR must point to the directory containing hwd.c, the *-next.c files,
+# and the SFMT library of the C implementation (by default, ../hwd/c).
 #
 # The copy of hwd.c is patched to print p-values with 17 significant digits,
 # rather than 3, so that they identify a double. Outputs are normalized by
@@ -44,7 +44,7 @@ if [ -n "$NUMCATS" ]; then COPT="$COPT -DHWD_NUMCATS=$NUMCATS"; ROPT="$ROPT -c $
 if [ -n "$MAXB" ]; then COPT="$COPT -DMAX_BATCH_SIZE=$MAXB"; ROPT="$ROPT --max-batch-size $MAXB"; fi
 
 CBIN=$W/bin/hwd-$CDEF-$WB-$PB-$DIM$(echo $COPT | tr -c 'a-zA-Z0-9\n' '_')
-gcc -O3 -ffp-contract=off -w $W/src/hwd.c -I$W/src -D$CDEF -DHWD_BITS=$WB -DHWD_PRNG_BITS=$PB -DHWD_DIM=$DIM $COPT -o $CBIN -lm
+gcc -O3 -ffp-contract=off -w $W/src/hwd.c -I$W/src -I$HWD_C_DIR -D$CDEF -DHWD_BITS=$WB -DHWD_PRNG_BITS=$PB -DHWD_DIM=$DIM $COPT -o $CBIN -lm
 (cd $ROOT && cargo build -q --release --features $FEAT && cp target/release/hwd $W/bin/hwd-$FEAT)
 
 TAG=$CDEF-$WB-$PB-$DIM-$(echo "$@ $COPT $RUSTOPT" | tr -c 'a-zA-Z0-9.\n' '_')

@@ -28,6 +28,11 @@ for RUSTOPT in "" "-P"; do
 	$C XOROSHIRO1024PLUS xoroshiro1024plus 64 64 12 -t --progress 3e9
 	$C WELL512A well512a 32 32 8 --progress 1e9
 	$C WELL512A well512a 32 32 16 --progress 2e9
+	$C MT19937 mt19937 32 32 8 --progress 1e9
+	$C MT19937 mt19937 32 32 12 -t --progress 1e9
+	$C SFMT19937 sfmt19937 64 64 8 --progress 2e9
+	$C SFMT19937 sfmt19937 32 64 10 -t --progress 1e9
+	$C SFMT19937 sfmt19937 128 64 6 --progress 1e9
 	# A 32-bit generator examined as 64-bit or 128-bit words overflows the
 	# small counters. C returns the output in the lower bits, the crate in the
 	# upper bits, so these runs must not use -t.

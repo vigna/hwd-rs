@@ -124,6 +124,52 @@ static inline uint64_t next(void) { return well512a(); }
 static inline uint32_t next(void) { return well512a(); }
 #endif
 static void init(void) { for(int i = 0; i < 16; i++) STATE[i] = splitmix64() >> 32; }
+#elif defined(MT19937)
+/* genrand_int32() from mt19937ar.c by Makoto Matsumoto and Takuji Nishimura. */
+#define N 624
+#define M 397
+#define MATRIX_A 0x9908b0dfUL
+#define UPPER_MASK 0x80000000UL
+#define LOWER_MASK 0x7fffffffUL
+static uint32_t mt[N];
+static int mti = N;
+static inline uint32_t next(void) {
+	uint32_t y;
+	static const uint32_t mag01[2] = { 0x0UL, MATRIX_A };
+	if (mti >= N) {
+		int kk;
+		for (kk = 0; kk < N - M; kk++) {
+			y = (mt[kk] & UPPER_MASK) | (mt[kk + 1] & LOWER_MASK);
+			mt[kk] = mt[kk + M] ^ (y >> 1) ^ mag01[y & 0x1UL];
+		}
+		for (; kk < N - 1; kk++) {
+			y = (mt[kk] & UPPER_MASK) | (mt[kk + 1] & LOWER_MASK);
+			mt[kk] = mt[kk + (M - N)] ^ (y >> 1) ^ mag01[y & 0x1UL];
+		}
+		y = (mt[N - 1] & UPPER_MASK) | (mt[0] & LOWER_MASK);
+		mt[N - 1] = mt[M - 1] ^ (y >> 1) ^ mag01[y & 0x1UL];
+		mti = 0;
+	}
+	y = mt[mti++];
+	y ^= (y >> 11);
+	y ^= (y << 7) & 0x9d2c5680UL;
+	y ^= (y << 15) & 0xefc60000UL;
+	y ^= (y >> 18);
+	return y;
+}
+static void init(void) { for(int i = 0; i < N; i++) mt[i] = splitmix64() >> 32; }
+#elif defined(SFMT19937)
+/* The SFMT library in the C implementation (check.sh adds it to the include path). */
+#define SFMT_MEXP 19937
+#include "SFMT/SFMT.h"
+#include "SFMT/SFMT.c"
+static sfmt_t sfmt;
+static inline uint64_t next(void) { return sfmt_genrand_uint64(&sfmt); }
+static void init(void) {
+	for(int i = 0; i < SFMT_N64; i++) sfmt.state[i / 2].u64[i % 2] = splitmix64();
+	period_certification(&sfmt);
+	sfmt.idx = SFMT_N32;
+}
 #else
 #error "No generator"
 #endif
