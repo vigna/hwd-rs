@@ -124,7 +124,7 @@ _t_ threads uses at least 4 · (_t_ − 1) · 3*ᵏ* additional bytes of memory
 number of threads is governed by the environment variable `RAYON_NUM_THREADS`
 (by default, the number of cores).
 
-All the 𝐅₂-linear generators of the paper provide arbitrary jumps using their
+All the 𝐅₂-linear generators provide arbitrary jumps using their
 characteristic polynomial (see the [`f2`] module).
 
 # Differences from the C implementation
@@ -153,8 +153,12 @@ The generator to test is selected at compilation time using Cargo features:
 besides `incr`, a counter useful only to test the crate, the available
 generators are those of the paper, `xorshift128`, `xorshift128plus`,
 `xorshift1024`, `xorshift1024plus`, `xoroshiro128`, `xoroshiro128plus`,
-`xoroshiro1024`, `xoroshiro1024plus`, and the 32-bit generator `well512a`. For
-example,
+`xoroshiro1024`, `xoroshiro1024plus`, and the 32-bit generator `well512a`.
+Moreover, two generators with 19937 bits of state not in the paper are
+available: the original 32-bit Mersenne Twister `mt19937` and the SFMT
+`sfmt19937`, returning 64-bit values. Keep in mind that the test is most
+effective when _wk_ is at least the number of bits of state of the generator
+(see the paper). For example,
 
 ```text
 cargo run -r -F xoroshiro128plus -- -P -t --progress --low-pv=1e-20 1e15

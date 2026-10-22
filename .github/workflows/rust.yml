@@ -44,6 +44,8 @@ jobs:
           - xoroshiro1024
           - xoroshiro1024plus
           - well512a
+          - mt19937
+          - sfmt19937
     steps:
       - uses: actions/checkout@v6
       - uses: dtolnay/rust-toolchain@stable
@@ -71,6 +73,8 @@ jobs:
           - xoroshiro1024
           - xoroshiro1024plus
           - well512a
+          - mt19937
+          - sfmt19937
     steps:
       - uses: actions/checkout@v6
       - uses: dtolnay/rust-toolchain@stable

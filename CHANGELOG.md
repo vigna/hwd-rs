@@ -1,5 +1,12 @@
 # Change Log
 
+## [Unreleased]
+
+### New
+
+- The original 32-bit Mersenne Twister (`mt19937`) and the SFMT with 19937
+  bits of state (`sfmt19937`), with arbitrary jumps.
+
 ## [0.1.1] - 2026-10-09
 
 ### Changed
