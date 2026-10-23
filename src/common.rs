@@ -265,8 +265,8 @@ impl<W: Write> Hwd<'_, W> {
         let elapsed = self.tstart.elapsed().as_secs_f64();
         writeln!(
             self.out,
-            "processed {} bytes in {:.3} seconds ({:.4} GB/s, {:.4} TB/h)\n",
-            pos,
+            "processed {} in {:.3} seconds ({:.4} GB/s, {:.4} TB/h)\n",
+            format_bytes(pos as u64),
             elapsed,
             pos as f64 * 1e-9 / elapsed,
             pos as f64 * (3600.0 * 1e-12) / elapsed,
@@ -344,6 +344,19 @@ fn prescan(start: Prng, offsets: &[u64]) -> Vec<Prng> {
             p
         })
         .collect()
+}
+
+/// Formats a number of bytes using a binary prefix and two decimal digits,
+/// followed by the exact number (e.g., `493.67 GiB (530074706688 bytes)`).
+fn format_bytes(bytes: u64) -> String {
+    const UNITS: [&str; 7] = ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB"];
+    let mut val = bytes as f64;
+    let mut i = 0;
+    while val >= 1024.0 && i < UNITS.len() - 1 {
+        val /= 1024.0;
+        i += 1;
+    }
+    format!("{val:.2} {} ({bytes} bytes)", UNITS[i])
 }
 
 /// Returns the description of how the output of the generator is produced,
@@ -443,7 +456,7 @@ fn run(
     eprintln!(
         "Examining {}{}",
         if bytes >= 0 {
-            format!("{bytes} bytes")
+            format_bytes(bytes as u64)
         } else {
             "the output indefinitely".to_string()
         },
@@ -713,6 +726,23 @@ mod tests {
                 .map(|s| (s.thread, s.batch, s.len))
                 .collect::<Vec<_>>(),
             expected
+        );
+    }
+
+    #[test]
+    fn test_format_bytes() {
+        assert_eq!(format_bytes(0), "0.00 B (0 bytes)");
+        assert_eq!(format_bytes(1023), "1023.00 B (1023 bytes)");
+        assert_eq!(format_bytes(1024), "1.00 KiB (1024 bytes)");
+        assert_eq!(format_bytes(110_931_456), "105.79 MiB (110931456 bytes)");
+        assert_eq!(
+            format_bytes(530_074_706_688),
+            "493.67 GiB (530074706688 bytes)"
+        );
+        assert_eq!(format_bytes(1 << 40), "1.00 TiB (1099511627776 bytes)");
+        assert_eq!(
+            format_bytes(u64::MAX),
+            "16.00 EiB (18446744073709551615 bytes)"
         );
     }
 }

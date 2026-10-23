@@ -144,8 +144,9 @@ characteristic polynomial (see the [`f2`] module).
   signatures and the amount of data needed to find bias are thus slightly
   different from those reported in the paper.
 
-- _p_-values are printed with full precision, and the reports contain the exact
-  number of bytes examined, but not the current date.
+- _p_-values are printed with full precision, byte counts are printed exactly,
+  after an approximation using binary prefixes (e.g., `493.67 GiB (530074706688
+  bytes)`), and the reports do not contain the current date.
 
 # Usage
 
@@ -165,7 +166,7 @@ cargo run -r -F xoroshiro128plus -- -P -t --progress --low-pv=1e-20 1e15
 Generator: xoroshiro128+ (24, 16, 37)
 Seed: 0x0000000000000000
 Running a test for Hamming-weight dependencies with k = 8 and 5 categories using 10 parallel generators (jump-ahead) on 64-bit words, the full outputs, analyzing transitions (batches of 2311072 words, 0.002 GiB RAM)
-Examining 1000000000000000 bytes, stopping if p < 1e-20
+Examining 909.49 TiB (1000000000000000 bytes), stopping if p < 1e-20
 mix3 extreme = 2.04196 (sig = 00200000) weight 1 (16), p-value = 0.4895265563711558
 mix3 extreme = 2.81178 (sig = 10000200) weight 2 (112), p-value = 0.4248712876027823
 mix3 extreme = 2.90032 (sig = 10020100) weight 3 (448), p-value = 0.8123541528946184
@@ -173,7 +174,7 @@ mix3 extreme = 4.32909 (sig = 02020202) weight 4 (1120), p-value = 0.01663004607
 mix3 extreme = 4.32152 (sig = 12021102) weight >=5 (4864), p-value = 0.07260107083813899
 bits per word = 64 (analyzing transitions); min category p-value = 0.016630046075989773
 
-processed 110931456 bytes in 0.052 seconds (2.1269 GB/s, 7.6568 TB/h)
+processed 105.79 MiB (110931456 bytes) in 0.052 seconds (2.1269 GB/s, 7.6568 TB/h)
 
 p = 0.08043025669891243
 ------
@@ -187,7 +188,7 @@ mix3 extreme = 3.83667 (sig = 11021000) weight 4 (1120), p-value = 0.13037297812
 mix3 extreme = 3.63088 (sig = 10100222) weight >=5 (4864), p-value = 0.7469225372955031
 bits per word = 64 (analyzing transitions); min category p-value = 1.9702516536983596e-23
 
-processed 5000013516288 bytes in 199.500 seconds (25.0627 GB/s, 90.2258 TB/h)
+processed 4.55 TiB (5000013516288 bytes) in 199.500 seconds (25.0627 GB/s, 90.2258 TB/h)
 
 p = 9.851258268491799e-23
 Test completed in 199.50 seconds

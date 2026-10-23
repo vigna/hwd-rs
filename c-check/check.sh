@@ -20,9 +20,10 @@
 # and the SFMT library of the C implementation (by default, ../hwd/c).
 #
 # The copy of hwd.c is patched to print p-values with 17 significant digits,
-# rather than 3, so that they identify a double. Outputs are normalized by
-# normalize.py, which removes timing information and writes p-values in a
-# canonical form, so they compare equal only if they are the same double.
+# rather than 3, so that they identify a double, and byte counts exactly, as
+# the crate does. Outputs are normalized by normalize.py, which removes timing
+# information and the approximate byte counts of the crate, and writes p-values
+# in a canonical form, so they compare equal only if they are the same double.
 
 set -e
 D=$(cd "$(dirname "$0")" && pwd)
@@ -31,10 +32,14 @@ HWD_C_DIR=${HWD_C_DIR:-$ROOT/../hwd/c}
 W=$ROOT/target/c-check
 mkdir -p $W/src $W/bin $W/out
 cp $HWD_C_DIR/*-next.c $D/prngs_hwd.c $W/src/
-sed -e 's/p-value = %\.3g/p-value = %.17g/' -e 's/"p = %\.3g/"p = %.17g/' $HWD_C_DIR/hwd.c > $W/src/hwd.c
+sed -e 's/p-value = %\.3g/p-value = %.17g/' -e 's/"p = %\.3g/"p = %.17g/' -e 's/processed %\.3g bytes/processed %.0f bytes/' $HWD_C_DIR/hwd.c > $W/src/hwd.c
 # The p-values of the categories, their minimum, and three final p-values.
 if [ $(grep -c '%\.17g' $W/src/hwd.c) -ne 5 ]; then
 	echo "Cannot patch the p-value formats of $HWD_C_DIR/hwd.c" >&2
+	exit 1
+fi
+if [ $(grep -c 'processed %\.0f bytes' $W/src/hwd.c) -ne 1 ]; then
+	echo "Cannot patch the byte-count format of $HWD_C_DIR/hwd.c" >&2
 	exit 1
 fi
 
