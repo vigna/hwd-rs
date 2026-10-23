@@ -448,7 +448,7 @@ fn run(
         k,
         args.numcats(),
         generation_desc(num_cpus, jump),
-        mode.description(),
+        mode.description(Prng::BITS),
         if trans { "transitions" } else { "bits" },
         batch,
         gib

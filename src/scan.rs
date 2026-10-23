@@ -184,9 +184,11 @@ impl Mode {
         }
     }
 
-    /// Returns a description of the words examined, for the header.
-    pub const fn description(self) -> &'static str {
+    /// Returns a description of the words examined, for the header, given the
+    /// number of bits of output of the generator.
+    pub const fn description(self, output_bits: usize) -> &'static str {
         match self {
+            Self::W32P32 if output_bits == 32 => "32-bit words, the full outputs",
             Self::W32P32 => "32-bit words, the upper halves of the outputs",
             Self::W32P64 => "32-bit words, two per output (upper half first)",
             Self::W64 => "64-bit words, the full outputs",
