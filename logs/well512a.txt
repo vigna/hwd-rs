@@ -1,0 +1,1353 @@
+nohup: ignoring input
+   Compiling hwd v0.1.1 (/home/ec2-user/hwd-rs)
+    Finished `release` profile [optimized] target(s) in 5.17s
+     Running `target/release/hwd -k 16 -w 32 --max-batch-size 1E12 -P`
+Generator: WELL512a
+Transparent huge pages: always [madvise] never
+Seed: 0x0000000000000000
+Running a test for Hamming-weight dependencies with k = 16 and 9 categories using 96 parallel generators (jump-ahead) on 32-bit words, the upper halves of the outputs, analyzing bits (batches of 11043223056 words, 16.357 GiB RAM)
+Examining the output indefinitely
+mix3 extreme = 2.18742 (sig = 0000020000000000) weight 1 (32), p-value = 0.606320791490066
+mix3 extreme = 3.14738 (sig = 0000000000000012) weight 2 (480), p-value = 0.546795587549777
+mix3 extreme = 4.00097 (sig = 0012000000000001) weight 3 (4480), p-value = 0.24619999427180217
+mix3 extreme = 4.48487 (sig = 0010010020000020) weight 4 (29120), p-value = 0.19140588655085533
+mix3 extreme = 4.42999 (sig = 1001100001001000) weight 5 (139776), p-value = 0.7321215291284981
+mix3 extreme = 4.72876 (sig = 1100000111020000) weight 6 (512512), p-value = 0.6857980691768564
+mix3 extreme = 5.13253 (sig = 2110021200002000) weight 7 (1464320), p-value = 0.3420327130305736
+mix3 extreme = 4.93068 (sig = 2000012011010110) weight 8 (3294720), p-value = 0.9327796032284297
+mix3 extreme = 5.52627 (sig = 2111101002022210) weight >=9 (37601280), p-value = 0.7076967913338537
+bits per word = 32 (analyzing bits); min category p-value = 0.19140588655085533
+
+processed 41.14 GiB (44172892224 bytes) in 4.909 seconds (8.9989 GB/s, 32.3959 TB/h)
+
+p = 0.852233775108077
+------
+
+mix3 extreme = 1.80795 (sig = 0000020000000000) weight 1 (32), p-value = 0.9040018553203284
+mix3 extreme = 3.04174 (sig = 0000002100000000) weight 2 (480), p-value = 0.6770883654256554
+mix3 extreme = 4.45258 (sig = 0000000000200102) weight 3 (4480), p-value = 0.03729803104153992
+mix3 extreme = 4.75286 (sig = 0000010001001001) weight 4 (29120), p-value = 0.05672898973919887
+mix3 extreme = 5.00952 (sig = 0000100001010012) weight 5 (139776), p-value = 0.07343317094955906
+mix3 extreme = 4.54144 (sig = 2102000120001000) weight 6 (512512), p-value = 0.9429277098955696
+mix3 extreme = 5.22603 (sig = 1020001002020120) weight 7 (1464320), p-value = 0.2239957850276224
+mix3 extreme = 4.97431 (sig = 2001110022010010) weight 8 (3294720), p-value = 0.8843796526618573
+mix3 extreme = 5.75673 (sig = 1111002210002012) weight >=9 (37601280), p-value = 0.2756346935573299
+bits per word = 32 (analyzing bits); min category p-value = 0.03729803104153992
+
+processed 82.28 GiB (88345784448 bytes) in 9.675 seconds (9.1310 GB/s, 32.8715 TB/h)
+
+p = 0.2897246538074978
+------
+
+mix3 extreme = 2.25499 (sig = 0000010000000000) weight 1 (32), p-value = 0.5423975329633864
+mix3 extreme = 4.06412 (sig = 0000000000100200) weight 2 (480), p-value = 0.022877732165875374
+mix3 extreme = 3.88361 (sig = 0000000000200102) weight 3 (4480), p-value = 0.3694046840028097
+mix3 extreme = 4.70973 (sig = 0000010001001001) weight 4 (29120), p-value = 0.0696840138986096
+mix3 extreme = 4.38705 (sig = 0021100000001010) weight 5 (139776), p-value = 0.7993206057683117
+mix3 extreme = 4.78182 (sig = 1020000020211000) weight 6 (512512), p-value = 0.5894726095333732
+mix3 extreme = 5.87137 (sig = 0100002200020121) weight 7 (1464320), p-value = 0.006308998180972486
+mix3 extreme = 5.46395 (sig = 0101020011200101) weight 8 (3294720), p-value = 0.14223240879097618
+mix3 extreme = 5.97711 (sig = 1212122012201202) weight >=9 (37601280), p-value = 0.08186006676214139
+bits per word = 32 (analyzing bits); min category p-value = 0.006308998180972486
+
+processed 123.42 GiB (132518676672 bytes) in 14.323 seconds (9.2525 GB/s, 33.3088 TB/h)
+
+p = 0.055368954844791526
+------
+
+mix3 extreme = 2.18087 (sig = 0000020000000000) weight 1 (32), p-value = 0.6125205485048317
+mix3 extreme = 3.79247 (sig = 0000000000100200) weight 2 (480), p-value = 0.06909783942873161
+mix3 extreme = 3.80075 (sig = 0000000000200102) weight 3 (4480), p-value = 0.47602669147420484
+mix3 extreme = 4.54475 (sig = 2000002001002000) weight 4 (29120), p-value = 0.14799100381282987
+mix3 extreme = 5.24093 (sig = 0021100000001010) weight 5 (139776), p-value = 0.02208422746086376
+mix3 extreme = 5.12842 (sig = 0022000002100220) weight 6 (512512), p-value = 0.1390772183057341
+mix3 extreme = 5.09043 (sig = 1021200100001100) weight 7 (1464320), p-value = 0.40733947582695174
+mix3 extreme = 4.98105 (sig = 0121002200010012) weight 8 (3294720), p-value = 0.8755170215747939
+mix3 extreme = 5.90021 (sig = 1212122012201202) weight >=9 (37601280), p-value = 0.1275975034280064
+bits per word = 32 (analyzing bits); min category p-value = 0.02208422746086376
+
+processed 164.56 GiB (176691568896 bytes) in 19.009 seconds (9.2951 GB/s, 33.4622 TB/h)
+
+p = 0.18207580124960102
+------
+
+mix3 extreme = 2.32153 (sig = 0000000000200000) weight 1 (32), p-value = 0.4805184659803741
+mix3 extreme = 3.55483 (sig = 0000000000100200) weight 2 (480), p-value = 0.16604731958614266
+mix3 extreme = 4.10613 (sig = 0000000000200102) weight 3 (4480), p-value = 0.1649444051469839
+mix3 extreme = 4.37880 (sig = 1000200002000200) weight 4 (29120), p-value = 0.29355635062622965
+mix3 extreme = 5.29338 (sig = 1000000010202001) weight 5 (139776), p-value = 0.01664402149013174
+mix3 extreme = 4.82547 (sig = 0022000002100220) weight 6 (512512), p-value = 0.5112155532150623
+mix3 extreme = 4.99578 (sig = 0010101001010101) weight 7 (1464320), p-value = 0.576029228983417
+mix3 extreme = 5.29833 (sig = 1010000221010110) weight 8 (3294720), p-value = 0.3195828562620455
+mix3 extreme = 5.76427 (sig = 2202201101121011) weight >=9 (37601280), p-value = 0.265355452320612
+bits per word = 32 (analyzing bits); min category p-value = 0.01664402149013174
+
+processed 205.70 GiB (220864461120 bytes) in 23.659 seconds (9.3352 GB/s, 33.6067 TB/h)
+
+p = 0.14020114471646605
+------
+
+mix3 extreme = 2.47777 (sig = 0000000020000000) weight 1 (32), p-value = 0.34680799846144267
+mix3 extreme = 3.40981 (sig = 0000000000100200) weight 2 (480), p-value = 0.2681232149897734
+mix3 extreme = 3.61016 (sig = 0000001010000002) weight 3 (4480), p-value = 0.7461736870886473
+mix3 extreme = 4.55485 (sig = 2000002001002000) weight 4 (29120), p-value = 0.1415726116655804
+mix3 extreme = 4.57755 (sig = 1000000010202001) weight 5 (139776), p-value = 0.48189077884787074
+mix3 extreme = 4.59564 (sig = 1020002022200000) weight 6 (512512), p-value = 0.8904197430476675
+mix3 extreme = 4.97879 (sig = 2001001020111000) weight 7 (1464320), p-value = 0.608162468681958
+mix3 extreme = 4.94190 (sig = 0011100010220120) weight 8 (3294720), p-value = 0.9218400605516421
+mix3 extreme = 5.59828 (sig = 0110100102221022) weight >=9 (37601280), p-value = 0.5569313790031603
+bits per word = 32 (analyzing bits); min category p-value = 0.1415726116655804
+
+processed 246.84 GiB (265037353344 bytes) in 28.306 seconds (9.3632 GB/s, 33.7077 TB/h)
+
+p = 0.7468767202573938
+------
+
+mix3 extreme = 2.04655 (sig = 0000000020000000) weight 1 (32), p-value = 0.7354479792817405
+mix3 extreme = 3.41304 (sig = 0000000000000202) weight 2 (480), p-value = 0.26542402624906747
+mix3 extreme = 3.49766 (sig = 0200001000010000) weight 3 (4480), p-value = 0.8779331856226467
+mix3 extreme = 4.68152 (sig = 2000002001002000) weight 4 (29120), p-value = 0.07957742950696935
+mix3 extreme = 4.89211 (sig = 0000010120020200) weight 5 (139776), p-value = 0.13015723072071037
+mix3 extreme = 4.75478 (sig = 0100002002021010) weight 6 (512512), p-value = 0.6387539571238495
+mix3 extreme = 5.00839 (sig = 0100000021200112) weight 7 (1464320), p-value = 0.5523469132537854
+mix3 extreme = 4.91253 (sig = 2101001022011000) weight 8 (3294720), p-value = 0.9482994252221385
+mix3 extreme = 5.51986 (sig = 0020210121112210) weight >=9 (37601280), p-value = 0.7207610338633349
+bits per word = 32 (analyzing bits); min category p-value = 0.07957742950696935
+
+processed 287.97 GiB (309210245568 bytes) in 32.953 seconds (9.3834 GB/s, 33.7802 TB/h)
+
+p = 0.5258832064530895
+------
+
+mix3 extreme = 2.03942 (sig = 0000020000000000) weight 1 (32), p-value = 0.7416115302617518
+mix3 extreme = 3.14056 (sig = 0000000000100200) weight 2 (480), p-value = 0.5551782792372846
+mix3 extreme = 3.67879 (sig = 0200001000010000) weight 3 (4480), p-value = 0.6500590679818405
+mix3 extreme = 4.28612 (sig = 0000000210012000) weight 4 (29120), p-value = 0.41107925895286823
+mix3 extreme = 4.55472 (sig = 0101100000200010) weight 5 (139776), p-value = 0.5196242238677664
+mix3 extreme = 4.81573 (sig = 1200002120000100) weight 6 (512512), p-value = 0.5284206440220245
+mix3 extreme = 5.28386 (sig = 0000220001122100) weight 7 (1464320), p-value = 0.16908035380776265
+mix3 extreme = 5.49215 (sig = 2101001022011000) weight 8 (3294720), p-value = 0.12262846835660174
+mix3 extreme = 5.53776 (sig = 0020210121112210) weight >=9 (37601280), p-value = 0.6839823125502298
+bits per word = 32 (analyzing bits); min category p-value = 0.12262846835660174
+
+processed 329.11 GiB (353383137792 bytes) in 37.645 seconds (9.3872 GB/s, 33.7939 TB/h)
+
+p = 0.6919282699685289
+------
+
+mix3 extreme = 1.95085 (sig = 0000020000000000) weight 1 (32), p-value = 0.8131817544030724
+mix3 extreme = 3.44290 (sig = 0000000000100200) weight 2 (480), p-value = 0.2414329121946621
+mix3 extreme = 3.74752 (sig = 0200001000010000) weight 3 (4480), p-value = 0.5507456790506828
+mix3 extreme = 4.69353 (sig = 0000200002002020) weight 4 (29120), p-value = 0.0752172023335077
+mix3 extreme = 4.64266 (sig = 2000200000201100) weight 5 (139776), p-value = 0.3816895674107579
+mix3 extreme = 5.03820 (sig = 1200002120000100) weight 6 (512512), p-value = 0.2140404136432351
+mix3 extreme = 4.73055 (sig = 0000220001122100) weight 7 (1464320), p-value = 0.9623262814400371
+mix3 extreme = 5.47236 (sig = 1100100110001102) weight 8 (3294720), p-value = 0.13611259570902193
+mix3 extreme = 5.53356 (sig = 1120001211112211) weight >=9 (37601280), p-value = 0.6927043046863406
+bits per word = 32 (analyzing bits); min category p-value = 0.0752172023335077
+
+processed 370.25 GiB (397556030016 bytes) in 42.294 seconds (9.3998 GB/s, 33.8391 TB/h)
+
+p = 0.5052820324850068
+------
+
+mix3 extreme = 1.93689 (sig = 0000000020000000) weight 1 (32), p-value = 0.8234997441047314
+mix3 extreme = 3.41998 (sig = 0000000000100200) weight 2 (480), p-value = 0.25969688370878174
+mix3 extreme = 3.61807 (sig = 0200001000010000) weight 3 (4480), p-value = 0.7354932177455125
+mix3 extreme = 4.98976 (sig = 0000200002002020) weight 4 (29120), p-value = 0.017450418271230835
+mix3 extreme = 4.43954 (sig = 2000200000201100) weight 5 (139776), p-value = 0.7163831272388644
+mix3 extreme = 5.05747 (sig = 1200002120000100) weight 6 (512512), p-value = 0.19566931467928325
+mix3 extreme = 4.76667 (sig = 1210100020001200) weight 7 (1464320), p-value = 0.9355949587463492
+mix3 extreme = 5.48329 (sig = 1100100110001102) weight 8 (3294720), p-value = 0.12851063578158362
+mix3 extreme = 5.34815 (sig = 1112010012201120) weight >=9 (37601280), p-value = 0.9646075861374823
+bits per word = 32 (analyzing bits); min category p-value = 0.017450418271230835
+
+processed 411.39 GiB (441728922240 bytes) in 46.945 seconds (9.4096 GB/s, 33.8745 TB/h)
+
+p = 0.14652603825389962
+------
+
+mix3 extreme = 2.15027 (sig = 0000001000000000) weight 1 (32), p-value = 0.6413229521922688
+mix3 extreme = 3.22866 (sig = 0000000000010020) weight 2 (480), p-value = 0.4497408326914738
+mix3 extreme = 3.82956 (sig = 0200001000010000) weight 3 (4480), p-value = 0.43737992965680744
+mix3 extreme = 5.33172 (sig = 0000200002002020) weight 4 (29120), p-value = 0.002829008008485761
+mix3 extreme = 4.60145 (sig = 0000200020002102) weight 5 (139776), p-value = 0.4436999500416068
+mix3 extreme = 4.92683 (sig = 0000001010220220) weight 6 (512512), p-value = 0.34840304387945653
+mix3 extreme = 4.88206 (sig = 0110210001102000) weight 7 (1464320), p-value = 0.7850348079753076
+mix3 extreme = 5.26094 (sig = 1100100110001102) weight 8 (3294720), p-value = 0.3763752208844912
+mix3 extreme = 5.26937 (sig = 2212211120102110) weight >=9 (37601280), p-value = 0.9941845823978729
+bits per word = 32 (analyzing bits); min category p-value = 0.002829008008485761
+
+processed 452.53 GiB (485901814464 bytes) in 51.596 seconds (9.4174 GB/s, 33.9025 TB/h)
+
+p = 0.02517484759562936
+------
+
+mix3 extreme = 2.00929 (sig = 0000000000010000) weight 1 (32), p-value = 0.7670339646034907
+mix3 extreme = 3.09055 (sig = 0000000000010020) weight 2 (480), p-value = 0.6170849825605711
+mix3 extreme = 3.64839 (sig = 0200001000010000) weight 3 (4480), p-value = 0.6934523995976922
+mix3 extreme = 4.89555 (sig = 0000200002002020) weight 4 (29120), p-value = 0.028143362268233163
+mix3 extreme = 4.97699 (sig = 0000200020002102) weight 5 (139776), p-value = 0.0863150580166601
+mix3 extreme = 5.27307 (sig = 1010022000120000) weight 6 (512512), p-value = 0.06644698399284775
+mix3 extreme = 4.87403 (sig = 1210100020001200) weight 7 (1464320), p-value = 0.7983382508011867
+mix3 extreme = 5.20101 (sig = 2001010020111001) weight 8 (3294720), p-value = 0.47953892415660015
+mix3 extreme = 5.51193 (sig = 2212211120102110) weight >=9 (37601280), p-value = 0.7367318908318115
+bits per word = 32 (analyzing bits); min category p-value = 0.028143362268233163
+
+processed 493.67 GiB (530074706688 bytes) in 56.246 seconds (9.4243 GB/s, 33.9275 TB/h)
+
+p = 0.22657207758897502
+------
+
+mix3 extreme = 2.09462 (sig = 0000001000000000) weight 1 (32), p-value = 0.6927367983318189
+mix3 extreme = 2.90226 (sig = 0200000000010000) weight 2 (480), p-value = 0.8316285887117356
+mix3 extreme = 3.69123 (sig = 0000200020200000) weight 3 (4480), p-value = 0.6320960866830343
+mix3 extreme = 4.70073 (sig = 0000200002002020) weight 4 (29120), p-value = 0.07270995618377127
+mix3 extreme = 4.68978 (sig = 0000200020002102) weight 5 (139776), p-value = 0.3176974914751721
+mix3 extreme = 5.21697 (sig = 1010022000120000) weight 6 (512512), p-value = 0.08900107974350067
+mix3 extreme = 5.13991 (sig = 1210100020001200) weight 7 (1464320), p-value = 0.33134620224880973
+mix3 extreme = 5.06596 (sig = 0100110010100111) weight 8 (3294720), p-value = 0.7378338824496712
+mix3 extreme = 5.54071 (sig = 1221220201020102) weight >=9 (37601280), p-value = 0.6778436962329474
+bits per word = 32 (analyzing bits); min category p-value = 0.07270995618377127
+
+processed 534.81 GiB (574247598912 bytes) in 60.893 seconds (9.4305 GB/s, 33.9498 TB/h)
+
+p = 0.49307889645442765
+------
+
+mix3 extreme = 2.05243 (sig = 1000000000000000) weight 1 (32), p-value = 0.7303346953855716
+mix3 extreme = 3.24960 (sig = 0000000000010020) weight 2 (480), p-value = 0.4259537094327093
+mix3 extreme = 3.73950 (sig = 0020002200000000) weight 3 (4480), p-value = 0.5622616462593715
+mix3 extreme = 4.40145 (sig = 0000200002002020) weight 4 (29120), p-value = 0.2688426992447433
+mix3 extreme = 4.53456 (sig = 0000200020002102) weight 5 (139776), p-value = 0.5537363084180957
+mix3 extreme = 5.31341 (sig = 2121100002000000) weight 6 (512512), p-value = 0.05364856160005239
+mix3 extreme = 5.07134 (sig = 0210210001010020) weight 7 (1464320), p-value = 0.43923012185572485
+mix3 extreme = 5.24696 (sig = 0100110010100111) weight 8 (3294720), p-value = 0.3991738901146167
+mix3 extreme = 5.73878 (sig = 0222001100112200) weight >=9 (37601280), p-value = 0.30133059971977244
+bits per word = 32 (analyzing bits); min category p-value = 0.05364856160005239
+
+processed 575.95 GiB (618420491136 bytes) in 65.541 seconds (9.4357 GB/s, 33.9684 TB/h)
+
+p = 0.3912036792994706
+------
+
+mix3 extreme = 1.95671 (sig = 0000000200000000) weight 1 (32), p-value = 0.8087604347163504
+mix3 extreme = 3.10489 (sig = 0000000000000202) weight 2 (480), p-value = 0.5993022452535963
+mix3 extreme = 3.39006 (sig = 0000001220000000) weight 3 (4480), p-value = 0.9563543887955053
+mix3 extreme = 4.26197 (sig = 0000200002002020) weight 4 (29120), p-value = 0.445709484495743
+mix3 extreme = 4.47892 (sig = 0000200020002102) weight 5 (139776), p-value = 0.649581649860293
+mix3 extreme = 5.36429 (sig = 2121100002000000) weight 6 (512512), p-value = 0.04079606865367396
+mix3 extreme = 4.92231 (sig = 1210100020001200) weight 7 (1464320), p-value = 0.7141891075519411
+mix3 extreme = 5.06430 (sig = 0100110010100111) weight 8 (3294720), p-value = 0.7409020588539479
+mix3 extreme = 5.57361 (sig = 2112122000020212) weight >=9 (37601280), p-value = 0.6086655794760509
+bits per word = 32 (analyzing bits); min category p-value = 0.04079606865367396
+
+processed 617.09 GiB (662593383360 bytes) in 70.189 seconds (9.4401 GB/s, 33.9843 TB/h)
+
+p = 0.3126173743774523
+------
+
+mix3 extreme = 2.16224 (sig = 0000000200000000) weight 1 (32), p-value = 0.630081499941062
+mix3 extreme = 3.12968 (sig = 0000000000000202) weight 2 (480), p-value = 0.5686040040715024
+mix3 extreme = 3.71841 (sig = 0000220100000000) weight 3 (4480), p-value = 0.5927165106886182
+mix3 extreme = 4.01796 (sig = 0000200002002020) weight 4 (29120), p-value = 0.8190446468845405
+mix3 extreme = 4.48143 (sig = 0112100000000100) weight 5 (139776), p-value = 0.6452502922938967
+mix3 extreme = 4.92065 (sig = 2121100002000000) weight 6 (512512), p-value = 0.35730273994829825
+mix3 extreme = 4.83740 (sig = 0210210001010020) weight 7 (1464320), p-value = 0.8543105558970825
+mix3 extreme = 5.21777 (sig = 0212000100110201) weight 8 (3294720), p-value = 0.449343687166494
+mix3 extreme = 5.51787 (sig = 2112122000020212) weight >=9 (37601280), p-value = 0.7247963423490876
+bits per word = 32 (analyzing bits); min category p-value = 0.35730273994829825
+
+processed 658.23 GiB (706766275584 bytes) in 74.837 seconds (9.4441 GB/s, 33.9987 TB/h)
+
+p = 0.9812906785897563
+------
+
+mix3 extreme = 2.35458 (sig = 0000000000010000) weight 1 (32), p-value = 0.4506227445116378
+mix3 extreme = 3.14507 (sig = 0000000000010020) weight 2 (480), p-value = 0.5496358790635701
+mix3 extreme = 3.60922 (sig = 0000220100000000) weight 3 (4480), p-value = 0.7474408501135505
+mix3 extreme = 4.07177 (sig = 0000100200002020) weight 4 (29120), p-value = 0.7430091221540014
+mix3 extreme = 4.71314 (sig = 0000200020002102) weight 5 (139776), p-value = 0.2889028722483775
+mix3 extreme = 4.72048 (sig = 1010022000120000) weight 6 (512512), p-value = 0.700568553713253
+mix3 extreme = 5.03054 (sig = 0000010201002211) weight 7 (1464320), p-value = 0.5113900566155986
+mix3 extreme = 5.23659 (sig = 0212000100110201) weight 8 (3294720), p-value = 0.4166180537268521
+mix3 extreme = 5.54437 (sig = 0222001100112200) weight >=9 (37601280), p-value = 0.6702122947657634
+bits per word = 32 (analyzing bits); min category p-value = 0.2889028722483775
+
+processed 699.37 GiB (750939167808 bytes) in 79.485 seconds (9.4476 GB/s, 34.0114 TB/h)
+
+p = 0.9535099171588973
+------
+
+mix3 extreme = 2.10130 (sig = 0000001000000000) weight 1 (32), p-value = 0.6866591894632439
+mix3 extreme = 3.32295 (sig = 0000000000000202) weight 2 (480), p-value = 0.34801517545306754
+mix3 extreme = 3.64075 (sig = 0000220100000000) weight 3 (4480), p-value = 0.7041925609653967
+mix3 extreme = 4.06099 (sig = 0200000000002011) weight 4 (29120), p-value = 0.7590014745682317
+mix3 extreme = 4.41199 (sig = 0020200000220010) weight 5 (139776), p-value = 0.7610947930707804
+mix3 extreme = 4.85307 (sig = 1010022000120000) weight 6 (512512), p-value = 0.46368033051892277
+mix3 extreme = 5.17685 (sig = 1000020200121001) weight 7 (1464320), p-value = 0.28139403172645666
+mix3 extreme = 5.19818 (sig = 0212000100110201) weight 8 (3294720), p-value = 0.48473287454958236
+mix3 extreme = 5.44881 (sig = 1110102001200012) weight >=9 (37601280), p-value = 0.8514337424743074
+bits per word = 32 (analyzing bits); min category p-value = 0.28139403172645666
+
+processed 740.51 GiB (795112060032 bytes) in 84.136 seconds (9.4503 GB/s, 34.0212 TB/h)
+
+p = 0.9489004143425827
+------
+
+mix3 extreme = 2.16354 (sig = 0000001000000000) weight 1 (32), p-value = 0.6288624240696324
+mix3 extreme = 3.46200 (sig = 0000000000000202) weight 2 (480), p-value = 0.22696674643473952
+mix3 extreme = 3.93657 (sig = 0020002200000000) weight 3 (4480), p-value = 0.3094759414293774
+mix3 extreme = 4.00157 (sig = 0200000000002011) weight 4 (29120), p-value = 0.8399755371538185
+mix3 extreme = 4.52227 (sig = 0002020100001200) weight 5 (139776), p-value = 0.5747877964433226
+mix3 extreme = 4.84480 (sig = 1010022000120000) weight 6 (512512), p-value = 0.47771914247950087
+mix3 extreme = 5.11501 (sig = 2120000200121000) weight 7 (1464320), p-value = 0.36832670652235344
+mix3 extreme = 5.40277 (sig = 0100110010100111) weight 8 (3294720), p-value = 0.19442651582465312
+mix3 extreme = 5.46978 (sig = 1001001111101001) weight >=9 (37601280), p-value = 0.8162782075169047
+bits per word = 32 (analyzing bits); min category p-value = 0.19442651582465312
+
+processed 781.65 GiB (839284952256 bytes) in 88.785 seconds (9.4530 GB/s, 34.0309 TB/h)
+
+p = 0.8571282168843506
+------
+
+mix3 extreme = 2.17174 (sig = 0000001000000000) weight 1 (32), p-value = 0.6211343555272525
+mix3 extreme = 3.49960 (sig = 0000000000000202) weight 2 (480), p-value = 0.20045492204814397
+mix3 extreme = 3.78274 (sig = 0020002200000000) weight 3 (4480), p-value = 0.5008986896823642
+mix3 extreme = 3.90745 (sig = 0200100200010000) weight 4 (29120), p-value = 0.9338837581506256
+mix3 extreme = 4.55191 (sig = 0020200000220010) weight 5 (139776), p-value = 0.5243440857933149
+mix3 extreme = 5.08710 (sig = 1001000201001020) weight 6 (512512), p-value = 0.17000542356099727
+mix3 extreme = 4.97349 (sig = 2120000200121000) weight 7 (1464320), p-value = 0.6182190698798105
+mix3 extreme = 5.57564 (sig = 0100110010100111) weight 8 (3294720), p-value = 0.07804043520905143
+mix3 extreme = 5.39118 (sig = 0222102111210221) weight >=9 (37601280), p-value = 0.9280583765541817
+bits per word = 32 (analyzing bits); min category p-value = 0.07804043520905143
+
+processed 822.78 GiB (883457844480 bytes) in 93.434 seconds (9.4554 GB/s, 34.0394 TB/h)
+
+p = 0.5187099669402603
+------
+
+mix3 extreme = 2.16344 (sig = 0000001000000000) weight 1 (32), p-value = 0.6289601329341002
+mix3 extreme = 3.42310 (sig = 0000000000100100) weight 2 (480), p-value = 0.257152540406662
+mix3 extreme = 3.53190 (sig = 0100002000100000) weight 3 (4480), p-value = 0.8425677469658789
+mix3 extreme = 4.02415 (sig = 0000100200002020) weight 4 (29120), p-value = 0.810840987106679
+mix3 extreme = 4.99381 (sig = 0210000010001200) weight 5 (139776), p-value = 0.0794174031364159
+mix3 extreme = 4.81468 (sig = 1010022000120000) weight 6 (512512), p-value = 0.5302795011125501
+mix3 extreme = 4.93503 (sig = 0001110020212000) weight 7 (1464320), p-value = 0.6907203356045647
+mix3 extreme = 5.43822 (sig = 1010100101002021) weight 8 (3294720), p-value = 0.16247807949199006
+mix3 extreme = 5.66470 (sig = 2011222200021201) weight >=9 (37601280), p-value = 0.4252304946772385
+bits per word = 32 (analyzing bits); min category p-value = 0.0794174031364159
+
+processed 863.92 GiB (927630736704 bytes) in 98.081 seconds (9.4578 GB/s, 34.0480 TB/h)
+
+p = 0.5251408129029906
+------
+
+mix3 extreme = 2.18269 (sig = 0000000000010000) weight 1 (32), p-value = 0.6107986020901377
+mix3 extreme = 3.34610 (sig = 0000022000000000) weight 2 (480), p-value = 0.3253461704774999
+mix3 extreme = 3.60241 (sig = 0000000200100010) weight 3 (4480), p-value = 0.7565147537504945
+mix3 extreme = 4.02282 (sig = 0000100200002020) weight 4 (29120), p-value = 0.8126142613681488
+mix3 extreme = 4.99817 (sig = 1010000001200020) weight 5 (139776), p-value = 0.07771232057578624
+mix3 extreme = 4.96307 (sig = 1010022000120000) weight 6 (512512), p-value = 0.2992555807258435
+mix3 extreme = 5.00813 (sig = 1000020200121001) weight 7 (1464320), p-value = 0.5528361389403728
+mix3 extreme = 5.27119 (sig = 1010100101002021) weight 8 (3294720), p-value = 0.3601852959251359
+mix3 extreme = 5.54997 (sig = 2011222200021201) weight >=9 (37601280), p-value = 0.6584774638108887
+bits per word = 32 (analyzing bits); min category p-value = 0.07771232057578624
+
+processed 905.06 GiB (971803628928 bytes) in 102.730 seconds (9.4598 GB/s, 34.0551 TB/h)
+
+p = 0.5171662011335956
+------
+
+mix3 extreme = 2.02473 (sig = 0000000000010000) weight 1 (32), p-value = 0.7541325888750854
+mix3 extreme = 3.48306 (sig = 0000000000000202) weight 2 (480), p-value = 0.21179844563465586
+mix3 extreme = 3.84640 (sig = 0000000200100010) weight 3 (4480), p-value = 0.4155140076234832
+mix3 extreme = 4.38934 (sig = 0000100200002020) weight 4 (29120), p-value = 0.28185543896653364
+mix3 extreme = 4.88743 (sig = 1010000001200020) weight 5 (139776), p-value = 0.13307242810533218
+mix3 extreme = 5.03448 (sig = 1000101010101000) weight 6 (512512), p-value = 0.21774302727754802
+mix3 extreme = 4.93277 (sig = 2120000200121000) weight 7 (1464320), p-value = 0.6949168149870921
+mix3 extreme = 5.48854 (sig = 0120000022010121) weight 8 (3294720), p-value = 0.12499645507717881
+mix3 extreme = 5.73097 (sig = 2011222200021201) weight >=9 (37601280), p-value = 0.3130382439941476
+bits per word = 32 (analyzing bits); min category p-value = 0.12499645507717881
+
+processed 946.20 GiB (1015976521152 bytes) in 107.380 seconds (9.4615 GB/s, 34.0614 TB/h)
+
+p = 0.699331235888471
+------
+
+mix3 extreme = 1.91662 (sig = 0000000000010000) weight 1 (32), p-value = 0.8379660839496306
+mix3 extreme = 3.71645 (sig = 0000000000010020) weight 2 (480), p-value = 0.09243319915038857
+mix3 extreme = 3.62789 (sig = 0020002200000000) weight 3 (4480), p-value = 0.7220552737715638
+mix3 extreme = 4.18536 (sig = 0000100200002020) weight 4 (29120), p-value = 0.5635654687774199
+mix3 extreme = 4.62612 (sig = 1010000001200020) weight 5 (139776), p-value = 0.40593843871120927
+mix3 extreme = 4.79096 (sig = 0020100001001201) weight 6 (512512), p-value = 0.5728819815197606
+mix3 extreme = 5.01351 (sig = 0220000022001220) weight 7 (1464320), p-value = 0.5427916700199064
+mix3 extreme = 5.11893 (sig = 0120000022010121) weight 8 (3294720), p-value = 0.6366564875068752
+mix3 extreme = 5.49746 (sig = 2011222200021201) weight >=9 (37601280), p-value = 0.7651496246226496
+bits per word = 32 (analyzing bits); min category p-value = 0.09243319915038857
+
+processed 987.34 GiB (1060149413376 bytes) in 112.027 seconds (9.4633 GB/s, 34.0679 TB/h)
+
+p = 0.5822587061110309
+------
+
+mix3 extreme = 2.07497 (sig = 0000000000010000) weight 1 (32), p-value = 0.7104237806197132
+mix3 extreme = 3.92595 (sig = 0000000000000202) weight 2 (480), p-value = 0.04062029239363549
+mix3 extreme = 3.77312 (sig = 0000001000110000) weight 3 (4480), p-value = 0.5143783761191723
+mix3 extreme = 4.24083 (sig = 0000100200002020) weight 4 (29120), p-value = 0.4771698527895754
+mix3 extreme = 4.61532 (sig = 0210000010001200) weight 5 (139776), p-value = 0.4222442629376225
+mix3 extreme = 4.79972 (sig = 1010022000120000) weight 6 (512512), p-value = 0.5570600318044716
+mix3 extreme = 5.04308 (sig = 0220000022001220) weight 7 (1464320), p-value = 0.4887065006453921
+mix3 extreme = 5.30703 (sig = 1010210212000010) weight 8 (3294720), p-value = 0.30726927359907186
+mix3 extreme = 5.42394 (sig = 2011222200021201) weight >=9 (37601280), p-value = 0.8883267566123958
+bits per word = 32 (analyzing bits); min category p-value = 0.04062029239363549
+
+processed 1.00 TiB (1104322305600 bytes) in 116.674 seconds (9.4650 GB/s, 34.0740 TB/h)
+
+p = 0.3114828634298599
+------
+
+mix3 extreme = 2.03575 (sig = 0000000000010000) weight 1 (32), p-value = 0.7447567585253324
+mix3 extreme = 3.67901 (sig = 0000000000000202) weight 2 (480), p-value = 0.10631441232472316
+mix3 extreme = 3.72796 (sig = 0000001000110000) weight 3 (4480), p-value = 0.578901670186366
+mix3 extreme = 4.21568 (sig = 0000100200002020) weight 4 (29120), p-value = 0.5157572205194026
+mix3 extreme = 4.69700 (sig = 0210000010001200) weight 5 (139776), p-value = 0.3085939053166066
+mix3 extreme = 4.90626 (sig = 1010022000120000) weight 6 (512512), p-value = 0.37858476536012997
+mix3 extreme = 5.15175 (sig = 0220000022001220) weight 7 (1464320), p-value = 0.3146958996952071
+mix3 extreme = 5.16973 (sig = 0220002220202200) weight 8 (3294720), p-value = 0.5380823981255881
+mix3 extreme = 5.38530 (sig = 0220211200210101) weight >=9 (37601280), p-value = 0.9340926265417812
+bits per word = 32 (analyzing bits); min category p-value = 0.10631441232472316
+
+processed 1.04 TiB (1148495197824 bytes) in 121.323 seconds (9.4665 GB/s, 34.0792 TB/h)
+
+p = 0.6363674196409494
+------
+
+mix3 extreme = 1.85794 (sig = 0000000000010000) weight 1 (32), p-value = 0.8761112620736042
+mix3 extreme = 3.55796 (sig = 0000000000010020) weight 2 (480), p-value = 0.16425410567405602
+mix3 extreme = 3.86338 (sig = 1000201000000000) weight 3 (4480), p-value = 0.39408857468496533
+mix3 extreme = 4.22709 (sig = 0000100200002020) weight 4 (29120), p-value = 0.49811603841540164
+mix3 extreme = 4.37047 (sig = 1010000001200020) weight 5 (139776), p-value = 0.8232384636120924
+mix3 extreme = 5.02302 (sig = 1010022000120000) weight 6 (512512), p-value = 0.22947651402103192
+mix3 extreme = 4.91246 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.7320755774311756
+mix3 extreme = 5.29609 (sig = 0101000102001121) weight 8 (3294720), p-value = 0.3228016374017254
+mix3 extreme = 5.61730 (sig = 1210022200112001) weight >=9 (37601280), p-value = 0.517773923864269
+bits per word = 32 (analyzing bits); min category p-value = 0.16425410567405602
+
+processed 1.08 TiB (1192668090048 bytes) in 125.971 seconds (9.4678 GB/s, 34.0840 TB/h)
+
+p = 0.8010846648524932
+------
+
+mix3 extreme = 1.96422 (sig = 0000000000010000) weight 1 (32), p-value = 0.8030325106058231
+mix3 extreme = 4.06460 (sig = 0000000000010020) weight 2 (480), p-value = 0.022831317275293982
+mix3 extreme = 3.65526 (sig = 0000001000110000) weight 3 (4480), p-value = 0.6837355274897644
+mix3 extreme = 4.28962 (sig = 0000100200002020) weight 4 (29120), p-value = 0.4061838396998656
+mix3 extreme = 4.58811 (sig = 1010200010000001) weight 5 (139776), p-value = 0.4648388864400076
+mix3 extreme = 4.67205 (sig = 1010022000120000) weight 6 (512512), p-value = 0.7831098646405174
+mix3 extreme = 5.09379 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.40186044221022743
+mix3 extreme = 5.46226 (sig = 0101000102001121) weight 8 (3294720), p-value = 0.1434860577123454
+mix3 extreme = 5.37275 (sig = 0022200212010101) weight >=9 (37601280), p-value = 0.9458380042292887
+bits per word = 32 (analyzing bits); min category p-value = 0.022831317275293982
+
+processed 1.12 TiB (1236840982272 bytes) in 130.620 seconds (9.4690 GB/s, 34.0884 TB/h)
+
+p = 0.18768240848194753
+------
+
+mix3 extreme = 1.82810 (sig = 0000000000000001) weight 1 (32), p-value = 0.8932770996655022
+mix3 extreme = 3.95227 (sig = 0000000000010020) weight 2 (480), p-value = 0.0364782952747189
+mix3 extreme = 3.61070 (sig = 0000001220000000) weight 3 (4480), p-value = 0.7454583292680792
+mix3 extreme = 4.33978 (sig = 0000100200002020) weight 4 (29120), p-value = 0.3398712402105776
+mix3 extreme = 4.76890 (sig = 1010000001200020) weight 5 (139776), p-value = 0.22811139472386155
+mix3 extreme = 4.77164 (sig = 2200100011010000) weight 6 (512512), p-value = 0.6080128142421117
+mix3 extreme = 5.27526 (sig = 2201210001020000) weight 7 (1464320), p-value = 0.17644411193818768
+mix3 extreme = 5.20808 (sig = 0101000102001121) weight 8 (3294720), p-value = 0.46668125944230054
+mix3 extreme = 5.62874 (sig = 0022200212010101) weight >=9 (37601280), p-value = 0.4946861422809303
+bits per word = 32 (analyzing bits); min category p-value = 0.0364782952747189
+
+processed 1.17 TiB (1281013874496 bytes) in 135.266 seconds (9.4703 GB/s, 34.0931 TB/h)
+
+p = 0.28426291544579746
+------
+
+mix3 extreme = 1.95285 (sig = 0000000000000001) weight 1 (32), p-value = 0.8116760935214951
+mix3 extreme = 3.79358 (sig = 0000000000010020) weight 2 (480), p-value = 0.06879980141175002
+mix3 extreme = 3.71010 (sig = 0000001220000000) weight 3 (4480), p-value = 0.6047564191756851
+mix3 extreme = 4.28257 (sig = 0000100200002020) weight 4 (29120), p-value = 0.4160778862342412
+mix3 extreme = 4.62445 (sig = 0101000210010000) weight 5 (139776), p-value = 0.40843577509029927
+mix3 extreme = 4.70160 (sig = 1010022000120000) weight 6 (512512), p-value = 0.7336496322807446
+mix3 extreme = 5.38263 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.1019144311048474
+mix3 extreme = 5.30370 (sig = 1000000121022220) weight 8 (3294720), p-value = 0.311936443281854
+mix3 extreme = 5.42931 (sig = 1002210202001202) weight >=9 (37601280), p-value = 0.880826200524816
+bits per word = 32 (analyzing bits); min category p-value = 0.06879980141175002
+
+processed 1.21 TiB (1325186766720 bytes) in 139.916 seconds (9.4713 GB/s, 34.0967 TB/h)
+
+p = 0.47351313669112294
+------
+
+mix3 extreme = 1.65180 (sig = 0000000000000001) weight 1 (32), p-value = 0.9638815054074412
+mix3 extreme = 3.63332 (sig = 0000000000010020) weight 2 (480), p-value = 0.12569171569491844
+mix3 extreme = 3.78260 (sig = 0000001220000000) weight 3 (4480), p-value = 0.5010918301223964
+mix3 extreme = 4.46741 (sig = 0000100200002020) weight 4 (29120), p-value = 0.20589968526310487
+mix3 extreme = 4.84687 (sig = 1010000001200020) weight 5 (139776), p-value = 0.16080737388943306
+mix3 extreme = 4.88011 (sig = 2200100011010000) weight 6 (512512), p-value = 0.41923532649030965
+mix3 extreme = 5.52289 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.04765850590152219
+mix3 extreme = 5.40254 (sig = 1000000121022220) weight 8 (3294720), p-value = 0.19465194371017477
+mix3 extreme = 5.57831 (sig = 1002210202001202) weight >=9 (37601280), p-value = 0.5987710459230563
+bits per word = 32 (analyzing bits); min category p-value = 0.04765850590152219
+
+processed 1.25 TiB (1369359658944 bytes) in 144.564 seconds (9.4724 GB/s, 34.1005 TB/h)
+
+p = 0.35563140622069916
+------
+
+mix3 extreme = 1.66792 (sig = 0000000000000001) weight 1 (32), p-value = 0.9594802969338025
+mix3 extreme = 3.55736 (sig = 0000000000010020) weight 2 (480), p-value = 0.16460055586216046
+mix3 extreme = 3.88501 (sig = 0020002200000000) weight 3 (4480), p-value = 0.36773123973291
+mix3 extreme = 4.47573 (sig = 0200000000002011) weight 4 (29120), p-value = 0.19888411280126195
+mix3 extreme = 4.93393 (sig = 1010000001200020) weight 5 (139776), p-value = 0.10653686704792563
+mix3 extreme = 5.15851 (sig = 2200100011010000) weight 6 (512512), p-value = 0.1197753294928225
+mix3 extreme = 5.58485 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.03367045989453596
+mix3 extreme = 5.39930 (sig = 0101000102001121) weight 8 (3294720), p-value = 0.1978230689616731
+mix3 extreme = 5.59598 (sig = 1002210202001202) weight >=9 (37601280), p-value = 0.5617223000746205
+bits per word = 32 (analyzing bits); min category p-value = 0.03367045989453596
+
+processed 1.29 TiB (1413532551168 bytes) in 149.210 seconds (9.4734 GB/s, 34.1044 TB/h)
+
+p = 0.2652707956180134
+------
+
+mix3 extreme = 1.61881 (sig = 0000001000000000) weight 1 (32), p-value = 0.9717671669643057
+mix3 extreme = 3.77447 (sig = 0000000000010020) weight 2 (480), p-value = 0.07408554469851335
+mix3 extreme = 3.91442 (sig = 0020002200000000) weight 3 (4480), p-value = 0.33368794063858076
+mix3 extreme = 4.55945 (sig = 0200000000002011) weight 4 (29120), p-value = 0.1387316052406679
+mix3 extreme = 4.82680 (sig = 1010000001200020) weight 5 (139776), p-value = 0.17628469946111142
+mix3 extreme = 5.18444 (sig = 2200100011010000) weight 6 (512512), p-value = 0.10510235682630724
+mix3 extreme = 5.53558 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.04440630726429536
+mix3 extreme = 5.26259 (sig = 1000000121022220) weight 8 (3294720), p-value = 0.37373602385264953
+mix3 extreme = 5.90243 (sig = 1002210202001202) weight >=9 (37601280), p-value = 0.1260054718177352
+bits per word = 32 (analyzing bits); min category p-value = 0.04440630726429536
+
+processed 1.33 TiB (1457705443392 bytes) in 153.860 seconds (9.4742 GB/s, 34.1072 TB/h)
+
+p = 0.3355543366062595
+------
+
+mix3 extreme = 1.67404 (sig = 0000001000000000) weight 1 (32), p-value = 0.9577109842458237
+mix3 extreme = 3.75228 (sig = 0000000000010020) weight 2 (480), p-value = 0.0806776862881161
+mix3 extreme = 4.05045 (sig = 0020002200000000) weight 3 (4480), p-value = 0.20469016943161716
+mix3 extreme = 4.53856 (sig = 0000100200002020) weight 4 (29120), p-value = 0.15205142449524495
+mix3 extreme = 4.92656 (sig = 1010000001200020) weight 5 (139776), p-value = 0.11039306700223056
+mix3 extreme = 4.94799 (sig = 2200100011010000) weight 6 (512512), p-value = 0.31907125113899376
+mix3 extreme = 5.60393 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.030217662805406765
+mix3 extreme = 5.16625 (sig = 1000000121022220) weight 8 (3294720), p-value = 0.5447428460114838
+mix3 extreme = 5.74996 (sig = 1002210202001202) weight >=9 (37601280), p-value = 0.28511700172461235
+bits per word = 32 (analyzing bits); min category p-value = 0.030217662805406765
+
+processed 1.37 TiB (1501878335616 bytes) in 158.506 seconds (9.4752 GB/s, 34.1108 TB/h)
+
+p = 0.2413028899960085
+------
+
+mix3 extreme = 1.70288 (sig = 0000000000000001) weight 1 (32), p-value = 0.9486155293206765
+mix3 extreme = 3.45306 (sig = 0000000000010020) weight 2 (480), p-value = 0.23365580454041618
+mix3 extreme = 4.04820 (sig = 0020002200000000) weight 3 (4480), p-value = 0.20644545775946668
+mix3 extreme = 4.28700 (sig = 0200000000002011) weight 4 (29120), p-value = 0.40984771856471297
+mix3 extreme = 5.17353 (sig = 1010000001200020) weight 5 (139776), p-value = 0.03159792957897901
+mix3 extreme = 4.72320 (sig = 2200100011010000) weight 6 (512512), p-value = 0.6957451034822559
+mix3 extreme = 5.60096 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.03073276590855216
+mix3 extreme = 5.14185 (sig = 1000000121022220) weight 8 (3294720), p-value = 0.591938268966059
+mix3 extreme = 5.63528 (sig = 2110020120020101) weight >=9 (37601280), p-value = 0.48168507903039537
+bits per word = 32 (analyzing bits); min category p-value = 0.03073276590855216
+
+processed 1.41 TiB (1546051227840 bytes) in 163.157 seconds (9.4758 GB/s, 34.1130 TB/h)
+
+p = 0.24492205422781482
+------
+
+mix3 extreme = 1.63326 (sig = 0000000000000001) weight 1 (32), p-value = 0.9684910986227895
+mix3 extreme = 3.55824 (sig = 0000000000010020) weight 2 (480), p-value = 0.16409328438431198
+mix3 extreme = 4.19538 (sig = 0020002200000000) weight 3 (4480), p-value = 0.11489199091400704
+mix3 extreme = 4.09180 (sig = 0200000000002011) weight 4 (29120), p-value = 0.7124862709225339
+mix3 extreme = 5.24937 (sig = 1010000001200020) weight 5 (139776), p-value = 0.021106253640234832
+mix3 extreme = 4.80794 (sig = 0010010120002001) weight 6 (512512), p-value = 0.5423094799427385
+mix3 extreme = 5.87425 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.006200644192706673
+mix3 extreme = 5.17966 (sig = 1000000121022220) weight 8 (3294720), p-value = 0.5192411128768408
+mix3 extreme = 5.73179 (sig = 2110020120020101) weight >=9 (37601280), p-value = 0.3117982537347504
+bits per word = 32 (analyzing bits); min category p-value = 0.006200644192706673
+
+processed 1.45 TiB (1590224120064 bytes) in 167.805 seconds (9.4766 GB/s, 34.1159 TB/h)
+
+p = 0.054441510835603495
+------
+
+mix3 extreme = 1.77889 (sig = 0000000000000001) weight 1 (32), p-value = 0.9182157811127244
+mix3 extreme = 3.42321 (sig = 0000000000010020) weight 2 (480), p-value = 0.257062718618029
+mix3 extreme = 4.35906 (sig = 0020002200000000) weight 3 (4480), p-value = 0.05683933068242921
+mix3 extreme = 3.98326 (sig = 0001010100000100) weight 4 (29120), p-value = 0.8618651117805237
+mix3 extreme = 5.25581 (sig = 1010000001200020) weight 5 (139776), p-value = 0.020388139498267666
+mix3 extreme = 4.98209 (sig = 2200100011010000) weight 6 (512512), p-value = 0.275572661661324
+mix3 extreme = 5.94397 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.004065484958234228
+mix3 extreme = 5.00680 (sig = 0021002100101120) weight 8 (3294720), p-value = 0.8385178192335732
+mix3 extreme = 5.35042 (sig = 0221202120012020) weight >=9 (37601280), p-value = 0.9631010347079951
+bits per word = 32 (analyzing bits); min category p-value = 0.004065484958234228
+
+processed 1.49 TiB (1634397012288 bytes) in 172.453 seconds (9.4773 GB/s, 34.1184 TB/h)
+
+p = 0.035999960678427735
+------
+
+mix3 extreme = 1.76113 (sig = 0000000000000001) weight 1 (32), p-value = 0.9261872210187321
+mix3 extreme = 3.33459 (sig = 0002000100000000) weight 2 (480), p-value = 0.33649674827353027
+mix3 extreme = 4.25045 (sig = 0020002200000000) weight 3 (4480), p-value = 0.09115384120387193
+mix3 extreme = 4.04129 (sig = 0001010100000100) weight 4 (29120), p-value = 0.7873322690001414
+mix3 extreme = 5.21586 (sig = 1010000001200020) weight 5 (139776), p-value = 0.02525037935429823
+mix3 extreme = 4.89094 (sig = 2200100011010000) weight 6 (512512), p-value = 0.4021047668277122
+mix3 extreme = 5.95046 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.003907783999433192
+mix3 extreme = 5.03728 (sig = 0002202010012110) weight 8 (3294720), p-value = 0.7889677119311849
+mix3 extreme = 5.41051 (sig = 0112202021202110) weight >=9 (37601280), p-value = 0.9058694535810744
+bits per word = 32 (analyzing bits); min category p-value = 0.003907783999433192
+
+processed 1.53 TiB (1678569904512 bytes) in 177.102 seconds (9.4780 GB/s, 34.1207 TB/h)
+
+p = 0.03462529148938196
+------
+
+mix3 extreme = 1.77856 (sig = 0000000010000000) weight 1 (32), p-value = 0.9183690917402711
+mix3 extreme = 3.19828 (sig = 0000000000010020) weight 2 (480), p-value = 0.4852399056436061
+mix3 extreme = 4.32394 (sig = 0020002200000000) weight 3 (4480), p-value = 0.06635912576436993
+mix3 extreme = 4.09991 (sig = 0001010100000100) weight 4 (29120), p-value = 0.6998792047393225
+mix3 extreme = 5.29638 (sig = 1010000001200020) weight 5 (139776), p-value = 0.016374473651498467
+mix3 extreme = 4.93300 (sig = 0020002010022010) weight 6 (512512), p-value = 0.3396698255244549
+mix3 extreme = 5.67078 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.020600306368177335
+mix3 extreme = 5.25193 (sig = 0002202010012110) weight 8 (3294720), p-value = 0.39097798364002756
+mix3 extreme = 5.54425 (sig = 0221202120012020) weight >=9 (37601280), p-value = 0.6704629680199583
+bits per word = 32 (analyzing bits); min category p-value = 0.016374473651498467
+
+processed 1.57 TiB (1722742796736 bytes) in 181.750 seconds (9.4786 GB/s, 34.1231 TB/h)
+
+p = 0.1380777013388604
+------
+
+mix3 extreme = 1.92021 (sig = 0000000000000001) weight 1 (32), p-value = 0.8354524696302261
+mix3 extreme = 3.16451 (sig = 0002000100000000) weight 2 (480), p-value = 0.5258551675522704
+mix3 extreme = 4.55129 (sig = 0020002200000000) weight 3 (4480), p-value = 0.02360389503592983
+mix3 extreme = 4.12007 (sig = 2200000022000000) weight 4 (29120), p-value = 0.6681162758122072
+mix3 extreme = 5.15215 (sig = 1010000001200020) weight 5 (139776), p-value = 0.03535485131281148
+mix3 extreme = 4.82565 (sig = 0020002010022010) weight 6 (512512), p-value = 0.5109049617886997
+mix3 extreme = 5.61856 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.02780268168098961
+mix3 extreme = 5.21694 (sig = 0002202010012110) weight 8 (3294720), p-value = 0.4508110668347041
+mix3 extreme = 5.44771 (sig = 0121102021210021) weight >=9 (37601280), p-value = 0.8531715719044701
+bits per word = 32 (analyzing bits); min category p-value = 0.02360389503592983
+
+processed 1.61 TiB (1766915688960 bytes) in 186.400 seconds (9.4792 GB/s, 34.1250 TB/h)
+
+p = 0.19344433784473997
+------
+
+mix3 extreme = 1.78871 (sig = 0000000000000001) weight 1 (32), p-value = 0.9135781649886242
+mix3 extreme = 3.26247 (sig = 0002000100000000) weight 2 (480), p-value = 0.4116481994899975
+mix3 extreme = 4.85357 (sig = 0020002200000000) weight 3 (4480), p-value = 0.005417587034469668
+mix3 extreme = 4.32153 (sig = 0001010100000100) weight 4 (29120), p-value = 0.36315369753849647
+mix3 extreme = 5.26252 (sig = 1010000001200020) weight 5 (139776), p-value = 0.01966541744526272
+mix3 extreme = 4.93318 (sig = 1121000000002100) weight 6 (512512), p-value = 0.3394109150449771
+mix3 extreme = 5.66956 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.020745220913037023
+mix3 extreme = 4.91723 (sig = 1020201201002100) weight 8 (3294720), p-value = 0.9445391847372456
+mix3 extreme = 5.48990 (sig = 0112202021202110) weight >=9 (37601280), p-value = 0.7795772961663443
+bits per word = 32 (analyzing bits); min category p-value = 0.005417587034469668
+
+processed 1.65 TiB (1811088581184 bytes) in 191.046 seconds (9.4798 GB/s, 34.1274 TB/h)
+
+p = 0.04771492301363689
+------
+
+mix3 extreme = 1.73402 (sig = 0000000000000010) weight 1 (32), p-value = 0.9373230766660288
+mix3 extreme = 3.39654 (sig = 0002000100000000) weight 2 (480), p-value = 0.27940554936488393
+mix3 extreme = 4.75107 (sig = 0020002200000000) weight 3 (4480), p-value = 0.00902387010882618
+mix3 extreme = 4.29976 (sig = 2200000022000000) weight 4 (29120), p-value = 0.39220318217879846
+mix3 extreme = 5.27386 (sig = 1010000001200020) weight 5 (139776), p-value = 0.018498792965621184
+mix3 extreme = 4.82230 (sig = 0020002010022010) weight 6 (512512), p-value = 0.5167904312436398
+mix3 extreme = 5.63674 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.025056976601288812
+mix3 extreme = 5.00980 (sig = 0002202010012110) weight 8 (3294720), p-value = 0.8338951903338541
+mix3 extreme = 5.66831 (sig = 0112202021202110) weight >=9 (37601280), p-value = 0.41856071823368524
+bits per word = 32 (analyzing bits); min category p-value = 0.00902387010882618
+
+processed 1.69 TiB (1855261473408 bytes) in 195.695 seconds (9.4803 GB/s, 34.1293 TB/h)
+
+p = 0.07834423916980067
+------
+
+mix3 extreme = 1.67619 (sig = 0000000000000010) weight 1 (32), p-value = 0.9570771110148978
+mix3 extreme = 3.41702 (sig = 0002000100000000) weight 2 (480), p-value = 0.262128255661469
+mix3 extreme = 4.62042 (sig = 0020002200000000) weight 3 (4480), p-value = 0.017010208795634647
+mix3 extreme = 4.59669 (sig = 2200000022000000) weight 4 (29120), p-value = 0.11750112047432726
+mix3 extreme = 4.99573 (sig = 1010000001200020) weight 5 (139776), p-value = 0.07866229621363208
+mix3 extreme = 4.85789 (sig = 0020002010022010) weight 6 (512512), p-value = 0.45559299545932075
+mix3 extreme = 5.68451 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.0190263474770826
+mix3 extreme = 5.13170 (sig = 0002202010012110) weight 8 (3294720), p-value = 0.6117203814037699
+mix3 extreme = 5.53213 (sig = 0112202021202110) weight >=9 (37601280), p-value = 0.6956449007482799
+bits per word = 32 (analyzing bits); min category p-value = 0.017010208795634647
+
+processed 1.73 TiB (1899434365632 bytes) in 200.344 seconds (9.4808 GB/s, 34.1310 TB/h)
+
+p = 0.14307844424807328
+------
+
+mix3 extreme = 1.46846 (sig = 0000000000000010) weight 1 (32), p-value = 0.9925536166684356
+mix3 extreme = 3.28836 (sig = 0002000100000000) weight 2 (480), p-value = 0.38365880396656094
+mix3 extreme = 4.24987 (sig = 0020002200000000) weight 3 (4480), p-value = 0.09137864632019486
+mix3 extreme = 4.53857 (sig = 2200000022000000) weight 4 (29120), p-value = 0.15204513653355411
+mix3 extreme = 4.84177 (sig = 1010000001200020) weight 5 (139776), p-value = 0.1646245207116507
+mix3 extreme = 4.96752 (sig = 0020002010022010) weight 6 (512512), p-value = 0.2935919030485151
+mix3 extreme = 5.53181 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.045349437826826204
+mix3 extreme = 5.05573 (sig = 0101000102001121) weight 8 (3294720), p-value = 0.7564969317583393
+mix3 extreme = 5.55645 (sig = 0120021121211102) weight >=9 (37601280), p-value = 0.6448584713975583
+bits per word = 32 (analyzing bits); min category p-value = 0.045349437826826204
+
+processed 1.77 TiB (1943607257856 bytes) in 204.991 seconds (9.4814 GB/s, 34.1331 TB/h)
+
+p = 0.34143310794885495
+------
+
+mix3 extreme = 1.60059 (sig = 0000000000000010) weight 1 (32), p-value = 0.9755210904739724
+mix3 extreme = 3.43562 (sig = 0002000100000000) weight 2 (480), p-value = 0.2471245203388254
+mix3 extreme = 4.21498 (sig = 0020002200000000) weight 3 (4480), p-value = 0.10587759412895206
+mix3 extreme = 4.54725 (sig = 2200000022000000) weight 4 (29120), p-value = 0.14638226518608732
+mix3 extreme = 5.11319 (sig = 1010000001200020) weight 5 (139776), p-value = 0.04331067516794541
+mix3 extreme = 4.89104 (sig = 0020002010022010) weight 6 (512512), p-value = 0.40194186060133225
+mix3 extreme = 5.30368 (sig = 0022001200210001) weight 7 (1464320), p-value = 0.15310972033694092
+mix3 extreme = 4.96503 (sig = 0101000102001121) weight 8 (3294720), p-value = 0.895981480009354
+mix3 extreme = 5.43690 (sig = 2011012202221012) weight >=9 (37601280), p-value = 0.8697901430106476
+bits per word = 32 (analyzing bits); min category p-value = 0.04331067516794541
+
+processed 1.81 TiB (1987780150080 bytes) in 209.641 seconds (9.4818 GB/s, 34.1346 TB/h)
+
+p = 0.3286664503501472
+------
+
+mix3 extreme = 1.62183 (sig = 0000000000000001) weight 1 (32), p-value = 0.9711046924233813
+mix3 extreme = 3.31095 (sig = 0002000100000000) weight 2 (480), p-value = 0.3601425817043632
+mix3 extreme = 4.09598 (sig = 0020002200000000) weight 3 (4480), p-value = 0.17166666878732223
+mix3 extreme = 4.50667 (sig = 2200000022000000) weight 4 (29120), p-value = 0.17450008102238163
+mix3 extreme = 5.13135 (sig = 1010000001200020) weight 5 (139776), p-value = 0.03941113444540559
+mix3 extreme = 4.89555 (sig = 0000001120020120) weight 6 (512512), p-value = 0.39493033883371476
+mix3 extreme = 5.11521 (sig = 2021101000102000) weight 7 (1464320), p-value = 0.3680308336176969
+mix3 extreme = 5.00670 (sig = 0101000102001121) weight 8 (3294720), p-value = 0.838673761234862
+mix3 extreme = 5.47408 (sig = 2011012202221012) weight >=9 (37601280), p-value = 0.8086562578846996
+bits per word = 32 (analyzing bits); min category p-value = 0.03941113444540559
+
+processed 1.85 TiB (2031953042304 bytes) in 214.291 seconds (9.4822 GB/s, 34.1359 TB/h)
+
+p = 0.30363339680548806
+------
+
+mix3 extreme = 1.48298 (sig = 0000000000000001) weight 1 (32), p-value = 0.9913910722809357
+mix3 extreme = 3.39160 (sig = 0002000100000000) weight 2 (480), p-value = 0.2836944061972724
+mix3 extreme = 4.06340 (sig = 0020002200000000) weight 3 (4480), p-value = 0.19480546194207532
+mix3 extreme = 4.50090 (sig = 2200000022000000) weight 4 (29120), p-value = 0.17884767981001137
+mix3 extreme = 5.03259 (sig = 1010000001200020) weight 5 (139776), p-value = 0.06540179733907164
+mix3 extreme = 4.73302 (sig = 0000001120020120) weight 6 (512512), p-value = 0.6781651124303792
+mix3 extreme = 5.00272 (sig = 0012200121100000) weight 7 (1464320), p-value = 0.5629672993253055
+mix3 extreme = 4.97561 (sig = 0101000102001121) weight 8 (3294720), p-value = 0.8826940850252476
+mix3 extreme = 5.42730 (sig = 0120021121211102) weight >=9 (37601280), p-value = 0.8836627313958089
+bits per word = 32 (analyzing bits); min category p-value = 0.06540179733907164
+
+processed 1.89 TiB (2076125934528 bytes) in 218.940 seconds (9.4826 GB/s, 34.1375 TB/h)
+
+p = 0.45596796525083044
+------
+
+mix3 extreme = 1.72860 (sig = 0000000000000001) weight 1 (32), p-value = 0.9393995207304942
+mix3 extreme = 3.39378 (sig = 0002000100000000) weight 2 (480), p-value = 0.28179578514943976
+mix3 extreme = 4.05522 (sig = 0020002200000000) weight 3 (4480), p-value = 0.20099759390243183
+mix3 extreme = 4.24544 (sig = 2200000022000000) weight 4 (29120), p-value = 0.47022717830999006
+mix3 extreme = 5.15086 (sig = 1010000001200020) weight 5 (139776), p-value = 0.03559463987371441
+mix3 extreme = 4.78158 (sig = 2200000200020021) weight 6 (512512), p-value = 0.5899050720854908
+mix3 extreme = 4.89904 (sig = 0012200121100000) weight 7 (1464320), p-value = 0.7559090336034867
+mix3 extreme = 4.97747 (sig = 0101000102001121) weight 8 (3294720), p-value = 0.8802713538724025
+mix3 extreme = 5.59748 (sig = 0120021121211102) weight >=9 (37601280), p-value = 0.5585928335482738
+bits per word = 32 (analyzing bits); min category p-value = 0.03559463987371441
+
+processed 1.93 TiB (2120298826752 bytes) in 223.587 seconds (9.4831 GB/s, 34.1392 TB/h)
+
+p = 0.2783335102027229
+------
+
+mix3 extreme = 1.73432 (sig = 0000000000000001) weight 1 (32), p-value = 0.9372073609929856
+mix3 extreme = 3.35666 (sig = 0002000100000000) weight 2 (480), p-value = 0.315327973423559
+mix3 extreme = 4.08543 (sig = 0020002200000000) weight 3 (4480), p-value = 0.1788922214214955
+mix3 extreme = 4.04453 (sig = 2200000022000000) weight 4 (29120), p-value = 0.7827535518105173
+mix3 extreme = 5.36067 (sig = 1010000001200020) weight 5 (139776), p-value = 0.011522354693907923
+mix3 extreme = 4.81756 (sig = 0220002200001002) weight 6 (512512), p-value = 0.5251777594142686
+mix3 extreme = 5.22122 (sig = 0012200121100000) weight 7 (1464320), p-value = 0.2291643774099303
+mix3 extreme = 5.12611 (sig = 0102000102110102) weight 8 (3294720), p-value = 0.6226282664500324
+mix3 extreme = 5.87097 (sig = 0120021121211102) weight >=9 (37601280), p-value = 0.15033239624420885
+bits per word = 32 (analyzing bits); min category p-value = 0.011522354693907923
+
+processed 1.97 TiB (2164471718976 bytes) in 228.238 seconds (9.4834 GB/s, 34.1403 TB/h)
+
+p = 0.09904796899382629
+------
+
+mix3 extreme = 1.96687 (sig = 0000000000000002) weight 1 (32), p-value = 0.8009873901827941
+mix3 extreme = 3.61074 (sig = 0002000100000000) weight 2 (480), p-value = 0.13634084607765345
+mix3 extreme = 3.93379 (sig = 0020002200000000) weight 3 (4480), p-value = 0.31244655334792326
+mix3 extreme = 4.14471 (sig = 2200000022000000) weight 4 (29120), p-value = 0.6287153069990661
+mix3 extreme = 5.28244 (sig = 1010000001200020) weight 5 (139776), p-value = 0.017660288786366506
+mix3 extreme = 4.93843 (sig = 0000001120020120) weight 6 (512512), p-value = 0.3321101354976318
+mix3 extreme = 5.19997 (sig = 0012200121100000) weight 7 (1464320), p-value = 0.2531293070911493
+mix3 extreme = 5.06685 (sig = 0102000102110102) weight 8 (3294720), p-value = 0.7361960290540411
+mix3 extreme = 5.69072 (sig = 0120021121211102) weight >=9 (37601280), p-value = 0.3785318039848843
+bits per word = 32 (analyzing bits); min category p-value = 0.017660288786366506
+
+processed 2.01 TiB (2208644611200 bytes) in 232.887 seconds (9.4838 GB/s, 34.1415 TB/h)
+
+p = 0.1481653392685817
+------
+
+mix3 extreme = 1.86377 (sig = 0000000000000002) weight 1 (32), p-value = 0.8725785523734277
+mix3 extreme = 3.19053 (sig = 0002000100000000) weight 2 (480), p-value = 0.4944641828404557
+mix3 extreme = 4.01573 (sig = 0020002200000000) weight 3 (4480), p-value = 0.23318296261127686
+mix3 extreme = 3.96736 (sig = 2200000022000000) weight 4 (29120), p-value = 0.8795221751395694
+mix3 extreme = 5.17417 (sig = 1010000001200020) weight 5 (139776), p-value = 0.03149263332737918
+mix3 extreme = 5.05064 (sig = 0000001120020120) weight 6 (512512), p-value = 0.20202682047656845
+mix3 extreme = 4.95491 (sig = 0012200121100000) weight 7 (1464320), p-value = 0.6534250525820912
+mix3 extreme = 5.28940 (sig = 0102000102110102) weight 8 (3294720), p-value = 0.3325772468202818
+mix3 extreme = 5.65575 (sig = 0120021121211102) weight >=9 (37601280), p-value = 0.4420354647956288
+bits per word = 32 (analyzing bits); min category p-value = 0.03149263332737918
+
+processed 2.05 TiB (2252817503424 bytes) in 237.535 seconds (9.4842 GB/s, 34.1430 TB/h)
+
+p = 0.2502329412629687
+------
+
+mix3 extreme = 2.01672 (sig = 0000000000000001) weight 1 (32), p-value = 0.7608633056077515
+mix3 extreme = 3.22978 (sig = 0002000100000000) weight 2 (480), p-value = 0.4484501074781883
+mix3 extreme = 3.86052 (sig = 0020002200000000) weight 3 (4480), p-value = 0.3976552632742465
+mix3 extreme = 3.93467 (sig = 2200000022000000) weight 4 (29120), p-value = 0.9116227971280575
+mix3 extreme = 5.23500 (sig = 1010000001200020) weight 5 (139776), p-value = 0.022797260599089483
+mix3 extreme = 5.05005 (sig = 0000001120020120) weight 6 (512512), p-value = 0.20257546524654407
+mix3 extreme = 5.04524 (sig = 0012200121100000) weight 7 (1464320), p-value = 0.484843227513384
+mix3 extreme = 5.20745 (sig = 0102000102110102) weight 8 (3294720), p-value = 0.46781825070405747
+mix3 extreme = 5.53702 (sig = 0121102021210021) weight >=9 (37601280), p-value = 0.6855329708250277
+bits per word = 32 (analyzing bits); min category p-value = 0.022797260599089483
+
+processed 2.09 TiB (2296990395648 bytes) in 242.239 seconds (9.4823 GB/s, 34.1364 TB/h)
+
+p = 0.18742757198070817
+------
+
+mix3 extreme = 2.14587 (sig = 0000000000000002) weight 1 (32), p-value = 0.6454465802379408
+mix3 extreme = 3.13490 (sig = 0002000100000000) weight 2 (480), p-value = 0.5621551283176967
+mix3 extreme = 3.88148 (sig = 0020002200000000) weight 3 (4480), p-value = 0.3719642952657155
+mix3 extreme = 3.91963 (sig = 2200000022000000) weight 4 (29120), p-value = 0.9244204196441591
+mix3 extreme = 5.15494 (sig = 1010000001200020) weight 5 (139776), p-value = 0.034841695004784005
+mix3 extreme = 4.77364 (sig = 2200000200020021) weight 6 (512512), p-value = 0.6043579232439267
+mix3 extreme = 5.08626 (sig = 0012200121100000) weight 7 (1464320), p-value = 0.41418967138114926
+mix3 extreme = 5.29247 (sig = 0102000102110102) weight 8 (3294720), p-value = 0.3280642997319577
+mix3 extreme = 5.67561 (sig = 0120021121211102) weight >=9 (37601280), p-value = 0.4052609786482002
+bits per word = 32 (analyzing bits); min category p-value = 0.034841695004784005
+
+processed 2.13 TiB (2341163287872 bytes) in 246.888 seconds (9.4827 GB/s, 34.1377 TB/h)
+
+p = 0.2732467737230578
+------
+
+mix3 extreme = 2.67735 (sig = 0000000000000002) weight 1 (32), p-value = 0.2120732960694758
+mix3 extreme = 3.02183 (sig = 0002000100000000) weight 2 (480), p-value = 0.7010628622009292
+mix3 extreme = 4.16320 (sig = 0020002200000000) weight 3 (4480), p-value = 0.13115593274730192
+mix3 extreme = 3.78647 (sig = 0202000010000200) weight 4 (29120), p-value = 0.9883209515728052
+mix3 extreme = 5.27412 (sig = 1010000001200020) weight 5 (139776), p-value = 0.018472332147182444
+mix3 extreme = 4.63451 (sig = 0212000100001001) weight 6 (512512), p-value = 0.8401750998779556
+mix3 extreme = 4.99173 (sig = 0012200121100000) weight 7 (1464320), p-value = 0.583665700640488
+mix3 extreme = 5.39620 (sig = 0102000102110102) weight 8 (3294720), p-value = 0.20089729714800214
+mix3 extreme = 5.60934 (sig = 2011220202202220) weight >=9 (37601280), p-value = 0.5340521993340479
+bits per word = 32 (analyzing bits); min category p-value = 0.018472332147182444
+
+processed 2.29 TiB (2517854856768 bytes) in 265.406 seconds (9.4868 GB/s, 34.1525 TB/h)
+
+p = 0.15448188591524262
+------
+
+mix3 extreme = 2.52460 (sig = 0000000000000002) weight 1 (32), p-value = 0.31121298739856934
+mix3 extreme = 3.11953 (sig = 0002000100000000) weight 2 (480), p-value = 0.5811607552688176
+mix3 extreme = 3.85796 (sig = 0020002200000000) weight 3 (4480), p-value = 0.40086489071976356
+mix3 extreme = 3.83458 (sig = 0001200010100000) weight 4 (29120), p-value = 0.9743438250422338
+mix3 extreme = 4.78002 (sig = 0002010020011000) weight 5 (139776), p-value = 0.21729513471622744
+mix3 extreme = 4.39762 (sig = 2000001121000002) weight 6 (512512), p-value = 0.9963362925305904
+mix3 extreme = 5.20093 (sig = 2201210001020000) weight 7 (1464320), p-value = 0.252007616511898
+mix3 extreme = 5.11855 (sig = 0220011102000012) weight 8 (3294720), p-value = 0.6373880550843933
+mix3 extreme = 5.84754 (sig = 0201021101012202) weight >=9 (37601280), p-value = 0.17105072651137876
+bits per word = 32 (analyzing bits); min category p-value = 0.17105072651137876
+
+processed 2.73 TiB (3003756671232 bytes) in 316.282 seconds (9.4971 GB/s, 34.1895 TB/h)
+
+p = 0.8151788801655675
+------
+
+mix3 extreme = 2.01336 (sig = 0000000000002000) weight 1 (32), p-value = 0.7636640554850014
+mix3 extreme = 3.30195 (sig = 2000000000000002) weight 2 (480), p-value = 0.3694082395778687
+mix3 extreme = 3.98732 (sig = 0020002200000000) weight 3 (4480), p-value = 0.2587186457266629
+mix3 extreme = 4.03519 (sig = 2000010000001020) weight 4 (29120), p-value = 0.7958312533963963
+mix3 extreme = 5.04500 (sig = 0010000012010002) weight 5 (139776), p-value = 0.06142534506046182
+mix3 extreme = 4.89161 (sig = 2000200021002200) weight 6 (512512), p-value = 0.4010504104468176
+mix3 extreme = 4.95648 (sig = 0100021020101001) weight 7 (1464320), p-value = 0.6504588083597108
+mix3 extreme = 5.18030 (sig = 2100200210010011) weight 8 (3294720), p-value = 0.5180285351100863
+mix3 extreme = 5.87540 (sig = 1012020210222102) weight >=9 (37601280), p-value = 0.14666901806037067
+bits per word = 32 (analyzing bits); min category p-value = 0.06142534506046182
+
+processed 3.66 TiB (4019733192384 bytes) in 422.635 seconds (9.5111 GB/s, 34.2401 TB/h)
+
+p = 0.434777551581642
+------
+
+mix3 extreme = 1.71171 (sig = 0000000000000002) weight 1 (32), p-value = 0.9455702684357506
+mix3 extreme = 3.28684 (sig = 1000000001000000) weight 2 (480), p-value = 0.38527362507204255
+mix3 extreme = 3.55494 (sig = 0001120000000000) weight 3 (4480), p-value = 0.8162282525030883
+mix3 extreme = 4.23797 (sig = 0000000202020200) weight 4 (29120), p-value = 0.48149291977745334
+mix3 extreme = 4.81810 (sig = 1020000000201010) weight 5 (139776), p-value = 0.18338101677611915
+mix3 extreme = 5.45462 (sig = 0001022100120000) weight 6 (512512), p-value = 0.024839832850803465
+mix3 extreme = 5.06779 (sig = 0101020000201220) weight 7 (1464320), p-value = 0.44530751532852686
+mix3 extreme = 5.85705 (sig = 0101120101010200) weight 8 (3294720), p-value = 0.015403199507925009
+mix3 extreme = 5.69100 (sig = 1012020210222102) weight >=9 (37601280), p-value = 0.3780431070506113
+bits per word = 32 (analyzing bits); min category p-value = 0.015403199507925009
+
+processed 4.58 TiB (5035709713536 bytes) in 529.000 seconds (9.5193 GB/s, 34.2695 TB/h)
+
+p = 0.13038748441264755
+------
+
+mix3 extreme = 1.81065 (sig = 0000000000000002) weight 1 (32), p-value = 0.9026023616908037
+mix3 extreme = 3.31363 (sig = 0002002000000000) weight 2 (480), p-value = 0.3574165514296389
+mix3 extreme = 3.59733 (sig = 0020002002000000) weight 3 (4480), p-value = 0.7631976334363509
+mix3 extreme = 4.11282 (sig = 0000000000200121) weight 4 (29120), p-value = 0.679603447973565
+mix3 extreme = 4.19580 (sig = 1020000000201010) weight 5 (139776), p-value = 0.9776452209361026
+mix3 extreme = 5.19086 (sig = 0001022100120000) weight 6 (512512), p-value = 0.1017263738770689
+mix3 extreme = 4.82158 (sig = 2000002201000211) weight 7 (1464320), p-value = 0.8757616832110814
+mix3 extreme = 5.31198 (sig = 0101120101010200) weight 8 (3294720), p-value = 0.30042693616161775
+mix3 extreme = 5.79099 (sig = 2002121021200020) weight >=9 (37601280), p-value = 0.23134568555874774
+bits per word = 32 (analyzing bits); min category p-value = 0.1017263738770689
+
+processed 5.46 TiB (6007513342464 bytes) in 630.743 seconds (9.5245 GB/s, 34.2882 TB/h)
+
+p = 0.6192167481385971
+------
+
+mix3 extreme = 1.97891 (sig = 0000000020000000) weight 1 (32), p-value = 0.7915909156861558
+mix3 extreme = 3.37406 (sig = 0000020000100000) weight 2 (480), p-value = 0.2992887122424272
+mix3 extreme = 3.68150 (sig = 0020002002000000) weight 3 (4480), p-value = 0.6461506214317259
+mix3 extreme = 4.14179 (sig = 0000000000200121) weight 4 (29120), p-value = 0.6334076174278824
+mix3 extreme = 4.51479 (sig = 0000002200010220) weight 5 (139776), p-value = 0.5876565502310451
+mix3 extreme = 5.23378 (sig = 0001022100120000) weight 6 (512512), p-value = 0.08159340534022076
+mix3 extreme = 5.09640 (sig = 1020200202000220) weight 7 (1464320), p-value = 0.39764080995139806
+mix3 extreme = 5.25585 (sig = 0201101000012012) weight 8 (3294720), p-value = 0.3845752200826889
+mix3 extreme = 5.50236 (sig = 2002121021200020) weight >=9 (37601280), p-value = 0.7556237915824546
+bits per word = 32 (analyzing bits); min category p-value = 0.08159340534022076
+
+processed 6.39 TiB (7023489863616 bytes) in 737.194 seconds (9.5273 GB/s, 34.2984 TB/h)
+
+p = 0.5351477452559802
+------
+
+mix3 extreme = 2.10063 (sig = 0000000000000002) weight 1 (32), p-value = 0.6872646132773388
+mix3 extreme = 2.95578 (sig = 0000001000000020) weight 2 (480), p-value = 0.7767322526355387
+mix3 extreme = 3.96725 (sig = 0001000002000100) weight 3 (4480), p-value = 0.2780082142779587
+mix3 extreme = 4.11823 (sig = 2100000000010001) weight 4 (29120), p-value = 0.6710361095759266
+mix3 extreme = 4.80272 (sig = 0000100102001100) weight 5 (139776), p-value = 0.19650807464292439
+mix3 extreme = 4.82087 (sig = 0001022100120000) weight 6 (512512), p-value = 0.5193155879907977
+mix3 extreme = 5.36786 (sig = 2001100012000202) weight 7 (1464320), p-value = 0.11012043027565986
+mix3 extreme = 5.41163 (sig = 0201101000012012) weight 8 (3294720), p-value = 0.1859797554250996
+mix3 extreme = 5.65886 (sig = 2002121021200020) weight >=9 (37601280), p-value = 0.4361574975644711
+bits per word = 32 (analyzing bits); min category p-value = 0.11012043027565986
+
+processed 7.75 TiB (8525368199232 bytes) in 894.558 seconds (9.5303 GB/s, 34.3089 TB/h)
+
+p = 0.6500700414504197
+------
+
+mix3 extreme = 2.13550 (sig = 0000000001000000) weight 1 (32), p-value = 0.6551211116919899
+mix3 extreme = 2.91778 (sig = 0000001000000020) weight 2 (480), p-value = 0.8164273811088216
+mix3 extreme = 3.80569 (sig = 0122000000000000) weight 3 (4480), p-value = 0.46929809490153573
+mix3 extreme = 4.44501 (sig = 2100000000010001) weight 4 (29120), p-value = 0.2258055589537028
+mix3 extreme = 4.43159 (sig = 0000100102001100) weight 5 (139776), p-value = 0.7294915696107516
+mix3 extreme = 4.79341 (sig = 0021200220020000) weight 6 (512512), p-value = 0.5684528960170006
+mix3 extreme = 5.05972 (sig = 2202000020001102) weight 7 (1464320), p-value = 0.4592627191806297
+mix3 extreme = 5.40417 (sig = 0201101000012012) weight 8 (3294720), p-value = 0.19307166070365706
+mix3 extreme = 5.58666 (sig = 1102120100111212) weight >=9 (37601280), p-value = 0.5812109492407463
+bits per word = 32 (analyzing bits); min category p-value = 0.19307166070365706
+
+processed 9.12 TiB (10027246534848 bytes) in 1051.787 seconds (9.5335 GB/s, 34.3207 TB/h)
+
+p = 0.8549510085993872
+------
+
+mix3 extreme = 2.31898 (sig = 0000000020000000) weight 1 (32), p-value = 0.48284999275010976
+mix3 extreme = 3.81940 (sig = 0000001000000020) weight 2 (480), p-value = 0.06219974642256363
+mix3 extreme = 3.94097 (sig = 0000200000012000) weight 3 (4480), p-value = 0.30482088085737324
+mix3 extreme = 4.21908 (sig = 0101001000000002) weight 4 (29120), p-value = 0.5104848666192825
+mix3 extreme = 4.28510 (sig = 0000100102001100) weight 5 (139776), p-value = 0.9221644855553872
+mix3 extreme = 4.65636 (sig = 0200101002000022) weight 6 (512512), p-value = 0.8078630431715443
+mix3 extreme = 5.22548 (sig = 2202000020001102) weight 7 (1464320), p-value = 0.2245873177108772
+mix3 extreme = 5.36788 (sig = 1002000020221101) weight 8 (3294720), p-value = 0.2308606320278444
+mix3 extreme = 5.25084 (sig = 1011020021200210) weight >=9 (37601280), p-value = 0.9966311353323781
+bits per word = 32 (analyzing bits); min category p-value = 0.06219974642256363
+
+processed 11.37 TiB (12500928499392 bytes) in 1310.727 seconds (9.5374 GB/s, 34.3347 TB/h)
+
+p = 0.43896092157592287
+------
+
+mix3 extreme = 2.14436 (sig = 0000000020000000) weight 1 (32), p-value = 0.6468520305920005
+mix3 extreme = 3.57153 (sig = 0000000000011000) weight 2 (480), p-value = 0.1566609076127285
+mix3 extreme = 3.79782 (sig = 0000022000000010) weight 3 (4480), p-value = 0.48004378003481546
+mix3 extreme = 4.47076 (sig = 0002100002000200) weight 4 (29120), p-value = 0.20305651152760598
+mix3 extreme = 4.43053 (sig = 0101000002101000) weight 5 (139776), p-value = 0.7312391841119918
+mix3 extreme = 4.62677 (sig = 1001001022010000) weight 6 (512512), p-value = 0.8509547825970655
+mix3 extreme = 4.75891 (sig = 1020200202000220) weight 7 (1464320), p-value = 0.9421677446933006
+mix3 extreme = 5.68489 (sig = 2110202100200200) weight 8 (3294720), p-value = 0.042210952107141826
+mix3 extreme = 5.94085 (sig = 1222122022221010) weight >=9 (37601280), p-value = 0.10112896479409178
+bits per word = 32 (analyzing bits); min category p-value = 0.042210952107141826
+
+processed 13.66 TiB (15018783356160 bytes) in 1574.406 seconds (9.5393 GB/s, 34.3416 TB/h)
+
+p = 0.32168909357072933
+------
+
+mix3 extreme = 2.24575 (sig = 0000000020000000) weight 1 (32), p-value = 0.5511129968071877
+mix3 extreme = 3.82566 (sig = 0000001000000200) weight 2 (480), p-value = 0.06068602550371794
+mix3 extreme = 4.53424 (sig = 0000022000000010) weight 3 (4480), p-value = 0.025566853795511837
+mix3 extreme = 5.16116 (sig = 0002100002000200) weight 4 (29120), p-value = 0.007121186794860284
+mix3 extreme = 4.28495 (sig = 0100020000000121) weight 5 (139776), p-value = 0.9222944876730353
+mix3 extreme = 4.71539 (sig = 1200200020210000) weight 6 (512512), p-value = 0.7095783110116798
+mix3 extreme = 5.68242 (sig = 2002020021011000) weight 7 (1464320), p-value = 0.01925871498257857
+mix3 extreme = 5.29413 (sig = 0102001011100102) weight 8 (3294720), p-value = 0.3256454784536012
+mix3 extreme = 5.66967 (sig = 1222122022221010) weight >=9 (37601280), p-value = 0.4160749198128356
+bits per word = 32 (analyzing bits); min category p-value = 0.007121186794860284
+
+processed 15.95 TiB (17536638212928 bytes) in 1837.939 seconds (9.5415 GB/s, 34.3493 TB/h)
+
+p = 0.06229508704547306
+------
+
+mix3 extreme = 2.06773 (sig = 0000020000000000) weight 1 (32), p-value = 0.7168684910575244
+mix3 extreme = 3.48052 (sig = 0000001000000020) weight 2 (480), p-value = 0.2135830648708642
+mix3 extreme = 3.69618 (sig = 0000022000000010) weight 3 (4480), p-value = 0.6249280717877848
+mix3 extreme = 5.08270 (sig = 0002100002000200) weight 4 (29120), p-value = 0.010777100586938737
+mix3 extreme = 4.43364 (sig = 0100220000100200) weight 5 (139776), p-value = 0.7261325436149981
+mix3 extreme = 4.89177 (sig = 0200110200002010) weight 6 (512512), p-value = 0.40080307177311
+mix3 extreme = 5.10500 (sig = 0001221100001010) weight 7 (1464320), p-value = 0.3839234906322845
+mix3 extreme = 5.76819 (sig = 0102001011100102) weight 8 (3294720), p-value = 0.026054223429272924
+mix3 extreme = 5.95098 (sig = 0120022202100122) weight >=9 (37601280), p-value = 0.09536513592401312
+bits per word = 32 (analyzing bits); min category p-value = 0.010777100586938737
+
+processed 18.20 TiB (20010320177472 bytes) in 2096.868 seconds (9.5430 GB/s, 34.3546 TB/h)
+
+p = 0.09291611559708761
+------
+
+mix3 extreme = 2.73237 (sig = 0000000020000000) weight 1 (32), p-value = 0.1827831394208973
+mix3 extreme = 3.43338 (sig = 0000001000000020) weight 2 (480), p-value = 0.24889699991785885
+mix3 extreme = 3.82803 (sig = 0000022000000010) weight 3 (4480), p-value = 0.4393863406053079
+mix3 extreme = 4.31174 (sig = 0002100002000200) weight 4 (29120), p-value = 0.37603930019886744
+mix3 extreme = 4.59937 (sig = 0112000001000010) weight 5 (139776), p-value = 0.4469705582007253
+mix3 extreme = 4.66133 (sig = 0021200220020000) weight 6 (512512), p-value = 0.800147694019439
+mix3 extreme = 4.85637 (sig = 0200110000200122) weight 7 (1464320), p-value = 0.8263403931931879
+mix3 extreme = 5.29524 (sig = 0111000212000022) weight 8 (3294720), p-value = 0.3240402307417468
+mix3 extreme = 5.42545 (sig = 1221110002100111) weight >=9 (37601280), p-value = 0.8862395677357621
+bits per word = 32 (analyzing bits); min category p-value = 0.1827831394208973
+
+processed 22.74 TiB (25001856998784 bytes) in 2619.275 seconds (9.5453 GB/s, 34.3632 TB/h)
+
+p = 0.8374316998767484
+------
+
+mix3 extreme = 2.45976 (sig = 0000000020000000) weight 1 (32), p-value = 0.36110369631415506
+mix3 extreme = 3.37741 (sig = 0000001000000020) weight 2 (480), p-value = 0.2962655133562651
+mix3 extreme = 3.89760 (sig = 0020010000000002) weight 3 (4480), p-value = 0.35290150383734287
+mix3 extreme = 4.87366 (sig = 0200200000000202) weight 4 (29120), p-value = 0.031397993198919484
+mix3 extreme = 4.96194 (sig = 0002020200021000) weight 5 (139776), p-value = 0.09294748962713535
+mix3 extreme = 4.83004 (sig = 2221002000010000) weight 6 (512512), p-value = 0.503224073359936
+mix3 extreme = 5.19207 (sig = 0001221100001010) weight 7 (1464320), p-value = 0.26252720571388893
+mix3 extreme = 5.59257 (sig = 1020220100021010) weight 8 (3294720), p-value = 0.07106109584349952
+mix3 extreme = 5.47026 (sig = 1021202122210012) weight >=9 (37601280), p-value = 0.8154249503423212
+bits per word = 32 (analyzing bits); min category p-value = 0.031397993198919484
+
+processed 27.32 TiB (30037566712320 bytes) in 3146.457 seconds (9.5465 GB/s, 34.3673 TB/h)
+
+p = 0.24957329513731522
+------
+
+mix3 extreme = 2.08431 (sig = 0000200000000000) weight 1 (32), p-value = 0.7020580182805327
+mix3 extreme = 3.34761 (sig = 0000001000000020) weight 2 (480), p-value = 0.3239017071529301
+mix3 extreme = 4.07516 (sig = 0000000100000021) weight 3 (4480), p-value = 0.18617312628992724
+mix3 extreme = 4.79946 (sig = 0200200000000202) weight 4 (29120), p-value = 0.04527197090876784
+mix3 extreme = 4.38324 (sig = 0012020001000001) weight 5 (139776), p-value = 0.804918924799672
+mix3 extreme = 4.73351 (sig = 0202001000201001) weight 6 (512512), p-value = 0.6772770175235843
+mix3 extreme = 4.97861 (sig = 0020220000101022) weight 7 (1464320), p-value = 0.6085065442082022
+mix3 extreme = 5.11370 (sig = 1002022020001120) weight 8 (3294720), p-value = 0.6468388145547435
+mix3 extreme = 5.62484 (sig = 1220001222101001) weight >=9 (37601280), p-value = 0.5025197546804223
+bits per word = 32 (analyzing bits); min category p-value = 0.04527197090876784
+
+processed 36.40 TiB (40020640354944 bytes) in 4191.577 seconds (9.5479 GB/s, 34.3723 TB/h)
+
+p = 0.3409519859453126
+------
+
+mix3 extreme = 2.19039 (sig = 0000010000000000) weight 1 (32), p-value = 0.6035165081527325
+mix3 extreme = 3.29758 (sig = 0000200002000000) weight 2 (480), p-value = 0.37396028373874796
+mix3 extreme = 3.95363 (sig = 0000000100000021) weight 3 (4480), p-value = 0.2916753644001203
+mix3 extreme = 4.55259 (sig = 0000100021002000) weight 4 (29120), p-value = 0.1429899600767211
+mix3 extreme = 4.27642 (sig = 0012020001000001) weight 5 (139776), p-value = 0.9296783165981524
+mix3 extreme = 4.86279 (sig = 1020020020002200) weight 6 (512512), p-value = 0.44744528101839054
+mix3 extreme = 5.13169 (sig = 0212000020201200) weight 7 (1464320), p-value = 0.34326596125132924
+mix3 extreme = 5.23428 (sig = 2000011112010010) weight 8 (3294720), p-value = 0.4205696147680712
+mix3 extreme = 5.54853 (sig = 0102011200100222) weight >=9 (37601280), p-value = 0.6614868646355744
+bits per word = 32 (analyzing bits); min category p-value = 0.1429899600767211
+
+processed 45.48 TiB (50003713997568 bytes) in 5236.456 seconds (9.5492 GB/s, 34.3769 TB/h)
+
+p = 0.7506133578986659
+------
+
+mix3 extreme = 1.90022 (sig = 0000020000000000) weight 1 (32), p-value = 0.849197281280963
+mix3 extreme = 2.91933 (sig = 0000000200002000) weight 2 (480), p-value = 0.8148753516253288
+mix3 extreme = 3.98894 (sig = 0200100200000000) weight 3 (4480), p-value = 0.2572091915588969
+mix3 extreme = 4.56967 (sig = 0000100021002000) weight 4 (29120), p-value = 0.13259301882387936
+mix3 extreme = 4.43067 (sig = 0210020002000020) weight 5 (139776), p-value = 0.7310127742747085
+mix3 extreme = 4.65188 (sig = 2002010010100200) weight 6 (512512), p-value = 0.8147032879711363
+mix3 extreme = 5.02202 (sig = 0000022001022202) weight 7 (1464320), p-value = 0.5270236123318912
+mix3 extreme = 5.25358 (sig = 1020220100021010) weight 8 (3294720), p-value = 0.3882782714134981
+mix3 extreme = 5.62043 (sig = 0121002020201221) weight >=9 (37601280), p-value = 0.5114203776215749
+bits per word = 32 (analyzing bits); min category p-value = 0.13259301882387936
+
+processed 54.60 TiB (60030960532416 bytes) in 6285.960 seconds (9.5500 GB/s, 34.3800 TB/h)
+
+p = 0.722024693001231
+------
+
+mix3 extreme = 1.56791 (sig = 0000020000000000) weight 1 (32), p-value = 0.9812811841833945
+mix3 extreme = 2.91836 (sig = 0002001000000000) weight 2 (480), p-value = 0.8158466548353707
+mix3 extreme = 3.90398 (sig = 1010000000000010) weight 3 (4480), p-value = 0.34553703524512314
+mix3 extreme = 4.36894 (sig = 0000100021002000) weight 4 (29120), p-value = 0.3048042308057546
+mix3 extreme = 4.46768 (sig = 2000002020001020) weight 5 (139776), p-value = 0.6688715711234965
+mix3 extreme = 4.62049 (sig = 0112000200100100) weight 6 (512512), p-value = 0.8594309937776291
+mix3 extreme = 5.05062 (sig = 0220110002000021) weight 7 (1464320), p-value = 0.4752628311611998
+mix3 extreme = 5.30584 (sig = 0002100221210020) weight 8 (3294720), p-value = 0.3089280586221294
+mix3 extreme = 5.39605 (sig = 0022102202110110) weight >=9 (37601280), p-value = 0.9228171946802567
+bits per word = 32 (analyzing bits); min category p-value = 0.3048042308057546
+
+processed 63.68 TiB (70014034175040 bytes) in 7330.857 seconds (9.5506 GB/s, 34.3821 TB/h)
+
+p = 0.9620716383060185
+------
+
+mix3 extreme = 2.14338 (sig = 0002000000000000) weight 1 (32), p-value = 0.6477711591610347
+mix3 extreme = 3.02405 (sig = 0000000200002000) weight 2 (480), p-value = 0.6984114989054863
+mix3 extreme = 3.66550 (sig = 1000200200000000) weight 3 (4480), p-value = 0.6691321697284226
+mix3 extreme = 4.21831 (sig = 0001002000002010) weight 4 (29120), p-value = 0.5116794163616785
+mix3 extreme = 4.54483 (sig = 0120100000020100) weight 5 (139776), p-value = 0.5362811482155945
+mix3 extreme = 4.65557 (sig = 0200021010002020) weight 6 (512512), p-value = 0.8090637003644586
+mix3 extreme = 4.94879 (sig = 2012010100200100) weight 7 (1464320), p-value = 0.6649613449272453
+mix3 extreme = 4.96986 (sig = 0201020111100010) weight 8 (3294720), p-value = 0.8900279469071591
+mix3 extreme = 5.55102 (sig = 2020010002201122) weight >=9 (37601280), p-value = 0.6562776818585551
+bits per word = 32 (analyzing bits); min category p-value = 0.5116794163616785
+
+processed 77.34 TiB (85032817531200 bytes) in 8903.107 seconds (9.5509 GB/s, 34.3833 TB/h)
+
+p = 0.9984211339763578
+------
+
+mix3 extreme = 2.37841 (sig = 0002000000000000) weight 1 (32), p-value = 0.4295323149340291
+mix3 extreme = 2.91473 (sig = 0002002000000000) weight 2 (480), p-value = 0.819466484984118
+mix3 extreme = 4.33828 (sig = 0220000001000000) weight 3 (4480), p-value = 0.062308567535405396
+mix3 extreme = 3.97682 (sig = 1000000000020101) weight 4 (29120), p-value = 0.8691811241533358
+mix3 extreme = 4.65044 (sig = 2002020000011000) weight 5 (139776), p-value = 0.37059791616107485
+mix3 extreme = 5.00350 (sig = 1000020100200202) weight 6 (512512), p-value = 0.2506404026434609
+mix3 extreme = 4.71000 (sig = 1012000110020020) weight 7 (1464320), p-value = 0.9734136226009656
+mix3 extreme = 5.23454 (sig = 1000200110211200) weight 8 (3294720), p-value = 0.42011597519471233
+mix3 extreme = 5.49591 (sig = 1022111101112120) weight >=9 (37601280), p-value = 0.7681224477011181
+bits per word = 32 (analyzing bits); min category p-value = 0.062308567535405396
+
+processed 90.96 TiB (100007427995136 bytes) in 10470.274 seconds (9.5516 GB/s, 34.3856 TB/h)
+
+p = 0.4395465698488569
+------
+
+mix3 extreme = 1.96551 (sig = 0000000000100000) weight 1 (32), p-value = 0.802039945578245
+mix3 extreme = 3.15164 (sig = 2000010000000000) weight 2 (480), p-value = 0.5415703653881775
+mix3 extreme = 3.93977 (sig = 0220000001000000) weight 3 (4480), p-value = 0.30608577562457057
+mix3 extreme = 4.38065 (sig = 1000000000020101) weight 4 (29120), p-value = 0.2914704693932289
+mix3 extreme = 4.59643 (sig = 0202000100120000) weight 5 (139776), p-value = 0.45160555922364926
+mix3 extreme = 4.99592 (sig = 1000020100200202) weight 6 (512512), p-value = 0.259264679883872
+mix3 extreme = 5.05779 (sig = 0220000122200200) weight 7 (1464320), p-value = 0.46263514167568204
+mix3 extreme = 5.09553 (sig = 1201212022000000) weight 8 (3294720), p-value = 0.6820338923584391
+mix3 extreme = 5.73352 (sig = 2020020112122101) weight >=9 (37601280), p-value = 0.30917996812283544
+bits per word = 32 (analyzing bits); min category p-value = 0.259264679883872
+
+processed 113.70 TiB (125009284993920 bytes) in 13087.183 seconds (9.5520 GB/s, 34.3873 TB/h)
+
+p = 0.9328621420979297
+------
+
+mix3 extreme = 2.66149 (sig = 0000000000000010) weight 1 (32), p-value = 0.2211349344052057
+mix3 extreme = 3.46201 (sig = 0002002000000000) weight 2 (480), p-value = 0.2269593625064147
+mix3 extreme = 4.39226 (sig = 0220000001000000) weight 3 (4480), p-value = 0.04901520929190259
+mix3 extreme = 4.42703 (sig = 1000000000020101) weight 4 (29120), p-value = 0.24286167287581006
+mix3 extreme = 4.59671 (sig = 0202000100120000) weight 5 (139776), p-value = 0.4511498492160757
+mix3 extreme = 4.63166 (sig = 1000020100200202) weight 6 (512512), p-value = 0.8441925092024686
+mix3 extreme = 5.17291 (sig = 0120101010001020) weight 7 (1464320), p-value = 0.28644205983320126
+mix3 extreme = 5.11462 (sig = 1010202000011210) weight 8 (3294720), p-value = 0.6450422920536808
+mix3 extreme = 5.34756 (sig = 2101000110010212) weight >=9 (37601280), p-value = 0.9649878756064456
+bits per word = 32 (analyzing bits); min category p-value = 0.04901520929190259
+
+processed 136.43 TiB (150011141992704 bytes) in 15704.099 seconds (9.5524 GB/s, 34.3885 TB/h)
+
+p = 0.3638461774933971
+------
+
+mix3 extreme = 1.95115 (sig = 0000200000000000) weight 1 (32), p-value = 0.8129538119021693
+mix3 extreme = 3.38345 (sig = 0002002000000000) weight 2 (480), p-value = 0.2908672438069757
+mix3 extreme = 4.51893 (sig = 0220000001000000) weight 3 (4480), p-value = 0.027460063572361047
+mix3 extreme = 4.71379 (sig = 1000000000020101) weight 4 (29120), p-value = 0.06835695397272257
+mix3 extreme = 4.75448 (sig = 0202000100120000) weight 5 (139776), p-value = 0.2427773441903577
+mix3 extreme = 4.66139 (sig = 0022220020000001) weight 6 (512512), p-value = 0.8000494645582858
+mix3 extreme = 4.95478 (sig = 0000012102120020) weight 7 (1464320), p-value = 0.6536624827962288
+mix3 extreme = 5.15099 (sig = 0001221002021020) weight 8 (3294720), p-value = 0.5741720929396018
+mix3 extreme = 5.40853 (sig = 2211001002011020) weight >=9 (37601280), p-value = 0.9083112300789917
+bits per word = 32 (analyzing bits); min category p-value = 0.027460063572361047
+
+processed 159.17 TiB (175012998991488 bytes) in 18321.100 seconds (9.5525 GB/s, 34.3891 TB/h)
+
+p = 0.22166421477962234
+------
+
+mix3 extreme = 2.00625 (sig = 0000010000000000) weight 1 (32), p-value = 0.7695445236841914
+mix3 extreme = 2.97693 (sig = 0020200000000000) weight 2 (480), p-value = 0.7532948124746862
+mix3 extreme = 4.42952 (sig = 0220000001000000) weight 3 (4480), p-value = 0.04142886089140839
+mix3 extreme = 4.18731 (sig = 0010010000201000) weight 4 (29120), p-value = 0.5604480153167728
+mix3 extreme = 4.65582 (sig = 2000000201101000) weight 5 (139776), p-value = 0.3630451221512054
+mix3 extreme = 4.84758 (sig = 0011100021000010) weight 6 (512512), p-value = 0.4729853816432542
+mix3 extreme = 5.15770 (sig = 0021201200101000) weight 7 (1464320), p-value = 0.30655507159892503
+mix3 extreme = 5.35839 (sig = 0001221002021020) weight 8 (3294720), p-value = 0.24167874494567612
+mix3 extreme = 5.87681 (sig = 2201101012202020) weight >=9 (37601280), p-value = 0.14552339462824987
+bits per word = 32 (analyzing bits); min category p-value = 0.04142886089140839
+
+processed 181.91 TiB (200014855990272 bytes) in 21186.433 seconds (9.4407 GB/s, 33.9865 TB/h)
+
+p = 0.3166878530106687
+------
+
+mix3 extreme = 2.57791 (sig = 0010000000000000) weight 1 (32), p-value = 0.2736144641719615
+mix3 extreme = 2.77782 (sig = 0002002000000000) weight 2 (480), p-value = 0.9282094131522357
+mix3 extreme = 4.48900 (sig = 0220000001000000) weight 3 (4480), p-value = 0.03154960221017456
+mix3 extreme = 3.96216 (sig = 0000012000210000) weight 4 (29120), p-value = 0.88501211826807
+mix3 extreme = 4.24324 (sig = 0000010011010100) weight 5 (139776), p-value = 0.9540161690938591
+mix3 extreme = 4.53206 (sig = 2000200010011200) weight 6 (512512), p-value = 0.9498993753299703
+mix3 extreme = 4.98336 (sig = 0010001002200222) weight 7 (1464320), p-value = 0.5994996394352472
+mix3 extreme = 4.97284 (sig = 0020212010001101) weight 8 (3294720), p-value = 0.8862579090323078
+mix3 extreme = 5.52712 (sig = 2101110110021101) weight >=9 (37601280), p-value = 0.7059619705680854
+bits per word = 32 (analyzing bits); min category p-value = 0.03154960221017456
+
+processed 227.39 TiB (250018569987840 bytes) in 26422.434 seconds (9.4624 GB/s, 34.0645 TB/h)
+
+p = 0.25062976848636703
+------
+
+mix3 extreme = 2.12794 (sig = 0002000000000000) weight 1 (32), p-value = 0.6621486071014984
+mix3 extreme = 3.05592 (sig = 0020200000000000) weight 2 (480), p-value = 0.6597914114796125
+mix3 extreme = 4.19804 (sig = 0100000000000022) weight 3 (4480), p-value = 0.11362863938304135
+mix3 extreme = 4.38324 (sig = 2001002200000000) weight 4 (29120), p-value = 0.28857817362555366
+mix3 extreme = 4.53297 (sig = 1010220001000000) weight 5 (139776), p-value = 0.5564524466230111
+mix3 extreme = 4.77173 (sig = 0220000011020010) weight 6 (512512), p-value = 0.6078466045677192
+mix3 extreme = 4.95155 (sig = 0101000221010100) weight 7 (1464320), p-value = 0.6597594116843999
+mix3 extreme = 5.08005 (sig = 0210102000110102) weight 8 (3294720), p-value = 0.7115388587657792
+mix3 extreme = 5.69327 (sig = 1122122212201120) weight >=9 (37601280), p-value = 0.3741364760574495
+bits per word = 32 (analyzing bits); min category p-value = 0.11362863938304135
+
+processed 272.87 TiB (300022283985408 bytes) in 31658.519 seconds (9.4768 GB/s, 34.1166 TB/h)
+
+p = 0.6622919315646691
+------
+
+mix3 extreme = 2.06552 (sig = 0000010000000000) weight 1 (32), p-value = 0.7188312449967778
+mix3 extreme = 3.05901 (sig = 0002002000000000) weight 2 (480), p-value = 0.6560005436554031
+mix3 extreme = 4.30004 (sig = 0000000100022000) weight 3 (4480), p-value = 0.0736514913735772
+mix3 extreme = 4.67130 (sig = 2001002200000000) weight 4 (29120), p-value = 0.08346474192433166
+mix3 extreme = 4.60466 (sig = 0010000002021020) weight 5 (139776), p-value = 0.43867985910473895
+mix3 extreme = 4.67658 (sig = 2001120000001200) weight 6 (512512), p-value = 0.775747573937493
+mix3 extreme = 5.15254 (sig = 0210010210002002) weight 7 (1464320), p-value = 0.3136129773789803
+mix3 extreme = 5.07475 (sig = 2020001101210100) weight 8 (3294720), p-value = 0.7215184795269334
+mix3 extreme = 5.70455 (sig = 1001222210202221) weight >=9 (37601280), p-value = 0.3550703483975468
+bits per word = 32 (analyzing bits); min category p-value = 0.0736514913735772
+
+processed 363.82 TiB (400029711980544 bytes) in 42131.330 seconds (9.4948 GB/s, 34.1814 TB/h)
+
+p = 0.49769250320472785
+------
+
+mix3 extreme = 2.02051 (sig = 0000000000010000) weight 1 (32), p-value = 0.7576810927791109
+mix3 extreme = 3.20028 (sig = 1000000000020000) weight 2 (480), p-value = 0.48287427125565685
+mix3 extreme = 4.38387 (sig = 0000020000000012) weight 3 (4480), p-value = 0.050891287202868916
+mix3 extreme = 4.55052 (sig = 2001002200000000) weight 4 (29120), p-value = 0.14429416700560385
+mix3 extreme = 4.60745 (sig = 0020001001000022) weight 5 (139776), p-value = 0.4343534966109982
+mix3 extreme = 4.48724 (sig = 0010001200100011) weight 6 (512512), p-value = 0.9752238460283686
+mix3 extreme = 4.94409 (sig = 0202210002000201) weight 7 (1464320), p-value = 0.6737979039621316
+mix3 extreme = 5.12411 (sig = 0101101010002101) weight 8 (3294720), p-value = 0.6265445688853669
+mix3 extreme = 5.38356 (sig = 0210121201001112) weight >=9 (37601280), p-value = 0.935813609117563
+bits per word = 32 (analyzing bits); min category p-value = 0.050891287202868916
+
+processed 454.78 TiB (500037139975680 bytes) in 52604.139 seconds (9.5057 GB/s, 34.2204 TB/h)
+
+p = 0.3750523460477828
+------
+
+mix3 extreme = 1.55951 (sig = 0000000000020000) weight 1 (32), p-value = 0.982573999022992
+mix3 extreme = 3.56338 (sig = 0000000202000000) weight 2 (480), p-value = 0.16118439647835456
+mix3 extreme = 4.38877 (sig = 0000000102000200) weight 3 (4480), p-value = 0.04978689807586544
+mix3 extreme = 5.06568 (sig = 2001002200000000) weight 4 (29120), p-value = 0.011780355760177745
+mix3 extreme = 4.52036 (sig = 2020000000000122) weight 5 (139776), p-value = 0.5780708332698881
+mix3 extreme = 4.72006 (sig = 0000001000101221) weight 6 (512512), p-value = 0.7013269953082404
+mix3 extreme = 4.91650 (sig = 0202210002000201) weight 7 (1464320), p-value = 0.7247674515778915
+mix3 extreme = 5.05171 (sig = 0112020211000200) weight 8 (3294720), p-value = 0.7636978631380249
+mix3 extreme = 5.58799 (sig = 1202212021112011) weight >=9 (37601280), p-value = 0.5784243551210982
+bits per word = 32 (analyzing bits); min category p-value = 0.011780355760177745
+
+processed 545.70 TiB (600000395078592 bytes) in 63072.400 seconds (9.5129 GB/s, 34.2464 TB/h)
+
+p = 0.10116216597367453
+------
+
+mix3 extreme = 1.88792 (sig = 0000000000000200) weight 1 (32), p-value = 0.8573332903020903
+mix3 extreme = 3.36177 (sig = 0000000202000000) weight 2 (480), p-value = 0.31055972370915685
+mix3 extreme = 4.46432 (sig = 0000020000000012) weight 3 (4480), p-value = 0.03534465035908538
+mix3 extreme = 5.22689 (sig = 2001002200000000) weight 4 (29120), p-value = 0.005007188615122991
+mix3 extreme = 4.81498 (sig = 0200000220001002) weight 5 (139776), p-value = 0.185979481116439
+mix3 extreme = 4.60629 (sig = 2001120000001200) weight 6 (512512), p-value = 0.8776547703382048
+mix3 extreme = 4.99622 (sig = 0210020020010012) weight 7 (1464320), p-value = 0.5751901080130678
+mix3 extreme = 5.70476 (sig = 0110101102020001) weight 8 (3294720), p-value = 0.03765928178702961
+mix3 extreme = 5.69210 (sig = 2220122010202222) weight >=9 (37601280), p-value = 0.3761505615719135
+bits per word = 32 (analyzing bits); min category p-value = 0.005007188615122991
+
+processed 636.65 TiB (700007823073728 bytes) in 73544.541 seconds (9.5181 GB/s, 34.2653 TB/h)
+
+p = 0.04417257431914564
+------
+
+mix3 extreme = 1.97224 (sig = 0002000000000000) weight 1 (32), p-value = 0.7968224712256192
+mix3 extreme = 3.30901 (sig = 0000000202000000) weight 2 (480), p-value = 0.3621249505602477
+mix3 extreme = 3.80620 (sig = 0000020000000012) weight 3 (4480), p-value = 0.4686016964217003
+mix3 extreme = 6.66755 (sig = 2001002200000000) weight 4 (29120), p-value = 7.57446152806845e-7
+mix3 extreme = 4.79262 (sig = 0100010110200000) weight 5 (139776), p-value = 0.2055405108008055
+mix3 extreme = 5.08749 (sig = 0010101010000011) weight 6 (512512), p-value = 0.16969000278685378
+mix3 extreme = 5.26769 (sig = 1100020002000112) weight 7 (1464320), p-value = 0.1831449024826699
+mix3 extreme = 5.37953 (sig = 0120101110000120) weight 8 (3294720), p-value = 0.2181172541419902
+mix3 extreme = 5.36027 (sig = 1120110212210111) weight >=9 (37601280), p-value = 0.9560412943810379
+bits per word = 32 (analyzing bits); min category p-value = 7.57446152806845e-7
+
+processed 773.09 TiB (850018965066432 bytes) in 89254.285 seconds (9.5236 GB/s, 34.2848 TB/h)
+
+p = 6.81699472120983e-6
+------
+
