@@ -13,7 +13,7 @@ This crate implements the test for Hamming-weight dependencies described in
 Vigna. The test finds bias induced by dependencies among the Hamming weights
 (the number of ones) of the outputs of a pseudorandom number generator (PRNG), in
 particular for generators based on 𝐅₂-linear transformations such as the [dSFMT],
-[`xoroshiro128+`], and [WELL512].
+[`xoroshiro128+`], and [WELL512a].
 
 The crate is a port of the [original C implementation]: for the same generator and
 parameters, the result of the test is the same. Moreover, the crate can use
@@ -101,7 +101,7 @@ test within a petabyte.
 | dSFMT (521 bits)                |  32 | 2⁵²¹ − 1 | 6 × 10¹²           | `1001000100100010`                           |
 | Mersenne Twister (521 bits)     |  32 | 2⁵²¹ − 1 | 4 × 10¹⁰ →         | `1000000100000000`, `2000000100000000`       |
 | Mersenne Twister (607 bits)     |  32 | 2⁶⁰⁷ − 1 | 4 × 10⁸ → 4 × 10¹⁰ | `1000000001000000000`, `2000000001000000000` |
-| WELL512a (512 bits)             |  32 | 2⁵¹² − 1 | 3 × 10¹⁵           | `2001002200000000`                           |
+| WELL512a (512 bits)             |  32 | 2⁵¹² − 1 | 2.5 × 10¹⁵         | `2001002200000000`                           |
 
 Since the generators of this crate are seeded differently (see below), the
 amount of output and the faulty signatures might be slightly different.
@@ -224,7 +224,7 @@ signature are those of the tests of the paper:
 | `xoroshiro128plus`  | `-t`                            | 5 × 10¹²      | `00000012`         |
 | `xoroshiro1024`     | `-k 16`                         | 5 × 10¹²      | `1100000000000001` |
 | `xoroshiro1024plus` | `-t -k 16`                      | 4 × 10¹³      | `1200000000000001` |
-| `well512a`          | `-w 32 -k 16`                   | 3 × 10¹⁵      | `2001002200000000` |
+| `well512a`          | `-w 32 -k 16`                   | 2.5 × 10¹⁵    | `2001002200000000` |
 
 WELL512a needs more than a petabyte, so for it you must raise the limit, or omit
 it to run indefinitely.
@@ -275,4 +275,4 @@ except for the `BITS` constant.
 [`LinearGenerator`]: https://docs.rs/hwd/latest/hwd/f2/trait.LinearGenerator.html
 [dSFMT]: https://doi.org/10.1007/978-3-642-04107-5_38
 [`xoroshiro128+`]: https://doi.org/10.1145/3460772
-[WELL512]: https://doi.org/10.1145/1132973.1132974
+[WELL512a]: https://doi.org/10.1145/1132973.1132974
