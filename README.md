@@ -164,42 +164,41 @@ effective when _wk_ is at least the number of bits of state of the generator
 ```text
 cargo run -r -F xoroshiro128plus -- -P -t --progress --low-pv=1e-20 1e15
 Generator: xoroshiro128+ (24, 16, 37)
+Transparent huge pages: always [madvise] never
 Seed: 0x0000000000000000
-Running a test for Hamming-weight dependencies with k = 8 and 5 categories using 10 parallel generators (jump-ahead) on 64-bit words, the full outputs, analyzing transitions (batches of 2311072 words, 0.002 GiB RAM)
+Running a test for Hamming-weight dependencies with k = 8 and 5 categories using 96 parallel generators (jump-ahead) on 64-bit words, the full outputs, analyzing transitions (batches of 2311072 words, 0.020 GiB RAM)
 Examining 909.49 TiB (1000000000000000 bytes), stopping if p < 1e-20
-mix3 extreme = 2.04196 (sig = 00200000) weight 1 (16), p-value = 0.4895265563711558
-mix3 extreme = 2.81178 (sig = 10000200) weight 2 (112), p-value = 0.4248712876027823
-mix3 extreme = 2.90032 (sig = 10020100) weight 3 (448), p-value = 0.8123541528946184
-mix3 extreme = 4.32909 (sig = 02020202) weight 4 (1120), p-value = 0.016630046075989773
+mix3 extreme = 2.04196 (sig = 00200000) weight 1 (16), p-value = 0.48952655637115594
+mix3 extreme = 2.81178 (sig = 10000200) weight 2 (112), p-value = 0.42487128760278237
+mix3 extreme = 2.90032 (sig = 10020100) weight 3 (448), p-value = 0.8123541528946185
+mix3 extreme = 4.32909 (sig = 02020202) weight 4 (1120), p-value = 0.016630046075989776
 mix3 extreme = 4.32152 (sig = 12021102) weight >=5 (4864), p-value = 0.07260107083813899
-bits per word = 64 (analyzing transitions); min category p-value = 0.016630046075989773
+bits per word = 64 (analyzing transitions); min category p-value = 0.016630046075989776
 
-processed 105.79 MiB (110931456 bytes) in 0.052 seconds (2.1269 GB/s, 7.6568 TB/h)
+processed 105.79 MiB (110931456 bytes) in 0.040 seconds (2.7725 GB/s, 9.9811 TB/h)
 
-p = 0.08043025669891243
+p = 0.08043025669891246
 ------
 
 [...]
 
-mix3 extreme = 1.72707 (sig = 01000000) weight 1 (16), p-value = 0.7550051714620413
+mix3 extreme = 1.72707 (sig = 01000000) weight 1 (16), p-value = 0.7550051714620414
 mix3 extreme = 10.43265 (sig = 00000012) weight 2 (112), p-value = 1.9702516536983596e-23
-mix3 extreme = 3.10710 (sig = 10000110) weight 3 (448), p-value = 0.5713964898923892
-mix3 extreme = 3.83667 (sig = 11021000) weight 4 (1120), p-value = 0.1303729781298133
+mix3 extreme = 3.10710 (sig = 10000110) weight 3 (448), p-value = 0.5713964898923891
+mix3 extreme = 3.83667 (sig = 11021000) weight 4 (1120), p-value = 0.13037297812981333
 mix3 extreme = 3.63088 (sig = 10100222) weight >=5 (4864), p-value = 0.7469225372955031
 bits per word = 64 (analyzing transitions); min category p-value = 1.9702516536983596e-23
 
-processed 4.55 TiB (5000013516288 bytes) in 199.500 seconds (25.0627 GB/s, 90.2258 TB/h)
+processed 4.55 TiB (5000013516288 bytes) in 14.832 seconds (337.1019 GB/s, 1213.5669 TB/h)
 
 p = 9.851258268491799e-23
-Test completed in 199.50 seconds
+Test completed in 14.83 seconds
 ```
 
 will run the transitional variant of the test on `xoroshiro128+` with _w_ = 64
-and _k_ = 8, as in the paper, on an Apple M1 Max with 10 cores, finding bias
-after 5 · 10¹² bytes in less than three and a half minutes, with the same amount
-of data and the same faulty signature reported in the paper (`00000012`). The
-test processes about 25 GB/s; the C implementation, which is sequential,
-processes about 3.3 GB/s on the same hardware, and would need about 25 minutes.
+and _k_ = 8, as in the paper, on a 96-core AMD EPYC 9R45 (Zen 5) CPU, finding
+bias after 5 · 10¹² bytes in less than 15 seconds, with the same amount of data
+and the same faulty signature reported in the paper (`00000012`).
 
 The default parameters (_w_ = 64, _k_ = 8) are those used for 64-bit generators
 with 128 bits of state; generators with a larger state need a larger _k_. To
