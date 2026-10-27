@@ -6,14 +6,14 @@
 
 /* Generators identical to those of the Rust crate, for compiling the C
    implementation of the test (hwd.c) with check.sh. The state of the
-   𝐅₂-linear generators is filled with SplitMix64 from SEED, as in the crate. */
+   𝐅₂-linear generators is filled with SplitMix from SEED, as in the crate. */
 #ifndef SEED
 #define SEED 0
 #endif
 #define ROTL64 static inline uint64_t rotl(const uint64_t x, int k) { return (x << k) | (x >> (64 - k)); }
 
 static uint64_t sm_x = SEED;
-static uint64_t splitmix64(void) {
+static uint64_t splitmix(void) {
 	uint64_t z = (sm_x += 0x9e3779b97f4a7c15);
 	z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9;
 	z = (z ^ (z >> 27)) * 0x94d049bb133111eb;
@@ -37,7 +37,7 @@ static uint64_t inline next() {
 	return s0;
 #endif
 }
-static void init(void) { s[0] = splitmix64(); s[1] = splitmix64(); }
+static void init(void) { s[0] = splitmix(); s[1] = splitmix(); }
 #elif defined(XORSHIFT1024) || defined(XORSHIFT1024PLUS)
 #define A 31
 #define B 11
@@ -52,7 +52,7 @@ static uint64_t inline next() {
 	return s0;
 #endif
 }
-static void init(void) { for(int i = 0; i < 16; i++) s[i] = splitmix64(); }
+static void init(void) { for(int i = 0; i < 16; i++) s[i] = splitmix(); }
 #elif defined(XOROSHIRO128) || defined(XOROSHIRO128PLUS)
 #define A 24
 #define B 16
@@ -67,7 +67,7 @@ static uint64_t inline next() {
 	return s0;
 #endif
 }
-static void init(void) { s[0] = splitmix64(); s[1] = splitmix64(); }
+static void init(void) { s[0] = splitmix(); s[1] = splitmix(); }
 #elif defined(XOROSHIRO1024) || defined(XOROSHIRO1024PLUS)
 #define A 25
 #define B 27
@@ -84,7 +84,7 @@ static uint64_t inline next() {
 	return s0;
 #endif
 }
-static void init(void) { for(int i = 0; i < 16; i++) s[i] = splitmix64(); }
+static void init(void) { for(int i = 0; i < 16; i++) s[i] = splitmix(); }
 #elif defined(WELL512A)
 #define W 32
 #define R 16
@@ -123,7 +123,7 @@ static inline uint64_t next(void) { return well512a(); }
 #else
 static inline uint32_t next(void) { return well512a(); }
 #endif
-static void init(void) { for(int i = 0; i < 16; i++) STATE[i] = splitmix64() >> 32; }
+static void init(void) { for(int i = 0; i < 16; i++) STATE[i] = splitmix() >> 32; }
 #elif defined(MT19937)
 /* genrand_int32() from mt19937ar.c by Makoto Matsumoto and Takuji Nishimura. */
 #define N 624
@@ -157,7 +157,7 @@ static inline uint32_t next(void) {
 	y ^= (y >> 18);
 	return y;
 }
-static void init(void) { for(int i = 0; i < N; i++) mt[i] = splitmix64() >> 32; }
+static void init(void) { for(int i = 0; i < N; i++) mt[i] = splitmix() >> 32; }
 #elif defined(SFMT19937)
 /* The SFMT library in the C implementation (check.sh adds it to the include path). */
 #define SFMT_MEXP 19937
@@ -166,7 +166,7 @@ static void init(void) { for(int i = 0; i < N; i++) mt[i] = splitmix64() >> 32; 
 static sfmt_t sfmt;
 static inline uint64_t next(void) { return sfmt_genrand_uint64(&sfmt); }
 static void init(void) {
-	for(int i = 0; i < SFMT_N64; i++) sfmt.state[i / 2].u64[i % 2] = splitmix64();
+	for(int i = 0; i < SFMT_N64; i++) sfmt.state[i / 2].u64[i % 2] = splitmix();
 	period_certification(&sfmt);
 	sfmt.idx = SFMT_N32;
 }

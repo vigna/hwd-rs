@@ -140,7 +140,7 @@ characteristic polynomial (see the [`f2`] module).
   upper half first.
 
 - Generators are initialized from a 64-bit seed (option `-S`), and generators
-  with more than 64 bits of state fill it using [SplitMix64]: the faulty
+  with more than 64 bits of state fill it using [SplitMix]: the faulty
   signatures and the amount of data needed to find bias are thus slightly
   different from those reported in the paper.
 
@@ -259,7 +259,9 @@ To add a new generator:
    define `CHARPOLY` as zero and run `cargo test -F mygen test_charpoly`: the
    test will fail, printing the characteristic polynomial, computed as the
    minimal polynomial of the sequence of the lowest bit of the state (the test
-   checks that it has full degree).
+   checks that it has full degree; the transition map of `mt19937` is
+   singular, so its characteristic polynomial is _x_³¹ times the minimal
+   polynomial, and the power of _x_ is set in the test).
 
 The [`prng`] module has the same interface as that of the [`coll-birth`] crate,
 except for the `BITS` constant.
@@ -267,7 +269,7 @@ except for the `BITS` constant.
 [A New Test for Hamming-Weight Dependencies]: https://doi.org/10.1145/3527582
 [original C implementation]: https://prng.di.unimi.it/hwd.php
 [page of the test]: https://prng.di.unimi.it/hwd.php
-[SplitMix64]: https://prng.di.unimi.it/splitmix64.c
+[SplitMix]: https://prng.di.unimi.it/splitmix.c
 [`coll-birth`]: https://crates.io/crates/coll-birth
 [`prng`]: https://docs.rs/hwd/latest/hwd/prng/index.html
 [`f2`]: https://docs.rs/hwd/latest/hwd/f2/index.html

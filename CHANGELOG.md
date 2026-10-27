@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [0.2.0] - 2026-10-27
 
 ### New
 
@@ -8,6 +8,11 @@
   bits of state (`sfmt19937`), with arbitrary jumps.
 
 ### Changed
+
+- `scan::Mode::description` takes the number of bits of output of the
+  generator, so that the header of a test of a 32-bit generator on 32-bit
+  words describes them as the full outputs, rather than as the upper halves of
+  the outputs.
 
 - Byte counts in the header and in the reports are preceded by an
   approximation using binary prefixes (e.g., `493.67 GiB (530074706688

@@ -56,8 +56,8 @@ impl<T: Pod> Buffer<T> {
     /// this faults in a single base page every 2 MiB, and the rest of the
     /// buffer is faulted in on first access.
     ///
-    /// [`MmapFlags::POPULATE`]: mmap_rs::MmapFlags::POPULATE
-    /// [`MmapFlags::TRANSPARENT_HUGE_PAGES`]: mmap_rs::MmapFlags::TRANSPARENT_HUGE_PAGES
+    /// [`MmapFlags::POPULATE`]: https://docs.rs/mmap-rs/latest/mmap_rs/struct.MmapFlags.html#associatedconstant.POPULATE
+    /// [`MmapFlags::TRANSPARENT_HUGE_PAGES`]: https://docs.rs/mmap-rs/latest/mmap_rs/struct.MmapFlags.html#associatedconstant.TRANSPARENT_HUGE_PAGES
     pub fn new(len: usize) -> Self {
         // A failed allocation is not a bug, so we exit with an explanation
         // rather than panicking.

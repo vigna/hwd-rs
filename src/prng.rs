@@ -90,13 +90,13 @@ impl Prng {
 // s0 + s1. Since the state transition is 𝐅₂-linear, try_skip uses its
 // characteristic polynomial (see the f2 module).
 
-/// Returns the next output of SplitMix64 (incrementing first), used to fill the
+/// Returns the next output of SplitMix (incrementing first), used to fill the
 /// state of generators with more than 64 bits of state. Since the output
-/// function of SplitMix64 is a bijection, two consecutive outputs cannot be
+/// function of SplitMix is a bijection, two consecutive outputs cannot be
 /// both zero, so the state of the 64-bit generators is never zero; WELL512a
 /// keeps only the upper 32 bits of each output, so its state is zero only with
 /// negligible probability.
-fn splitmix64(x: &mut u64) -> u64 {
+fn splitmix(x: &mut u64) -> u64 {
     *x = x.wrapping_add(0x9e3779b97f4a7c15);
     let mut z = *x;
     z = (z ^ (z >> 30)).wrapping_mul(0xbf58476d1ce4e5b9);
@@ -153,7 +153,7 @@ macro_rules! xorshift128 {
             pub fn new(seed: u64) -> Self {
                 let mut x = seed;
                 Self {
-                    s: [splitmix64(&mut x), splitmix64(&mut x)],
+                    s: [splitmix(&mut x), splitmix(&mut x)],
                 }
             }
 
@@ -235,7 +235,7 @@ macro_rules! xorshift1024 {
             pub fn new(seed: u64) -> Self {
                 let mut x = seed;
                 Self {
-                    s: ::std::array::from_fn(|_| splitmix64(&mut x)),
+                    s: ::std::array::from_fn(|_| splitmix(&mut x)),
                     p: 0,
                 }
             }
@@ -302,7 +302,7 @@ macro_rules! xoroshiro128 {
             pub fn new(seed: u64) -> Self {
                 let mut x = seed;
                 Self {
-                    s: [splitmix64(&mut x), splitmix64(&mut x)],
+                    s: [splitmix(&mut x), splitmix(&mut x)],
                 }
             }
 
@@ -384,7 +384,7 @@ macro_rules! xoroshiro1024 {
             pub fn new(seed: u64) -> Self {
                 let mut x = seed;
                 Self {
-                    s: ::std::array::from_fn(|_| splitmix64(&mut x)),
+                    s: ::std::array::from_fn(|_| splitmix(&mut x)),
                     p: 0,
                 }
             }
@@ -456,7 +456,7 @@ impl Prng {
     pub fn new(seed: u64) -> Self {
         let mut x = seed;
         Self {
-            s: std::array::from_fn(|_| (splitmix64(&mut x) >> 32) as u32),
+            s: std::array::from_fn(|_| (splitmix(&mut x) >> 32) as u32),
             i: 0,
         }
     }
@@ -507,7 +507,7 @@ impl crate::f2::LinearGenerator<8> for Prng {
 // not in the paper. As in the reference implementations, the state is an array
 // of words that is regenerated in place when all of them have been returned, and
 // the first output comes from the first regeneration; however, the state is
-// filled with SplitMix64 from the seed, rather than by the initialization
+// filled with SplitMix from the seed, rather than by the initialization
 // functions of the reference implementations. For jumps, the state is the
 // sequence of words that follows the last output, which is a window sliding
 // by one word at each step of the recurrence.
@@ -516,7 +516,7 @@ impl crate::f2::LinearGenerator<8> for Prng {
 /// Matsumoto and Takuji Nishimura.
 #[cfg(feature = "mt19937")]
 mod mt19937 {
-    use super::splitmix64;
+    use super::splitmix;
 
     const N: usize = 624;
     const M: usize = 397;
@@ -641,7 +641,7 @@ mod mt19937 {
         pub fn new(seed: u64) -> Self {
             let mut x = seed;
             Self {
-                mt: std::array::from_fn(|_| (splitmix64(&mut x) >> 32) as u32),
+                mt: std::array::from_fn(|_| (splitmix(&mut x) >> 32) as u32),
                 i: N,
             }
         }
@@ -729,7 +729,7 @@ use mt19937::CHARPOLY;
 /// Matsumoto, returning 64-bit values as `sfmt_genrand_uint64()`.
 #[cfg(feature = "sfmt19937")]
 mod sfmt19937 {
-    use super::splitmix64;
+    use super::splitmix;
 
     // The parameters of SFMT-params19937.h.
     const N: usize = 156;
@@ -875,8 +875,8 @@ mod sfmt19937 {
         pub fn new(seed: u64) -> Self {
             let mut x = seed;
             let mut s = std::array::from_fn(|_| {
-                let lo = splitmix64(&mut x);
-                lo as u128 | (splitmix64(&mut x) as u128) << 64
+                let lo = splitmix(&mut x);
+                lo as u128 | (splitmix(&mut x) as u128) << 64
             });
             period_certification(&mut s);
             Self { s, i: 2 * N }
